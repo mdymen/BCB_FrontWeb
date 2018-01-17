@@ -11,6 +11,7 @@ import { HttpClient} from '@angular/common/http';
 export class AppComponent {
   title = 'app';
   private listaJogos = [];
+  private url = "http://www.bolaocraquedebola.com.br";
 
   constructor(private http: HttpClient) {}
 
