@@ -1,522 +1,422 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
   <base href="/">
-  <!-- start: Meta -->
   <meta charset="utf-8">
-  <title>Bolão Craque de Bola</title>
-  <meta name="description" content="Bolão Craque de Bola.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bolão Craque de Bola">
   <meta name="author" content="Martin Dymenstein">
-  <meta name="keyword" content="Bolão, Futebol, Brasileirão, Campeonato">
-  <!-- end: Meta -->
+  <link rel="shortcut icon" href="assets/ico/icone.gif">
+  <link rel="icon" href="assets/ico/icone.gif">
 
-  <!-- start: Mobile Specific -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- end: Mobile Specific -->
+  <title> Bolão Craque de Bola </title>
 
-  <!-- start: CSS -->
- <link href="assets/css/bootstrap.min.css" rel="stylesheet"> 
-  <link href="assets/css/style.min.css" rel="stylesheet"> 
+  <!-- Bootstrap core CSS -->
+  <link href="assets/css/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/icomoon.css">
+  <link href="assets/css/animate-custom.css" rel="stylesheet">
+
+  <!--    <link href="public/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="publicassets/css/style.min.css"  rel="stylesheet">-->
+
+  <script type="text/css">
+    
+    <?php
+        $error = $_GET['error'];
+        $msg = "";
+        if (isset($error)) {
+            
+            if (strcmp($error, "t") == 0) {
+                $msg = "Deve aceitar os termos";
+            }
+            
+            elseif (strcmp($error, "u") == 0) {
+                $msg = "Nome de usuario existente";
+            }
+            elseif (strcmp($error, "s") == 0) {
+                $msg = "Verifique a senha e a confirmação";
+            }
+            
+        }
+    
+    ?>
+
+/****** LOGIN MODAL ******/
+.loginmodal-container {
+  padding: 30px;
+  max-width: 350px;
+  width: 100% !important;
+  background-color: #F7F7F7;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  font-family: roboto;
+}
+
+.loginmodal-container h1 {
+  text-align: center;
+  font-size: 1.8em;
+  font-family: roboto;
+}
+
+.loginmodal-container input[type=submit] {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.loginmodal-container input[type=text], input[type=password] {
+  height: 44px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.loginmodal-container input[type=text]:hover, input[type=password]:hover {
+  border: 1px solid #b9b9b9;
+  border-top: 1px solid #a0a0a0;
+  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.loginmodal {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+/* border-radius: 3px; */
+/* -webkit-user-select: none;
+  user-select: none; */
+}
+
+.loginmodal-submit {
+  /* border: 1px solid #3079ed; */
+  border: 0px;
+  color: #fff;
+  text-shadow: 0 1px rgba(0,0,0,0.1); 
+  background-color: #4d90fe;
+  padding: 17px 0px;
+  font-family: roboto;
+  font-size: 14px;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
+}
+
+.loginmodal-submit:hover {
+  /* border: 1px solid #2f5bb7; */
+  border: 0px;
+  text-shadow: 0 1px rgba(0,0,0,0.3);
+  background-color: #357ae8;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
+}
+
+.loginmodal-container a {
+  text-decoration: none;
+  color: #666;
+  font-weight: 400;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  transition: opacity ease 0.5s;
+} 
+
+.login-help{
+  font-size: 12px;
+}
+
+</script>
+
+
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/style.min.css" rel="stylesheet">
   <link href="assets/css/retina.min.css" rel="stylesheet">
-  <link href="assets/css/print.css" rel="stylesheet" type="text/css" media="print" />
-  <!-- end: CSS -->
+  <link href="assets/css/print.css" rel="stylesheet" type="text/css" media="print">
 
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.js"></script>
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.min.js"></script>
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/own.js"></script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>
 
-    <!-- start: JavaScript-->
-  <!--[if !IE]>-->
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/own.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
-  <!--<![endif]-->
-
-  <!--[if IE]>
-	
-		<script src="assets/js/jquery-1.11.0.min.js"></script>
-	
-	<![endif]-->
-
-  <!--[if !IE]>-->
-
-  <script type="text/javascript">
-    window.jQuery || document.write("<script src='assets/js/jquery-2.1.0.min.js'>" + "<" + "/script>");
-  </script>
-
-  <!--<![endif]-->
-
-  <!--[if IE]>
-	
-		<script type="text/javascript">
-	 	window.jQuery || document.write("<script src='assets/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
-		</script>
-		
-	<![endif]-->
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/own.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/own.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-
-
-
-
-
-
-  <!-- page scripts -->
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/own.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-  <!-- theme scripts -->
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/own.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/custom.min.js"></script>
-  <script type="text/javascript" src="jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.js"></script>
-  <script type="text/javascript" src="jquery/jquery-ui-1.9.2.custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/own.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
-  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/custom.min.js"></script>
-  <script type="text/javascript" src="assets/js/core.min.js"></script>
-
-  <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
-		
-	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		
-	<![endif]-->
-
-  <!-- start: Favicon and Touch Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="assets/ico/apple-touch-icon-57-precomposed.png">
-  <link rel="shortcut icon" href="assets/ico/icone.png">
-  <link rel="icon" href="/assets/ico/icone.png">
-  <!-- end: Favicon and Touch Icons -->
-
+      <script src="assets/js/html5shiv.js"></script>
+      <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-<body>
-  <!-- start: Header -->
-  <header class="navbar">
-    <div class="container">
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".sidebar-nav.nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a id="main-menu-toggle" class="hidden-xs open">
-        <i class="fa fa-bars"></i>
-      </a>
-      <a class="navbar-brand col-md-6 col-sm-6 col-xs-6" href="/public">
-        <span>Craque de Bola</span>
-      </a>
-      <div id="search" class="col-sm-4 col-xs-8 col-lg-3" style="background: none !important; margin-top:9px !important">
-        <a href="index/regulamento" style="color:white ">Regulamento</a>
-      </div>
-      <!-- start: Header Menu -->
-      <div class="nav-no-collapse header-nav">
-        <ul class="nav navbar-nav pull-right">
-          <li>
-            <a href="index/idioma?i=pt">Portugues</a>
-          </li>
-          <li>
-            <a href="index/idioma?i=es">Español</a>
-          </li>
-          <li>
-            <a style="padding-right: 20px !important" class="btn account dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
-              <div class="user">
-                <span>Base:</span>
-                wi061609_penca </div>
+<body data-spy="scroll" data-offset="0" data-target="#navbar-main">
 
-            </a>
-          </li>
-          <li>
-            <a style="padding-right: 20px !important" class="btn account dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
-              <div class="user">
-                <span class="hello">R$</span>
-                <span class="name" id="cash_usuario">19.06</span>
-              </div>
-
-            </a>
-          </li>
-          <li class="dropdown">
-            <a style="padding-right: 20px !important" class="btn account dropdown-toggle" data-toggle="dropdown" href="2nd-level.html#">
-              <div class="user">
-                <span class="hello">Bem-vindo!</span>
-                <span class="name">m</span>
-              </div>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="2nd-level.html#">
-                  <i class="fa fa-user"></i> Profile</a>
-              </li>
-              <li>
-                <a href="2nd-level.html#">
-                  <i class="fa fa-cog"></i> Settings</a>
-              </li>
-              <li>
-                <a href="2nd-level.html#">
-                  <i class="fa fa-envelope"></i> Messages</a>
-              </li>
-              <li>
-                <a href="/pencaindex/logout">
-                  <i class="fa fa-off"></i> Logout</a>
-              </li>
+  <div id="navbar-main">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="" style="font-size:30px; color:#3498db;">
+              <img src="http://www.bolaocraquedebola.com.br/assets/img/iconelogo.png" width="28px" height="28px" style="background: none !important"
+              />
+            </span>
+          </button>
+          <a class="navbar-brand hidden-xs hidden-sm" href="#home">
+            <span style="font-size:18px; color:#3498db;">
+              <img src="http://www.bolaocraquedebola.com.br/assets/img/iconelogo.png" width="32px" height="32px" style="background: none !important"
+              />
+            </span>
+          </a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="#home" class="smoothScroll">Home</a>
+            </li>
+            <li>
+              <a href="public" class="smoothScroll"> Login</a>
+            </li>
+            <li>
+              <a href="comofunciona.html" class="smoothScroll"> Como funciona</a>
+            </li>
+            <li>
+              <a href="contato.html" class="smoothScroll"> Contato</a>
+            </li>
             </ul>
-          </li>
-
-
-          <li>
-            <a class="btn" href="index/logout">
-              <i class="fa fa-power-off"></i>
-            </a>
-
-          </li>
-
-        </ul>
-      </div>
-      <!-- end: Header Menu -->
-
-    </div>
-  </header>
-  <!-- end: Header -->
-
-  <div class="container">
-    <div class="row">
-
-      <!-- start: Main Menu -->
-      <div id="sidebar-left" class="col-lg-2 col-sm-1 ">
-
-        <div class="sidebar-nav nav-collapse collapse navbar-collapse">
-          <ul class="nav main-menu">
-            <li>
-              <a href="">
-                <i class="fa fa-home"></i>
-                <span class="hidden-sm text"> Home</span>
-              </a>
-            </li>
-            <!--<li><a href="index.html"><i class="fa fa-dollar"></i><span class="hidden-sm text"> Caixa</span></a></li>-->
-            <!--<li><a href="penca/pencas"><i class="fa fa-dribbble"></i><span class="hidden-sm text"> Baloes</span></a></li>-->
-            <!--<li><a href="penca/meusbaloes" ><i class="fa fa-globe"></i><span class="hidden-sm text"> Meus Baloes </span></a></li>-->
-            <li>
-              <a href="penca/meuspalpites">
-                <i class="ttt fa fa-globe"></i>
-                <span class="hidden-sm text"> Meus Palpites </span>
-              </a>
-            </li>
-            <li>
-              <a href="penca/bolao">
-                <i class="fa fa-globe"></i>
-                <span class="hidden-sm text">Palpites </span>
-              </a>
-            </li>
-            <li>
-              <a class="dropmenu">
-                <i class="fa fa-users"></i>
-                <span class="hidden-sm text">Bolões</span>
-                <span class="chevron closed"></span>
-              </a>
-              <ul style="display: none;">
-                <li>
-                  <a class="submenu" href="penca/meusbaloes">
-                    <i class="fa fa-sign-in"></i>
-                    <span class="hidden-sm text">Meus Bolões</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="submenu" href="penca/boloesdisponiveis">
-                    <i class="fa  fa-search"></i>
-                    <span class="hidden-sm text">Bolões Disponiveis</span>
-                  </a>
-                </li>
-                <li>
-                  <a class="submenu" href="penca/criar">
-                    <i class="fa fa-money"></i>
-                    <span class="hidden-sm text">Criar Bolão</span>
-                  </a>
-                </li>
-              </ul>
-          
-            </li>
-            <li>
-              <a href="usuario">
-                <i class="fa fa-user"></i>
-                <span class="test hidden-sm text">Meu Perfil </span>
-              </a>
-            </li>
-            <!--                                                <li><a href="campeonatos"><i class="fa fa-star-o"></i><span class="hidden-sm text">Campeonatos</span></a></li> 
-                                                -->
-            <li>
-              <a class="dropmenu" href="campeonatos">
-                <i class="fa fa-star-o"></i>
-                <span class="hidden-sm text"> Campeonatos </span>
-                <span class="chevron closed"></span>
-              </a>
-              <ul style="display: none;">
-                <li>
-                  <a class="submenu" href="campeonatos">
-                    <i class="fa fa-chevron-right"></i>
-                    <span class="hidden-sm text">Em andamento </span>
-                  </a>
-                </li>
-                <li>
-                  <a class="submenu" href="penca/encerrados">
-                    <i class="fa fa-chevron-right"></i>
-                    <span class="hidden-sm text">Encerrados </span>
-                  </a>
-                </li>
-              </ul>
-          
-            </li>
-          
-            <li>
-              <a href="penca/ranking">
-                <i class="fa fa-star-o"></i>
-                <span class="hidden-sm text">Ranking</span>
-              </a>
-            </li>
-            <li>
-              <a href="caixa/index">
-                <i class="fa fa-dollar"></i>
-                <span class="hidden-sm text">Caixa </span>
-              </a>
-            </li>
-            <li>
-              <a href="caixa/transacoes">
-                <i class="fa fa-dollar"></i>
-                <span class="hidden-sm text">Transações</span>
-              </a>
-            </li>
-            <!--<li><a href="register/penca"><i class="fa fa-legal"></i><span class="hidden-sm text"> Criar Balão </span></a></li>-->
-            <li>
-              <a href="admin/campeonato">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text">Add Campeonato</span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/campeonato/cerrar">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text">Fechar Campeonato</span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/time">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Add Time </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/rodada">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Add Rodada </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/rodada/rodadaatual">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Set Rodada Atual </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/jogos/jogospordata">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text">Jogos por data</span>
-              </a>
-            </li>
-            <li>
-              <a href="admin">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text">Add Jogo</span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/jogos">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Jogos </span>
-              </a>
-            </li>
-            <!--<li><a href="admin/team"><i class="fa fa-male"></i><span class="hidden-sm text"> Admin Teams </span></a></li>-->
-            <li>
-              <a href="admin/transacoes">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Transações </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/campeonato/palpites">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Palpites </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/resultados">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Resultados </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/index/usuarios">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Usuarios </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/index/adicionargrana">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Adicionar Grana </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/index/emails">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Emails </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/mail/index">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Envio email </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/index/verrodada">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Ver Rodada </span>
-              </a>
-            </li>
-            <li>
-              <a href="penca/selecionarbase">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Selecionar base </span>
-              </a>
-            </li>
-            <li>
-              <a href="admin/campeonato/backup">
-                <i class="fa fa-male"></i>
-                <span class="hidden-sm text"> Backup </span>
-              </a>
-            </li>
-            <li>
-              <a href="index/logout">
-                <i class="fa fa-power-off"></i>
-                <span class="hidden-sm text">Logout</span>
-              </a>
-            </li>
-          </ul>
         </div>
-        <a href="javascript:void(0)" id="main-menu-min" class="full visible-md visible-lg">
-          <i class="fa fa-angle-double-left"></i>
-        </a>
       </div>
-      <!-- end: Main Menu -->
-
-      <!-- start: Content -->
-      <div id="content" class="col-lg-10 col-sm-11 ">
-        
-<app-root></app-root>
+    </div>
+  </div>
 
 
+
+  <!-- ==== HEADERWRAP ==== -->
+  <div id="headerwrap" id="home" name="home">
+    <header class="clearfix">
+
+
+
+
+      <div class=" col-xs-12 col-sm-12 col-lg-4 col-lg-offset-1 callout" style="padding-top:20px">
+        <div class="box" style="background:white !important">
+          <div class="header" style="color:white;background-color:#222; padding: 20px">
+            <b>Cadastre-se Agora!</b>
+          </div>
+          <form id="novo_usuario" class="form-horizontal" role="form" action="public/index/register" style="padding: 40px 0 30px 30px">
+            <div>
+              <span id="erro" style="display:yes; color:red">
+                <?php echo $msg; ?>
+              </span>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-sm-10 col-lg-10">
+                <input type="text" class="form-control" name="username" placeholder="Usuario">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-sm-10 col-lg-10">
+                <input type="password" class="form-control" name="password" placeholder="Senha">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-sm-10 col-lg-10">
+                <input type="password" class="form-control" name="confpassword" placeholder="Confirmação">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-sm-10 col-lg-10">
+                <input type="checkbox" id="termos" name="termos">
+                <a href="http://www.bolaocraquedebola.com.br/termos.pdf" TARGET="_BLANK">Aceito os termos de uso.</a>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-sm-10 col-lg-10">
+                <button type="submit" id="btnCadastro" class="btn btn-success">Cadastra-se</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-10 col-sm-10 col-lg-10" style="text-align:left">
+                <span>
+                  <a href="public/?login">Já possui uma conta? Faça Login</a>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-      <!-- end: Content -->
+
+
+
+
+
+    </header>
+  </div>
+  <!-- /headerwrap -->
+
+  <!-- ==== GREYWRAP ==== -->
+  <div id="greywrap">
+    <div class="row">
+      <div class="col-lg-4 callout">
+        <span class="icon icon-user-plus"></span>
+        <h2>Bolão com os Amigos!</h2>
+        <p>Crie seu próprio bolão personalizado para curtir com a rapaziada, compartilhar com os amigos e se divertir. </p>
+      </div>
+      <!-- col-lg-4 -->
+
+      <div class="col-lg-4 callout">
+        <span class="icon icon-star"></span>
+        <h2>Ranking e Histórico</h2>
+        <p>Tenha acesso ao Ranking do Bolão em que esta participando; veja todos os históricos de palpites e de quem está palpitando.
+          </p>
+      </div>
+      <!-- col-lg-4 -->
+
+      <div class="col-lg-4 callout">
+        <span class="icon icon-trophy"></span>
+        <h2>Time do coração</h2>
+        <p>Faça palpites no seu time do coração, com uma pagina exclusiva para seu time. </p>
+      </div>
+      <!-- col-lg-4 -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- greywrap -->
+
+  <!-- ==== SECTION DIVIDER4 ==== -->
+  <section class="section-divider textdivider divider4">
+    <div class="container">
+
+      <h1>Participe dos Bolões do Futebol Brasileiro com seus palpites e ganhe prêmios! Faça o cadastro e compartilhe com seus
+        amigos!.</h1>
+    </div>
+    <!-- container -->
+  </section>
+  <!-- section -->
+
+  <!-- ==== SECTION DIVIDER4 ==== -->
+  <section class="section-divider textdivider " style="padding-top:0px !important; margin-top:0px !important">
+
+    <app-root></app-root>
+
+  </section>
+  <!-- section -->
+
+
+  <div class="container" id="contact" name="contact">
+    <div class="row">
+      <br>
+      <h1 class="centered">OBRIGADO PELA VISITA</h1>
+      <hr>
+      <br>
+      <br>
+      <div class="col-lg-4">
+        <h3>Informação de Contato</h3>
+        <p>
+          <br/>
+          <span class="icon icon-envelop"></span>
+          <a href="#"> info@bolaocraquedebola.com.br</a>
+          <br/>
+          <span class="icon icon-twitter"></span>
+          <a href="https://twitter.com/BolaoCraqueBola"> @BolaoCraqueBola </a>
+          <br/>
+          <span class="icon icon-facebook"></span>
+          <a href="https://www.facebook.com/bolaocraquedebolaoficial/"> Bolão Craque de Bola </a>
+          <br/>
+        </p>
+      </div>
+      <!-- col -->
+
+
+
+      <div class="col-lg-4">
+        <h3>Ajude-nos a melhorar!</h3>
+        <p>Estamos trabalhando para melhor comodidade ao usuario acessar a plataforma, ajude-nos informando seu feedback para
+          que possamos estar sempre melhorando. Toda ajuda é sempre Bem vinda!</p>
+      </div>
+      <!-- col -->
 
     </div>
-    <!--/row-->
+    <!-- row -->
 
   </div>
-  <!--/container-->
+  <!-- container -->
 
-
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Modal title</h4>
-        </div>
-        <div class="modal-body">
-          <p>Here settings can be configured...</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-      <!-- /.modal-content -->
+  <div id="footerwrap">
+    <div class="container">
+      <h4>Created by Bolão Craque de Bola</h4>
     </div>
-    <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal -->
 
-  <div class="clearfix"></div>
-
-  <footer>
-
-    <div class="row">
-
-      <div class="col-sm-5">
-        <h5>Campeonatos</h5>
-        <h5>
-          <a href="penca/bolao?champ=17">Campeonato Paulista de 2018</a>
-        </h5>
-        <h5>
-          <a href="penca/bolao?champ=18">Copa do Mundo FIFA 2018</a>
-        </h5>
-      </div>
-      <!--/.col-->
-
-      <div class="col-sm-7 text-right">
-
-      </div>
-      <!--/.col-->
-
-    </div>
-    <!--/.row-->
-
-  </footer>
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
 
 
-  <!-- inline scripts related to this page -->
-
-  <!-- end: JavaScript-->
-
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="assets/js/retina.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.easing.1.3.js"></script>
+  <script type="text/javascript" src="assets/js/smoothscroll.js"></script>
+  <script type="text/javascript" src="assets/js/jquery-func.js"></script>
 </body>
 
 </html>
+
+
+<script type="text/javascript">
+//
+//    $(function() {
+//       $("#btnCadastro").bind("click", function() {
+//            var usuario = $("#usuario").val();
+//            var password = $("#password").val();
+//            if (usuario === "" || password === "") {
+//                $("#erro").html("Nome de usuario ou senha incorretos");
+//                $("#erro").show();
+//            } else {
+//                if ($("#termos").is(":checked")) {
+//                    $.post("public/index/podecadastrarusuario", {usuario:usuario}, function(response) {
+////                        console.log(response);
+//                        if (response) {
+//                            $("#novo_usuario").submit();
+//                        } else {
+//                            $("#erro").html("O nome de usuario jà esta sendo utilizado");
+//                            $("#erro").show();            
+//                        }
+//                    });
+//                    
+//                } else {
+//                    $("#erro").html("Deve aceitar os termos");
+//                    $("#erro").show();    
+//                }
+//            }
+//       });
+//    });
+
+
+</script>
+
+
+<script>
+  (function (i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+    (i[r].q = i[r].q || []).push(arguments)
+  }, i[r].l = 1 * new Date(); a = s.createElement(o),
+    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-90398320-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

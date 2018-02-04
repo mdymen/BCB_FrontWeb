@@ -11,6 +11,7 @@ import { LoginGuard } from './login.guard';
 import { JogosComponent } from './jogos/jogos.component';
 import { IndexComponent } from './index/index.component';
 import { MainComponent } from './main/main.component';
+import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
   {path: "login", component: LoginComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
     LoginComponent,
     JogosComponent,
     IndexComponent,
-    MainComponent
+    MainComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
