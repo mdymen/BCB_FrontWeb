@@ -11,11 +11,14 @@ import { LoginGuard } from './login.guard';
 import { JogosComponent } from './jogos/jogos.component';
 import { IndexComponent } from './index/index.component';
 import { MainComponent } from './main/main.component';
+import { PalpitarrodadaComponent } from './palpitarrodada/palpitarrodada.component';
+
 
 const routes: Routes = [
   {path: "login", component: LoginComponent },
   {path: "inicio", component: IndexComponent },
-  {path: "main", component: MainComponent }
+  {path: "main", component: MainComponent },
+  {path: "palpitarrodada", component: PalpitarrodadaComponent }
 ];
 
 @NgModule({
@@ -24,7 +27,8 @@ const routes: Routes = [
     LoginComponent,
     JogosComponent,
     IndexComponent,
-    MainComponent
+    MainComponent,
+    PalpitarrodadaComponent
   ],
   imports: [
     BrowserModule,

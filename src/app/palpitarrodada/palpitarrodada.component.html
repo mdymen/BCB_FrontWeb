@@ -1,0 +1,145 @@
+<!-- INICIO DEL COMBO PARA ELEGIR EL CAMPEONATO -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box">
+      <div class="box-content">
+        <form id="frChamp" action="/public/penca/bolao" method="post">
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group date col-sm-12">
+                <span class="input-group-addon">
+                  <i class="fa  fa-search"></i>
+                </span>
+                <div class="controls">
+                  <select class="form-control" (change)="onChange($event)">
+                    <option value="Vazio"></option>
+                    <option *ngFor="let campeonato of campeonatos" value={{campeonato.ch_id}} [value]="campeonato.ch_id">
+                      {{campeonato.ch_nome}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FINAL DEL COMBO PARA ELEGIR EL CAMPEONATO -->
+
+<!-- INICIO DE LA LISTA DE PARTIDOS DEL CAMPEONATO EN LA RODADA ACTIVA -->
+<form #form="ngForm" (submit)="logForm(partidos)">
+<div class="container">
+  <div class="box">
+    <div class="box-header">
+      <h2>
+        <i class="fa fa-align-justify"></i>
+        <span class="break"></span> Próximos Jogos</h2>
+    </div>
+    <div class="box-content">
+      <div class="row">
+
+
+
+        <div *ngFor='let partido of partidos'>
+
+
+          <div class="col-lg-3 col-sm-6 col-xs-12 col-xxs-12 col-xxs-6" style="margin-top: 10px">
+            <div class="smallstat box" style="border:1px solid #dbdee0; padding:7px">
+              <table width="100%">
+                <tbody>
+                  <tr>
+                    <td style="text-align:center">
+                      <b>
+                        <a href="{{url}}/public/campeonatos/index?champ={{partido.ch_id}}">{{partido.ch_nome}}</a>
+                      </b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table width="100%">
+                <tbody>
+                  <tr>
+                    <td style="text-align:center">
+                      <b>
+                        <a href="{{url}}/public/campeonatos/index?rodada={{partido.rd_id}}&amp;champ={{partido.ch_id}}">Rodada {{partido.rd_round}}</a>
+                      </b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table width="100%">
+                <tbody>
+                  <tr>
+                    <td style="text-align:center">
+                      <b>{{partido.mt_date}}</b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table>
+                <tbody>
+                  <tr>
+                    <td width="55%" style="text-align:left">
+                      <span id="376">
+                        <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm1_logo}}">
+                        <a href="{{url}}/public/team/team?team=376&amp;champ=17">{{partido.t1nome}}</a>
+                      </span>
+                    </td>
+                    <td width="35%">
+                      <div class="row">
+                        <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                          <input style="text-align:center" class="form-control numeros_input" ngModel value="{{partido.rs_res1}}" name="rs_res1" type="text">
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table>
+                <tbody>
+                  <tr>
+                    <td width="55%" style="text-align:left">
+                      <span id="372">
+                        <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm2_logo}}">
+                        <a href="{{url}}/public/team/team?team=372&amp;champ=17">{{partido.t2nome}}</a>
+                      </span>
+                    </td>
+                    <td width="35%">
+                      <div class="row">
+                        <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                          <input style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res2" name="rs_res2" type="text">
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div id="466" style="margin: 15px 0 0 0; ">
+                <div id="dvInfo_1114" style="display:none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="width:100%">
+    <div style="display:table; margin: 0 auto;"><button class="btn btn-lg btn-success" style="text-align: center;">Palpitar</button></div>
+  </div>
+
+</form>
+
+<!-- FIN DE LA LISTA DE PARTIDOS DEL CAMPEONATO EN LA RODADA ACTIVA -->
