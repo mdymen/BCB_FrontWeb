@@ -1,33 +1,31 @@
 import { Component } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { HttpClient} from '@angular/common/http';
+import 'rxjs/add/operator/map';
+//import {Globals} from '../globals';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
+ /* styleUrls: 
+  [
+    './app.component.css',
+    '../assets/css/bootstrap.min.css',
+    '../assets/css/style.min.css',
+    '../assets/css/filetypes.css',
+    '../assets/fonts/glyphicons-filetypes-regular.ttf',
+    '../assets/css/glyphicons.css'
+  ]*/
 })
 
 export class AppComponent {
-  title = 'app';
-  private listaJogos = [];
-  private url = "http://www.bolaocraquedebola.com.br";
-
-  constructor(private http: HttpClient) {}
+ 
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
-    // Make the HTTP request:
-   this.http.post("http://bolaocraquedebola.com.br/public/mobile/celproximojogos/?", {us_id:"3"}).
-    subscribe(res => { 
-      res.map(res => {
-        this.listaJogos.push(res);
-      })
-      console.log(this.listaJogos);
-      console.log(this.listaJogos[1]);
-    
-    });
+
+ 
   }
 
 }
-
-
