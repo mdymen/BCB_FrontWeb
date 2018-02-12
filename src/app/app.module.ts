@@ -8,16 +8,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes} from '@angular/router';
 import { LoginGuard } from './login.guard';
-import { JogosComponent } from './jogos/jogos.component';
-import { IndexComponent } from './index/index.component';
-import { MainComponent } from './main/main.component';
-import { MenuComponent } from './menu/menu.component';
 import { PalpitarrodadaComponent } from './palpitarrodada/palpitarrodada.component';
 
 const routes: Routes = [
   {path: "login", component: LoginComponent },
-  {path: "inicio", component: IndexComponent },
-  {path: "main", component: MainComponent },
   {path: "", component: PalpitarrodadaComponent },
   {path: "palpitarrodada", component: PalpitarrodadaComponent },
   {path: "palpitarrodada/:campeonato", component: PalpitarrodadaComponent },
@@ -28,10 +22,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    JogosComponent,
-    IndexComponent,
-    MainComponent,
-    MenuComponent,
     PalpitarrodadaComponent
   ],
   imports: [

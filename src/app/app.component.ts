@@ -23,8 +23,7 @@ export class AppComponent {
     this.menu.push(new Opciones("Campeonatos","fa fa-star-o", "/campeonatos"));
     this.menu.push(new Opciones("Ranking","fa fa-star-o", "/ranking"));
     this.menu.push(new Opciones("Caixa","fa fa-dollar", "/caixa"));
-    this.menu.push(new Opciones("Transacoes","fa fa-dollar", "/transacoes"));
- 
+
   }
 
 }
