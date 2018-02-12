@@ -18,7 +18,9 @@ const routes: Routes = [
   {path: "login", component: LoginComponent },
   {path: "inicio", component: IndexComponent },
   {path: "main", component: MainComponent },
-  {path: "palpitarrodada", component: PalpitarrodadaComponent }
+  {path: "palpitarrodad", component: PalpitarrodadaComponent },
+  {path: "palpitarrodada/:campeonato", component: PalpitarrodadaComponent }
+  {path: "palpitarrodada/:campeonato/rodada/:rodada", component: PalpitarrodadaComponent }
 ];
 
 @NgModule({
