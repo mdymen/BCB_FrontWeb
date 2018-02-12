@@ -78,6 +78,8 @@ export class PalpitarrodadaComponent implements OnInit {
       { id: 3, champ: this.campeonatoActual, rodada: this.rodadaActual })
       .subscribe(res => {
 
+        console.log(res);
+
         this.cargoCampeonato = true;
 
         //carga la rodada actual
