@@ -36,7 +36,6 @@ export class PalpitarrodadaComponent implements OnInit {
 
     //carga los dados del campeonato en funcion de los parametros de la url
     this.route.params.subscribe(params => {
-      this.campeonatoActual = params['campeonato'];
 
       //si no hay valor en la variable rodada, significa que el parametro
       //de la url rodada viene vacio, entonces tiene que cargar la 
@@ -46,28 +45,38 @@ export class PalpitarrodadaComponent implements OnInit {
       } else {
         this.rodadaActual = null;
       }
-      this.onChange();
+
+      //si no hay valor en la variable campeonato, significa que el parametro
+      //de la url campeonato viene vacio
+      if (params['campeonato']) {
+        this.campeonatoActual = params['campeonato'];
+        this.onChange();
+      } else {
+        this.campeonatoActual = null;
+      }
+
     });
 
-    this.http.post("http://bolaocraquedebola.com.br/public/mobile/cellgetcampeonatosabertos/?", {}).
-      subscribe(res => {
-
-        this.campeonatos.push(res[0]);
-        this.campeonatos.push(res[1]);
-
+    //carga todos los campeonatos disponibles
+    this.http.post("http://bolaocraquedebola.com.br/public/mobile/cellgetcampeonatosabertos/?", {})
+      .subscribe(result => {
+        let aux = JSON.stringify(result);
+        let campeonatos = JSON.parse(aux);
+        for (let campeonato of campeonatos) {
+          this.campeonatos.push(campeonato);
+        }
+        this.setCampeonatoActivo();
       });
   }
 
   /**
    * carga todo lo necesario para realizar los palpites del campeonato y de la rodada
    */
-  public onChange(): void {  
+  public onChange(): void {
 
     this.http.post("http://bolaocraquedebola.com.br/public/mobile/cellbolao",
       { id: 3, champ: this.campeonatoActual, rodada: this.rodadaActual })
       .subscribe(res => {
-
-        console.log(res);
 
         this.cargoCampeonato = true;
 
@@ -86,14 +95,7 @@ export class PalpitarrodadaComponent implements OnInit {
           }
         }
 
-        //para pintar el campeonato activo
-        for (let campeonato of this.campeonatos) {
-          if (campeonato.ch_id == this.campeonatoActual) {
-            campeonato.active = "blue";
-          } else {
-            campeonato.active = "white";
-          }
-        }
+        this.setCampeonatoActivo();
 
         //carga los partidos
         for (let partido of res['rodada']) {
@@ -119,5 +121,18 @@ export class PalpitarrodadaComponent implements OnInit {
           this.palpitesRealizados = false;
         }
       })
+  }
+
+  /**
+   * para pintar el campeonato activo
+   */
+  setCampeonatoActivo() {
+    for (let campeonato of this.campeonatos) {
+      if (campeonato.ch_id == this.campeonatoActual) {
+        campeonato.active = "blue";
+      } else {
+        campeonato.active = "white";
+      }
+    }
   }
 }

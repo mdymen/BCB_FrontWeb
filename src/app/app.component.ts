@@ -18,12 +18,7 @@ export class AppComponent {
 
 
   ngOnInit(): void {
-    this.menu.push(new Opciones("Home","fa fa-home", "/"));
-    this.menu.push(new Opciones("Meus Palpites","fa fa-globe", "/meuspalpites"));
-    this.menu.push(new Opciones("Palpites","fa fa-globe", "/palpites"));
-    this.menu.push(new Opciones("Mues Boloes","fa fa-sign-in", "/meusboloes"));
-    this.menu.push(new Opciones("Boloes disponivies","fa fa-search", "/boloesdisponiveis"));
-    this.menu.push(new Opciones("Criar Bolao","fa fa-money", "/criarbolao"));       
+    this.menu.push(new Opciones("Home","fa fa-home", "/palpitarrodada"));
     this.menu.push(new Opciones("Meu Perfil","fa fa-user", "/meuperfil"));
     this.menu.push(new Opciones("Campeonatos","fa fa-star-o", "/campeonatos"));
     this.menu.push(new Opciones("Ranking","fa fa-star-o", "/ranking"));
