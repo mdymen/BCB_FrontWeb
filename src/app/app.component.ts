@@ -19,8 +19,6 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.menu.push(new Opciones("Home","fa fa-home", "/palpitarrodada"));
-    this.menu.push(new Opciones("Meu Perfil","fa fa-user", "/meuperfil"));
-    this.menu.push(new Opciones("Ranking","fa fa-star-o", "/ranking"));
     this.menu.push(new Opciones("Caixa","fa fa-dollar", "/caixa"));
 
   }
