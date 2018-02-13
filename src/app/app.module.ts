@@ -10,10 +10,12 @@ import { PalpitarrodadaComponent } from './palpitarrodada/palpitarrodada.compone
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
+import { RegistrarseComponent } from './registrarse/registrarse.component';
 
 
 const routes: Routes = [
   {path: "main", component: MainComponent },
+  {path: "cadastro", component: RegistrarseComponent },
   {path: "login", component: LoginComponent },
   {path: "", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
   {path: "palpitarrodada", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
@@ -27,7 +29,8 @@ const routes: Routes = [
     AppComponent,
     PalpitarrodadaComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    RegistrarseComponent
   ],
   imports: [
     BrowserModule,

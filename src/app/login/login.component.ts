@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
    */
   ngOnInit() {
     this.login = new FormGroup({
-      usuario: new FormControl(),
-      password: new FormControl()
+      usuario: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
 
     });
 
