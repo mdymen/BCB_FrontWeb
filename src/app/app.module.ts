@@ -11,6 +11,10 @@ import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
+import { AdicionarEquipoComponent } from './admin/adicionar-equipo/adicionar-equipo.component';
+import { AdicionarCampeonatoComponent } from './admin/adicionar-campeonato/adicionar-campeonato.component';
+import { AdicionarRodadaComponent } from './admin/adicionar-rodada/adicionar-rodada.component';
+import { PartidosComponent } from './admin/partidos/partidos.component';
 
 
 const routes: Routes = [
@@ -30,7 +34,11 @@ const routes: Routes = [
     PalpitarrodadaComponent,
     LoginComponent,
     MainComponent,
-    RegistrarseComponent
+    RegistrarseComponent,
+    AdicionarEquipoComponent,
+    AdicionarCampeonatoComponent,
+    AdicionarRodadaComponent,
+    PartidosComponent
   ],
   imports: [
     BrowserModule,
