@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +8,39 @@ import { Router} from '@angular/router';
 })
 export class AppComponent {
   title = 'app';
+  logado = false;
+  menu = [];
 
   constructor(private route: Router) {
+    var usuario = localStorage.getItem("username");
+    if (usuario) {
+      this.logado = true;
+    }
+    console.log("logado " + this.logado);
+  }
+
+  ngOnInit(): void {
+    this.menu.push(new Opciones("Home", "fa fa-home", "/palpitarrodada"));
+    this.menu.push(new Opciones("Meu Perfil", "fa fa-user", "/meuperfil"));
+    this.menu.push(new Opciones("Ranking", "fa fa-star-o", "/ranking"));
+    this.menu.push(new Opciones("Caixa", "fa fa-dollar", "/caixa"));
 
   }
 
   logout() {
     localStorage.clear();
     this.route.navigate(['/login']);
+  }
+}
+
+class Opciones {
+  link: string;
+  icono: string;
+  nombre: string;
+
+  constructor( private n: string, private i: string, private l: string) {
+    this.link = l;
+    this.icono = i;
+    this.nombre = n;
   }
 }

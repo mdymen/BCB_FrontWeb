@@ -11,6 +11,8 @@ import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
+import { MeuPerfilComponent } from './meu-perfil/meu-perfil.component';
+import { CaixaComponent } from './caixa/caixa.component';
 
 
 const routes: Routes = [
@@ -30,7 +32,9 @@ const routes: Routes = [
     PalpitarrodadaComponent,
     LoginComponent,
     MainComponent,
-    RegistrarseComponent
+    RegistrarseComponent,
+    MeuPerfilComponent,
+    CaixaComponent
   ],
   imports: [
     BrowserModule,
