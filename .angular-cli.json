@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "bolao-craque-de-bola"
+    "name": "bolao-craque-de-bola2"
   },
   "apps": [
     {
@@ -19,13 +19,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css",
-        "assets/css/bootstrap.min.css",
-        "assets/css/style.min.css",
-        "assets/css/retina.min.css",
-        "assets/css/print.css"
+        "styles.css"
       ],
-      "scripts": ["assets/jquery/*.js"],
+      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

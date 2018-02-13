@@ -15,7 +15,7 @@ export class PalpitarrodadaComponent implements OnInit {
   campeonatos = [];
   partidos = [];
   campeonato;
-  url = "http://www.bolaocraquedebola.com.br";
+  url = "http://www.dymenstein.com";
   rodadas = [];
   campeonatoActual = 0;
   palpitesRealizados = false;
@@ -58,7 +58,7 @@ export class PalpitarrodadaComponent implements OnInit {
     });
 
     //carga todos los campeonatos disponibles
-    this.http.post("http://bolaocraquedebola.com.br/public/mobile/cellgetcampeonatosabertos/?", {})
+    this.http.post(this.url + "/public/mobile/cellgetcampeonatosabertos/?", {})
       .subscribe(result => {
         let aux = JSON.stringify(result);
         let campeonatos = JSON.parse(aux);
@@ -74,7 +74,7 @@ export class PalpitarrodadaComponent implements OnInit {
    */
   public onChange(): void {
 
-    this.http.post("http://bolaocraquedebola.com.br/public/mobile/cellbolao",
+    this.http.post(this.url + "/public/mobile/cellbolao",
       { id: 3, champ: this.campeonatoActual, rodada: this.rodadaActual })
       .subscribe(res => {
 
@@ -115,7 +115,7 @@ export class PalpitarrodadaComponent implements OnInit {
   logForm(value: any) {
     console.log(value);
 
-    this.http.post("http://bolaocraquedebola.com.br/public/mobile/palpitarrodadatoda", { palpites: value, usuario: 3 })
+    this.http.post(this.url + "/public/mobile/palpitarrodadatoda", { palpites: value, usuario: 3 })
       .subscribe(resultado => {
         if (resultado == 200) {
           this.palpitesRealizados = true;
