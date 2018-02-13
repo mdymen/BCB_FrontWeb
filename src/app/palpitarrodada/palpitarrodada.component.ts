@@ -77,9 +77,7 @@ export class PalpitarrodadaComponent implements OnInit {
     this.http.post(this.url + "/public/mobile/cellbolao",
       { id: 3, champ: this.campeonatoActual, rodada: this.rodadaActual })
       .subscribe(res => {
-
-        console.log(res);
-
+        
         this.cargoCampeonato = true;
 
         //carga la rodada actual

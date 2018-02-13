@@ -7,18 +7,27 @@ import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router';
 import { PalpitarrodadaComponent } from './palpitarrodada/palpitarrodada.component';
+import { AuthGuard } from './auth.guard';
+import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
+
 
 const routes: Routes = [
-  {path: "", component: PalpitarrodadaComponent },
-  {path: "palpitarrodada", component: PalpitarrodadaComponent },
-  {path: "palpitarrodada/:campeonato", component: PalpitarrodadaComponent },
-  {path: "palpitarrodada/:campeonato/rodada/:rodada", component: PalpitarrodadaComponent }
+  {path: "main", component: MainComponent },
+  {path: "login", component: LoginComponent },
+  {path: "", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
+  {path: "palpitarrodada", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
+  {path: "palpitarrodada/:campeonato", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
+  {path: "palpitarrodada/:campeonato/rodada/:rodada", 
+    component: PalpitarrodadaComponent, canActivate:[AuthGuard] }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    PalpitarrodadaComponent
+    PalpitarrodadaComponent,
+    LoginComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +37,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 
