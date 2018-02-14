@@ -53,11 +53,12 @@
 </div>
 <!-- end: Header -->
 
+<div [hidden]="!logado">
+
 <div class="container">
   <div class="row">
 
     <!-- start: Main Menu -->
-    <div [hidden]="!logado">
       <div id="sidebar-left" class="col-lg-2 col-sm-1 ">
 
         <div class="sidebar-nav nav-collapse collapse navbar-collapse">
@@ -147,3 +148,9 @@
 <!-- inline scripts related to this page -->
 
 <!-- end: JavaScript-->
+
+<div [hidden]="logado">
+
+  <app-login></app-login> 
+
+</div>

@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
    * por ahora sin validar mucho el formulario consigue logarse
    */
   onSubmit() {
-    console.log(this.login.valid);
+    console.log("xxxx " + this.login.valid);
     if (this.login.valid) {
       this.http.post("http://www.dymenstein.com/public/mobile/cellogin", 
         {us:this.login.value.usuario, pass: this.login.value.password})

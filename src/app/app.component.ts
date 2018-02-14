@@ -29,7 +29,7 @@ export class AppComponent {
 
   logout() {
     localStorage.clear();
-    this.route.navigate(['/login']);
+    //this.route.navigate(['/login']);
   }
 }
 
