@@ -54,4 +54,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  cadastrese() {
+    alert("HOLA 2");
+  }
+
 }

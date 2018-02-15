@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'app';
   logado = false;
+  cadastro = true;
   menu = [];
 
   constructor(private route: Router) {
@@ -30,6 +31,10 @@ export class AppComponent {
   logout() {
     localStorage.clear();
     //this.route.navigate(['/login']);
+  }
+
+  cadastrese() {
+    alert("HOLA");
   }
 }
 
