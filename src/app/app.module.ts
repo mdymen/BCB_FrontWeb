@@ -15,6 +15,7 @@ import { AdicionarEquipoComponent } from './admin/adicionar-equipo/adicionar-equ
 import { AdicionarCampeonatoComponent } from './admin/adicionar-campeonato/adicionar-campeonato.component';
 import { AdicionarRodadaComponent } from './admin/adicionar-rodada/adicionar-rodada.component';
 import { PartidosComponent } from './admin/partidos/partidos.component';
+import { AdicionarPartidosComponent } from './admin/adicionar-partidos/adicionar-partidos.component';
 
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
     AdicionarEquipoComponent,
     AdicionarCampeonatoComponent,
     AdicionarRodadaComponent,
-    PartidosComponent
+    PartidosComponent,
+    AdicionarPartidosComponent
   ],
   imports: [
     BrowserModule,
