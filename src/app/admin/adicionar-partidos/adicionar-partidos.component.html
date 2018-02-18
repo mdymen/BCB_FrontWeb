@@ -1,3 +1,143 @@
-<p>
-  adicionar-partidos works!
-</p>
+<div class="form-group">
+  <div class="control">
+    <select [ngModel]="campeonatos" class="control" (ngModelChange)="seleccionarCampeonato($event)" name="seleccion">
+      <option [value]="campeonato.ch_id" *ngFor="let campeonato of campeonatos">{{campeonato.ch_nome}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box">
+      <div class="box-header">
+        <h2>
+          <i class="fa fa-edit"></i>Adicionar jogo</h2>
+        <div class="box-icon">
+          <a href="form-elements.html#" class="btn-setting">
+            <i class="fa fa-wrench"></i>
+          </a>
+          <a href="form-elements.html#" class="btn-minimize">
+            <i class="fa fa-chevron-up"></i>
+          </a>
+          <a href="form-elements.html#" class="btn-close">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <div class="box-content">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group col-sm-4">
+                <select id="ronda" name="ronda">
+                  <option value="184">1</option>
+                  <option value="193">10</option>
+                  <option value="194">11</option>
+                  <option value="195">12</option>
+                  <option value="185">2</option>
+                  <option value="186">3</option>
+                  <option value="187">4</option>
+                  <option value="188">5</option>
+                  <option value="189">6</option>
+                  <option value="190">7</option>
+                  <option value="191">8</option>
+                  <option value="192">9</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group col-sm-4">
+                <span class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </span>
+                <input type="text" id="date" name="date" class="form-control" placeholder="Data dd/mm/yy">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group col-sm-4">
+                <span class="input-group-addon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                <input type="text" id="hora" name="hora" class="form-control" placeholder="Hora hh:mm">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group date col-sm-12">
+                <span class="input-group-addon">
+                  <i class="fa  fa-search"></i>
+                </span>
+                <div class="controls">
+                  <select id="team1" name="team1" class="form-control">
+                    <option value="378">Botafogo</option>
+                    <option value="361">Bragantino</option>
+                    <option value="360">Corinthians</option>
+                    <option value="372">Ferroviária</option>
+                    <option value="362">Ituano</option>
+                    <option value="363">Linense</option>
+                    <option value="377">Mirassol</option>
+                    <option value="374">Novorizontino</option>
+                    <option value="371">Palmeiras</option>
+                    <option value="365">Ponte Preta</option>
+                    <option value="376">Red Bull Brasil</option>
+                    <option value="367">Santo Andre</option>
+                    <option value="375">Santos</option>
+                    <option value="373">São Bento</option>
+                    <option value="369">São Caetano</option>
+                    <option value="364">São Paulo</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group date col-sm-12">
+                <span class="input-group-addon">
+                  <i class="fa  fa-search"></i>
+                </span>
+                <div class="controls">
+                  <select id="team2" name="team2" class="form-control">
+                    <option value="378">Botafogo</option>
+                    <option value="361">Bragantino</option>
+                    <option value="360">Corinthians</option>
+                    <option value="372">Ferroviária</option>
+                    <option value="362">Ituano</option>
+                    <option value="363">Linense</option>
+                    <option value="377">Mirassol</option>
+                    <option value="374">Novorizontino</option>
+                    <option value="371">Palmeiras</option>
+                    <option value="365">Ponte Preta</option>
+                    <option value="376">Red Bull Brasil</option>
+                    <option value="367">Santo Andre</option>
+                    <option value="375">Santos</option>
+                    <option value="373">São Bento</option>
+                    <option value="369">São Caetano</option>
+                    <option value="364">São Paulo</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="form-actions">
+            <button type="button" id="salvar_jogo" class="btn btn-primary">Salvar</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <!--/col-->
+</div>

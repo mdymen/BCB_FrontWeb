@@ -16,9 +16,13 @@ import { AdicionarCampeonatoComponent } from './admin/adicionar-campeonato/adici
 import { AdicionarRodadaComponent } from './admin/adicionar-rodada/adicionar-rodada.component';
 import { PartidosComponent } from './admin/partidos/partidos.component';
 import { AdicionarPartidosComponent } from './admin/adicionar-partidos/adicionar-partidos.component';
+import { MeuPerfilComponent } from './meu-perfil/meu-perfil.component';
+import { CaixaComponent } from './caixa/caixa.component';
+import { BackendService } from './backend.service';
 
 
 const routes: Routes = [
+  {path: "adicionarpartidos", component: AdicionarPartidosComponent },
   {path: "main", component: MainComponent },
   {path: "cadastro", component: RegistrarseComponent },
   {path: "login", component: LoginComponent },
@@ -50,7 +54,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, BackendService],
   bootstrap: [AppComponent]
 })
 
