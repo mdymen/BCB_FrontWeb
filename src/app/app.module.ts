@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpModule, Headers } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
-//import {Globals} from '../globals';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes} from '@angular/router';
 import { PalpitarrodadaComponent } from './palpitarrodada/palpitarrodada.component';
@@ -19,9 +18,11 @@ import { AdicionarPartidosComponent } from './admin/adicionar-partidos/adicionar
 import { MeuPerfilComponent } from './meu-perfil/meu-perfil.component';
 import { CaixaComponent } from './caixa/caixa.component';
 import { BackendService } from './backend.service';
+import { CargarcampeonatoComponent } from './admin/cargarcampeonato/cargarcampeonato.component';
 
 
 const routes: Routes = [
+  {path: "partidos", component: PartidosComponent },
   {path: "adicionarpartidos", component: AdicionarPartidosComponent },
   {path: "main", component: MainComponent },
   {path: "cadastro", component: RegistrarseComponent },
@@ -44,7 +45,8 @@ const routes: Routes = [
     AdicionarCampeonatoComponent,
     AdicionarRodadaComponent,
     PartidosComponent,
-    AdicionarPartidosComponent
+    AdicionarPartidosComponent,
+    CargarcampeonatoComponent
   ],
   imports: [
     BrowserModule,
