@@ -25,6 +25,14 @@ export class AppComponent {
     this.menu.push(new Opciones("Ranking", "fa fa-star-o", "/ranking"));
     this.menu.push(new Opciones("Caixa", "fa fa-dollar", "/caixa"));
 
+    let admin = localStorage.getItem("username");
+
+    if (admin == "m") {
+      this.menu.push(new Opciones("Adicionar Partidos", "fa fa-home", "/adicionarpartidos"));
+      this.menu.push(new Opciones("Resultados", "fa fa-user", "/partidos"));
+
+    }
+
   }
 
   logout() {

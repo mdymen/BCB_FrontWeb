@@ -61,10 +61,12 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("username", null);
             localStorage.setItem("cash", null);
             localStorage.setItem("jsonUsuario", null);
+            localStorage.setItem("admin", null);
           } else {
             localStorage.setItem("id", result['us_id']);
             localStorage.setItem("username", result['us_username']);
             localStorage.setItem("cash", result['us_cash']);
+            localStorage.setItem("admin", result['us_admin']);
             localStorage.setItem("jsonUsuario", JSON.stringify(result));
             this.router.navigate(['/']);
             location.reload();

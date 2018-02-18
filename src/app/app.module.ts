@@ -19,11 +19,12 @@ import { MeuPerfilComponent } from './meu-perfil/meu-perfil.component';
 import { CaixaComponent } from './caixa/caixa.component';
 import { BackendService } from './backend.service';
 import { CargarcampeonatoComponent } from './admin/cargarcampeonato/cargarcampeonato.component';
+import { AdminGuard } from './admin.guard';
 
 
 const routes: Routes = [
-  {path: "partidos", component: PartidosComponent },
-  {path: "adicionarpartidos", component: AdicionarPartidosComponent },
+  {path: "partidos", component: PartidosComponent, canActivate:[AdminGuard] },
+  {path: "adicionarpartidos", component: AdicionarPartidosComponent, canActivate:[AdminGuard] },
   {path: "main", component: MainComponent },
   {path: "cadastro", component: RegistrarseComponent },
   {path: "login", component: LoginComponent },
@@ -56,7 +57,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthGuard, BackendService],
+  providers: [AuthGuard, BackendService, AdminGuard],
   bootstrap: [AppComponent]
 })
 
