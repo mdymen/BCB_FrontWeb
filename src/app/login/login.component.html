@@ -1,23 +1,36 @@
-<div >
-<div class="container">
-  <div class="row">
-    <div id="content" class="col-sm-12 full">
-      <div class="row">
-        <div class="login-box" style="width:400px">
+<div [hidden]="!mostrarRegistrarse">
 
-          <div class="header">
-            Login Bolão Craque de Bola
-            <div class="text-with-hr">
-              <span style="background-color: #34383c"></span>
+  <div class="container">
+    <div class="row">
+      <div id="content" class="col-sm-12 full">
+        <div class="row">
+          <div class="login-box" style="width:400px">
+
+            <div class="header">
+              Cadastre-se no Bolão Craque de Bola
+              <div class="text-with-hr">
+                <span style="background-color: #34383c"></span>
+              </div>
             </div>
-          </div>
-            <form class="form-horizontal login" [formGroup]="login" (ngSubmit)="onSubmit()">
+
+            <form class="form-horizontal login" [formGroup]="registro" (ngSubmit)="onSubmitRegistro()">
               <input type="hidden" value="" name="url_go">
               <fieldset class="col-sm-12">
                 <div class="form-group">
                   <div class="controls row">
                     <div class="input-group col-sm-12">
-                      <input type="text" class="form-control" name="usuario" formControlName="usuario" placeholder="Username or E-mail">
+                      <input type="text" class="form-control" name="usuario" formControlName="usuario" placeholder="Username">
+                      <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="controls row">
+                    <div class="input-group col-sm-12">
+                      <input type="text" class="form-control" name="email" formControlName="email" placeholder="E-mail">
                       <span class="input-group-addon">
                         <i class="fa fa-user"></i>
                       </span>
@@ -36,9 +49,20 @@
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <div class="controls row">
+                    <div class="input-group col-sm-12">
+                      <input type="text" class="form-control" formControlName="grito" name="grito" placeholder="Grito de Guerra">
+                      <span class="input-group-addon">
+                        <i class="fa fa-key"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
                 <div style="width:100%">
                   <div style="display:table; margin: 0 auto;">
-                    <button class="btn btn-lg btn-success" style="text-align: center;">Login</button>
+                    <button class="btn btn-lg btn-success" style="text-align: center;">Cadastrarse</button>
                   </div>
                 </div>
 
@@ -46,14 +70,13 @@
 
             </form>
 
-            <a class="pull-left" href="page-login.html#">Esqueceu a senha?</a>
-            <a class="pull-right" (click)="cadastrese()">Cadastre-se</a>
+            <a class="pull-left" (click)="backToLogin()">Login</a>
             <!--<a class="pull-right" href="/public/?register&login=yes">Cadastre-se!</a>-->
 
             <div class="clearfix"></div>
 
           </div>
-       
+        </div>
         <!--/row-->
 
       </div>
@@ -66,7 +89,6 @@
   </div>
   <!--/container-->
 
-</div>
 
   <!-- start: JavaScript-->
   <!--[if !IE]>-->
@@ -76,10 +98,10 @@
   <!--<![endif]-->
 
   <!--[if IE]>
-	
-		<script src="assets/js/jquery-1.11.0.min.js"></script>
-	
-	<![endif]-->
+    
+      <script src="assets/js/jquery-1.11.0.min.js"></script>
+    
+    <![endif]-->
 
   <!--[if !IE]>-->
 
@@ -90,12 +112,12 @@
   <!--<![endif]-->
 
   <!--[if IE]>
-	
-		<script type="text/javascript">
-	 	window.jQuery || document.write("<script src='assets/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
-		</script>
-		
-	<![endif]-->
+    
+      <script type="text/javascript">
+       window.jQuery || document.write("<script src='assets/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+      </script>
+      
+    <![endif]-->
   <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
 
@@ -109,6 +131,121 @@
   <!-- inline scripts related to this page -->
   <script src="assets/js/pages/login.js"></script>
 
+</div>
+
+<!-- FIN DE REGISTRO Y COMIENZO DE LOGIN -->
+
+<div [hidden]="!mostrarLogin">
+
+  <div>
+    <div class="container">
+      <div class="row">
+        <div id="content" class="col-sm-12 full">
+          <div class="row">
+            <div class="login-box" style="width:400px">
+
+              <div class="header">
+                Login Bolão Craque de Bola
+                <div class="text-with-hr">
+                  <span style="background-color: #34383c"></span>
+                </div>
+              </div>
+              <form class="form-horizontal login" [formGroup]="login" (ngSubmit)="onSubmitLogin()">
+                <input type="hidden" value="" name="url_go">
+                <fieldset class="col-sm-12">
+                  <div class="form-group">
+                    <div class="controls row">
+                      <div class="input-group col-sm-12">
+                        <input type="text" class="form-control" name="usuario" formControlName="usuario" placeholder="Username or E-mail">
+                        <span class="input-group-addon">
+                          <i class="fa fa-user"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="controls row">
+                      <div class="input-group col-sm-12">
+                        <input type="password" class="form-control" formControlName="password" name="password" placeholder="Password">
+                        <span class="input-group-addon">
+                          <i class="fa fa-key"></i>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="width:100%">
+                    <div style="display:table; margin: 0 auto;">
+                      <button class="btn btn-lg btn-success" style="text-align: center;">Login</button>
+                    </div>
+                  </div>
+
+                </fieldset>
+
+              </form>
+
+              <a class="pull-left" href="page-login.html#">Esqueceu a senha?</a>
+              <a class="pull-right" (click)="cadastrese()">Cadastre-se</a>
+              <!--<a class="pull-right" href="/public/?register&login=yes">Cadastre-se!</a>-->
+
+              <div class="clearfix"></div>
+
+            </div>
+
+            <!--/row-->
+
+          </div>
 
 
-  
+
+        </div>
+        <!--/row-->
+
+      </div>
+      <!--/container-->
+
+    </div>
+
+    <!-- start: JavaScript-->
+    <!--[if !IE]>-->
+
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+
+    <!--<![endif]-->
+
+    <!--[if IE]>
+	
+		<script src="assets/js/jquery-1.11.0.min.js"></script>
+	
+	<![endif]-->
+
+    <!--[if !IE]>-->
+
+    <script type="text/javascript">
+      window.jQuery || document.write("<script src='assets/js/jquery-2.1.0.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!--<![endif]-->
+
+    <!--[if IE]>
+	
+		<script type="text/javascript">
+	 	window.jQuery || document.write("<script src='assets/js/jquery-1.11.0.min.js'>"+"<"+"/script>");
+		</script>
+		
+	<![endif]-->
+    <script src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- page scripts -->
+    <script src="assets/js/jquery.icheck.min.js"></script>
+
+    <!-- theme scripts -->
+    <script src="assets/js/custom.min.js"></script>
+    <script src="assets/js/core.min.js"></script>
+
+    <!-- inline scripts related to this page -->
+    <script src="assets/js/pages/login.js"></script>
+
+  </div>

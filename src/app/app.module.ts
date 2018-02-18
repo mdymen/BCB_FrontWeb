@@ -13,6 +13,7 @@ import { MainComponent } from './main/main.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { MeuPerfilComponent } from './meu-perfil/meu-perfil.component';
 import { CaixaComponent } from './caixa/caixa.component';
+import { BackendService } from './backend.service';
 
 
 const routes: Routes = [
@@ -44,7 +45,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, BackendService],
   bootstrap: [AppComponent]
 })
 
