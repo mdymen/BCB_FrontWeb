@@ -20,6 +20,8 @@ import { CaixaComponent } from './caixa/caixa.component';
 import { BackendService } from './backend.service';
 import { CargarcampeonatoComponent } from './admin/cargarcampeonato/cargarcampeonato.component';
 import { AdminGuard } from './admin.guard';
+import { CampeonatoService } from './entidades/campeonato.service';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 
 const routes: Routes = [
@@ -55,9 +57,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    Ng4LoadingSpinnerModule.forRoot()
   ],
-  providers: [AuthGuard, BackendService, AdminGuard],
+  providers: [AuthGuard, BackendService, AdminGuard, CampeonatoService],
   bootstrap: [AppComponent]
 })
 

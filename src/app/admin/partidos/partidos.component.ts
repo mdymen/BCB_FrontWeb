@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CargarcampeonatoComponent } from '../cargarcampeonato/cargarcampeonato.component';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
+import { CampeonatoService } from '../../entidades/campeonato.service';
+import { Observable } from 'rxjs/Observable';
+
 
 @Component({
   selector: 'app-partidos',
@@ -20,20 +23,13 @@ export class PartidosComponent implements OnInit {
 
   url = "http://www.dymenstein.com";
 
-  constructor(private http: HttpClient, private backend: BackendService) { }
+  constructor(private http: HttpClient, 
+    private backend: BackendService, 
+    private campeonatoService:CampeonatoService) { }
 
   ngOnInit() {
     //carga todos los campeonatos disponibles
-    this.http.post(this.backend.getBackEnd() + "cellgetcampeonatosabertos/?", {})
-      .subscribe(result => {
-        let aux = JSON.stringify(result);
-        let campeonatos = JSON.parse(aux);
-
-        for (let campeonato of campeonatos) {
-          this.campeonatos.push(campeonato);
-        }
-
-      });
+    this.campeonatoService.getCampeonatos().then((result:any) => this.campeonatos = result );  
   }
 
   seleccionarCampeonato(campeonato) {

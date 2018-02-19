@@ -1,27 +1,40 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../backend.service';
+import { Observable } from 'rxjs/Observable';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Injectable()
 export class CampeonatoService {
 
-  constructor(private http: HttpClient, private backend : BackendService) { }
+  campeonatos = [];
 
+  constructor(private http: HttpClient, private backend: BackendService, private spinnerService: Ng4LoadingSpinnerService) { }
+
+  /**
+   * retorna uma promesa con los campeonatos abiertos
+   */
   getCampeonatos() {
-        //carga todos los campeonatos disponibles
-        this.http.post(this.backend.getBackEnd + "cellgetcampeonatosabertos/?", {})
+    this.spinnerService.show();
+    return new Promise(resolve =>
+      this.http.post(this.backend.getBackEnd() + "cellgetcampeonatosabertos/?", {})
         .subscribe(result => {
-
           let aux = JSON.stringify(result);
           let campeonatos = JSON.parse(aux);
-          
-          let listaCampeonatos = [];
+
           for (let campeonato of campeonatos) {
-            listaCampeonatos.push(campeonato);
+            this.campeonatos.push(campeonato);
           }
 
-          return listaCampeonatos;
-        });
+          resolve(this.campeonatos);
+
+          this.spinnerService.hide()
+        })
+    );
   }
 
 }
+
+
+
+
