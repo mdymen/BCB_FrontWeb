@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
 import { CampeonatoService } from '../../entidades/campeonato.service';
 import { Observable } from 'rxjs/Observable';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-partidos',
@@ -25,19 +26,26 @@ export class PartidosComponent implements OnInit {
 
   constructor(private http: HttpClient, 
     private backend: BackendService, 
-    private campeonatoService:CampeonatoService) { }
+    private campeonatoService:CampeonatoService,
+    private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
     //carga todos los campeonatos disponibles
-    this.campeonatoService.getCampeonatos().then((result:any) => this.campeonatos = result );  
+    this.spinnerService.show();
+    this.campeonatoService.getCampeonatos().subscribe(result => {
+      this.campeonatos = result as any[];
+      this.spinnerService.hide();
+    });  
   }
 
   seleccionarCampeonato(campeonato) {
     this.campeonato = campeonato;
+    this.spinnerService.show();
     this.http.post(this.backend.getBackEndAdmin() + "resultados/cargarpartidos?", { champ: campeonato })
       .subscribe(result => {
         result['rounds'].map(round => { this.rodadas.push(round); });
         this.cargoCampeonato = true;
+        this.spinnerService.hide();
       })
   }
 
@@ -52,6 +60,7 @@ export class PartidosComponent implements OnInit {
   }
 
   grabarResultados(partidos: any) {
+    this.spinnerService.show();
     let resultados = [];
     partidos.map(partido => {
       if (partido.mt_goal1 && partido.mt_goal2) {
@@ -66,9 +75,10 @@ export class PartidosComponent implements OnInit {
       }
     });
     this.http.post(this.backend.getBackEndAdmin() + "resultados/grabarresultados?",
-      { resultados: resultados })
+      { results: resultados })
       .subscribe(result => {
         console.log(result);
+        this.spinnerService.hide();
       })
   }
 
