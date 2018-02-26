@@ -70,7 +70,8 @@ export class PartidosComponent implements OnInit {
           partido.mt_goal2,
           partido.mt_idteam1,
           partido.mt_idteam2,
-          partido.ch_id
+          partido.ch_id,
+          partido.mt__played
         ));
       }
     });
@@ -92,7 +93,8 @@ export class Resultado {
     private res2: number,
     private team1: number,
     private team2: number,
-    private champ: number) {
+    private champ: number,
+    private played: number) {
 
   }
 }
