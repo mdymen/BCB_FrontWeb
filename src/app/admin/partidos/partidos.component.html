@@ -81,7 +81,7 @@
                         <td width="35%">
                           <div class="row">
                             <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                              <input style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal1" name="rs_res1{{partido.mt_id}}"
+                              <input disabled="{{partido.mt_played == 1}}" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal1" name="rs_res1{{partido.mt_id}}"
                                 type="text">
                             </div>
                           </div>
@@ -100,7 +100,7 @@
                         <td width="35%">
                           <div class="row">
                             <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                              <input style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal2" name="rs_res2{{partido.mt_id}}"
+                              <input disabled="{{partido.mt_played == 1}}" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal2" name="rs_res2{{partido.mt_id}}"
                                 type="text">
                             </div>
                           </div>
@@ -127,6 +127,6 @@
         <button class="btn btn-lg btn-success" style="text-align: center;">Grabar resultados</button>
       </div>
     </div>
-
+    <pre>{{partidos | json}}</pre>
   </form>
 </div>

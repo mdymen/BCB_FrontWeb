@@ -3,6 +3,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Partido } from '../partido';
 import { ActivatedRoute } from '@angular/router';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-palpitarrodada',
@@ -28,15 +29,17 @@ export class PalpitarrodadaComponent implements OnInit {
   //sirve para mostrar el HTML en la pantalla;
   cargoCampeonato = false;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, 
+    private route: ActivatedRoute, 
+    private spinnerService: Ng4LoadingSpinnerService) {
 
   }
 
   ngOnInit() {
-
+    this.spinnerService.show();
     //carga los dados del campeonato en funcion de los parametros de la url
     this.route.params.subscribe(params => {
-
+      
       //si no hay valor en la variable rodada, significa que el parametro
       //de la url rodada viene vacio, entonces tiene que cargar la 
       //rodada actual activa del campeonato
@@ -66,6 +69,7 @@ export class PalpitarrodadaComponent implements OnInit {
           this.campeonatos.push(campeonato);
         }
         this.setCampeonatoActivo();
+        this.spinnerService.hide();
       });
   }
 

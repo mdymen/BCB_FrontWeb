@@ -21,6 +21,7 @@ export class PartidosComponent implements OnInit {
 
   cargoRodada = false;
   rodadas = [];
+  resultados = [];
 
   url = "http://www.dymenstein.com";
 
@@ -50,36 +51,37 @@ export class PartidosComponent implements OnInit {
   }
 
   seleccionarRodada(rodada) {
+    this.spinnerService.show();
     this.http.post(this.backend.getBackEndAdmin() + "resultados/cargarpartidos?",
       { champ: this.campeonato, ronda: rodada })
       .subscribe(result => {
         this.cargoRodada = true;
         this.partidos = [];
         result['matchs'].map(match => { this.partidos.push(match); });
+        this.spinnerService.hide();
       });
   }
 
   grabarResultados(partidos: any) {
     this.spinnerService.show();
-    let resultados = [];
     partidos.map(partido => {
       if (partido.mt_goal1 && partido.mt_goal2) {
-        resultados.push(new Resultado(
+        this.resultados.push(new Resultado(
           partido.mt_id,
           partido.mt_goal1,
           partido.mt_goal2,
           partido.mt_idteam1,
           partido.mt_idteam2,
           partido.ch_id,
-          partido.mt__played
+          partido.mt_played
         ));
       }
     });
     this.http.post(this.backend.getBackEndAdmin() + "resultados/grabarresultados?",
-      { results: resultados })
+      { results: this.resultados })
       .subscribe(result => {
         console.log(result);
-        this.spinnerService.hide();
+        this.seleccionarRodada(partidos[0].rd_id);
       })
   }
 
