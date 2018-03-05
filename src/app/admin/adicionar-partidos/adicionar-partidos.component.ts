@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-adicionar-partidos',
@@ -16,10 +17,13 @@ export class AdicionarPartidosComponent implements OnInit {
   equipos2 = [];
   rodadas = [];
   cargoCampeonato = false;
+  campeonato: any;
 
-  constructor(private http: HttpClient, private backend: BackendService) { }
+  constructor(private http: HttpClient, private backend: BackendService,
+    private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
+    this.spinnerService.show();
     //carga todos los campeonatos disponibles
     this.http.post(this.backend.getBackEnd() + "cellgetcampeonatosabertos/?", {})
       .subscribe(result => {
@@ -29,16 +33,16 @@ export class AdicionarPartidosComponent implements OnInit {
         for (let campeonato of campeonatos) {
           this.campeonatos.push(campeonato);
         }
-        
-      });
+        this.spinnerService.hide();
 
-      let partido = new Partido(null,null,null,null,null);
-      this.partidos.push(partido);
+      });
 
   }
 
   seleccionarCampeonato(campeonato) {
-    this.http.post(this.backend.getBackEndAdmin() + "index/adicionarpartido?", {champ:campeonato})
+    this.spinnerService.show();
+    this.campeonato = campeonato;
+    this.http.post(this.backend.getBackEndAdmin() + "index/adicionarpartido?", { champ: campeonato })
       .subscribe(result => {
 
         this.cargoCampeonato = true;
@@ -53,20 +57,22 @@ export class AdicionarPartidosComponent implements OnInit {
           this.equipos2.push(team);
         })
 
+        this.adicionarjogo();
+        this.spinnerService.hide();
       })
   }
 
 
   onSubmitPartidos(partidos) {
-    this.http.post(this.backend.getBackEndAdmin() + "index/salvarpartidos", {partidos:this.partidos})
-    .subscribe(result => {
-      console.log(result);
-    })    
+    this.http.post(this.backend.getBackEndAdmin() + "index/salvarpartidos", { partidos: this.partidos })
+      .subscribe(result => {
+        console.log(result);
+      })
   }
 
   adicionarjogo() {
     console.log("adicionar partido");
-    let nuevoPartido = new Partido(null, null, null, null, null);
+    let nuevoPartido = new Partido(null, null, null, null, null, this.campeonato);
     this.partidos.push(nuevoPartido);
   }
 
@@ -75,7 +81,12 @@ export class AdicionarPartidosComponent implements OnInit {
 
 export class Partido {
 
-  constructor(private ronda:number, private date:string, private hora:string, private team1:number, private team2:number) {
+  constructor(private ronda: number,
+    private date: string,
+    private hora: string,
+    private team1: number,
+    private team2: number,
+    private champ: number) {
 
   }
 
