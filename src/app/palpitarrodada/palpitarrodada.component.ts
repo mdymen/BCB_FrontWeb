@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Partido } from '../partido';
 import { ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { FechaService } from '../fecha.service';
 
 @Component({
   selector: 'app-palpitarrodada',
@@ -31,12 +32,13 @@ export class PalpitarrodadaComponent implements OnInit {
 
   constructor(private http: HttpClient, 
     private route: ActivatedRoute, 
-    private spinnerService: Ng4LoadingSpinnerService) {
+    private spinnerService: Ng4LoadingSpinnerService,
+    private fechaService: FechaService) {
 
   }
 
   ngOnInit() {
-    this.spinnerService.show();
+    
     //carga los dados del campeonato en funcion de los parametros de la url
     this.route.params.subscribe(params => {
       
@@ -59,7 +61,7 @@ export class PalpitarrodadaComponent implements OnInit {
       }
 
     });
-
+    this.spinnerService.show();
     //carga todos los campeonatos disponibles
     this.http.post(this.url + "/public/mobile/cellgetcampeonatosabertos/?", {})
       .subscribe(result => {
@@ -82,6 +84,8 @@ export class PalpitarrodadaComponent implements OnInit {
       { id: 3, champ: this.campeonatoActual, rodada: this.rodadaActual })
       .subscribe(res => {
         
+        console.log(res);
+
         this.cargoCampeonato = true;
 
         //carga la rodada actual
@@ -103,7 +107,9 @@ export class PalpitarrodadaComponent implements OnInit {
 
         //carga los partidos
         for (let partido of res['rodada']) {
-          this.partidos.push(<Partido>partido);
+          let partidoJson = <Partido>partido;
+          this.partidos.push(partidoJson);
+          this.fechaService.puedePalpitar(partidoJson.mt_date);
         }
 
       })

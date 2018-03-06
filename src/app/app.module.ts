@@ -21,10 +21,13 @@ import { BackendService } from './backend.service';
 import { CargarcampeonatoComponent } from './admin/cargarcampeonato/cargarcampeonato.component';
 import { AdminGuard } from './admin.guard';
 import { CampeonatoService } from './entidades/campeonato.service';
+import { FechaService } from './fecha.service';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { SetrodadaComponent } from './admin/setrodada/setrodada.component';
 
 
 const routes: Routes = [
+  {path: "setrodada", component: SetrodadaComponent, canActivate:[AdminGuard] },
   {path: "partidos", component: PartidosComponent, canActivate:[AdminGuard] },
   {path: "adicionarpartidos", component: AdicionarPartidosComponent, canActivate:[AdminGuard] },
   {path: "main", component: MainComponent },
@@ -49,7 +52,8 @@ const routes: Routes = [
     AdicionarRodadaComponent,
     PartidosComponent,
     AdicionarPartidosComponent,
-    CargarcampeonatoComponent
+    CargarcampeonatoComponent,
+    SetrodadaComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     Ng4LoadingSpinnerModule.forRoot()
   ],
-  providers: [AuthGuard, BackendService, AdminGuard, CampeonatoService],
+  providers: [AuthGuard, BackendService, AdminGuard, CampeonatoService, FechaService],
   bootstrap: [AppComponent]
 })
 
