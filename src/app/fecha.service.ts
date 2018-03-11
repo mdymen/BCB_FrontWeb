@@ -5,17 +5,49 @@ export class FechaService {
 
   constructor() { }
 
-  puedePalpitar(fecha:string): boolean {
+  puedePalpitar(fecha: string): boolean {
 
+    // 2018-01-30 17:30:00
+
+    // [2018,01,30 17:30:00]
     let anomes = fecha.split("-");
+    let anoJogo = anomes[0];
+    let mesJogo = anomes[1];
+
+    // [30, 17:30:00]
     let diahora = anomes[2].split(" ");
+    let diaJogo = diahora[0];
+
+    // [17,30,00]
     let horas = diahora[1].split(":");
 
-    console.log(anomes);
-    console.log(diahora);
-    console.log(horas);
+    let horaJogo = horas[0];
+    let minutosJogo = horas[1];
+    
+    //7/3/2018 5:48:09
+    let fechaHoraActual = new Date().toLocaleString();
 
-    return false;
+    //[7,3,2018 5:48:09]
+    let fhAtual = fechaHoraActual.split("/");
+    let diaAtual = fhAtual[0];
+    let mesAtual = fhAtual[1];
+
+    //[2018, 5:48:09]
+    let diahoraAtual = fhAtual[2].split(" ");
+    let anoAtual = diahoraAtual[0];
+
+    //[5,48,09]
+    let horasAtual = diahoraAtual[1].split(":");
+    let horaAtual = horasAtual[0];
+    let minutoAtual = horasAtual[1];
+
+    let r = Number(anoJogo) >= Number(anoAtual) 
+    && Number(mesJogo) >= Number(mesAtual) 
+    && Number(diaJogo) >= Number(diaAtual) 
+    && Number(horaJogo) >= Number(horaAtual);
+
+    return r;
+
   }
 
 }

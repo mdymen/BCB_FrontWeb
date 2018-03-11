@@ -108,12 +108,24 @@ export class PalpitarrodadaComponent implements OnInit {
         //carga los partidos
         for (let partido of res['rodada']) {
           let partidoJson = <Partido>partido;
+          partidoJson.disabled = this.fechaService.puedePalpitar(partidoJson.mt_date) ? null : "disabled";
+          partidoJson.played = partido.mt_played == 1 ? "display: block" : "display: none";
+          partidoJson.acerto = this.verificarResultadoPalpitado(partidoJson) ? "label-success" : "label-danger";
+          console.log(partidoJson.played);
           this.partidos.push(partidoJson);
-          this.fechaService.puedePalpitar(partidoJson.mt_date);
         }
 
       })
   }
+
+  verificarResultadoPalpitado(partido: Partido) {
+    if (partido.mt_goal1 == partido.rs_res1
+      && partido.mt_goal2 == partido.rs_res2) {
+        return true;
+      }
+    return false;  
+  }
+
 
   /**
    * Crea o actualiza todos los palpites de la rodada this.rodadaActual 
