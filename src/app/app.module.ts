@@ -24,6 +24,8 @@ import { CampeonatoService } from './entidades/campeonato.service';
 import { FechaService } from './fecha.service';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { SetrodadaComponent } from './admin/setrodada/setrodada.component';
+import { PosicionesComponent } from './posiciones/posiciones.component';
+import { RankingComponent } from './ranking/ranking.component';
 
 
 const routes: Routes = [
@@ -53,7 +55,9 @@ const routes: Routes = [
     PartidosComponent,
     AdicionarPartidosComponent,
     CargarcampeonatoComponent,
-    SetrodadaComponent
+    SetrodadaComponent,
+    PosicionesComponent,
+    RankingComponent
   ],
   imports: [
     BrowserModule,
