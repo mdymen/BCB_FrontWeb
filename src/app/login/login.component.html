@@ -1,3 +1,5 @@
+<ng4-loading-spinner> </ng4-loading-spinner>
+
 <div [hidden]="!mostrarRegistrarse">
 
   <div class="container">
@@ -14,8 +16,10 @@
             </div>
 
             <form class="form-horizontal login" [formGroup]="registro" (ngSubmit)="onSubmitRegistro()">
+
               <input type="hidden" value="" name="url_go">
               <fieldset class="col-sm-12">
+
                 <div class="form-group">
                   <div class="controls row">
                     <div class="input-group col-sm-12">
@@ -152,6 +156,14 @@
               </div>
               <form class="form-horizontal login" [formGroup]="login" (ngSubmit)="onSubmitLogin()">
                 <input type="hidden" value="" name="url_go">
+
+                <div *ngIf="loginIncorrecto">
+                  <div class="alert alert-danger">
+                    <strong>Erro!</strong> Usuario o senha incorretos.
+                  </div>
+                </div>
+
+
                 <fieldset class="col-sm-12">
                   <div class="form-group">
                     <div class="controls row">
