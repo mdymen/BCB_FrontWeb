@@ -23,7 +23,7 @@ export class FechaService {
 
     let horaJogo = horas[0];
     let minutosJogo = horas[1];
-    
+
     //7/3/2018 5:48:09
     let fechaHoraActual = new Date().toLocaleString();
 
@@ -41,13 +41,35 @@ export class FechaService {
     let horaAtual = horasAtual[0];
     let minutoAtual = horasAtual[1];
 
-    let r = Number(anoJogo) >= Number(anoAtual) 
-    && Number(mesJogo) >= Number(mesAtual) 
-    && Number(diaJogo) >= Number(diaAtual) 
-    && Number(horaJogo) >= Number(horaAtual);
+    /*console.log(Number(anoJogo) + " >= " + Number(anoAtual) + " "
+      + Number(mesJogo) + " >= " + Number(mesAtual) + " "
+      + Number(diaJogo) + " >= " + Number(diaAtual) + " "
+      + Number(horaJogo) + " >= " + Number(horaAtual));
+*/
 
-    return r;
+    if (Number(anoJogo) > Number(anoAtual)) {
+      return true;
+    }
 
+    if (Number(anoJogo) == Number(anoAtual)
+      && Number(mesJogo) > Number(mesAtual)) {
+      return true;
+    }
+
+    if (Number(anoJogo) == Number(anoAtual)
+      && Number(mesJogo) == Number(mesAtual)
+      && Number(diaJogo) > Number(diaAtual)) {
+      return true;
+    }
+
+    if (Number(anoJogo) == Number(anoAtual)
+      && Number(mesJogo) == Number(mesAtual)
+      && Number(diaJogo) == Number(diaAtual)
+      && Number(horaJogo) >= Number(horaAtual)) {
+      return true;
+    }
+
+    return false;
   }
 
 }
