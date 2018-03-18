@@ -111,6 +111,7 @@ export class PalpitarrodadaComponent implements OnInit {
           partidoJson.disabled = this.fechaService.puedePalpitar(partidoJson.mt_date) ? null : "disabled";
           partidoJson.played = partido.mt_played == 1 ? "display: block" : "display: none";
           partidoJson.acerto = this.verificarResultadoPalpitado(partidoJson) ? "label-success" : "label-danger";
+          console.log(partidoJson);
           this.partidos.push(partidoJson);
         }
 
