@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Partido } from '../partido';
@@ -15,7 +15,7 @@ import { FechaService } from '../fecha.service';
 export class PalpitarrodadaComponent implements OnInit {
 
   campeonatos = [];
-  partidos = [];
+  @Input() partidos = [];
   campeonato;
   url = "http://www.dymenstein.com";
   rodadas = [];
@@ -111,7 +111,6 @@ export class PalpitarrodadaComponent implements OnInit {
           partidoJson.disabled = this.fechaService.puedePalpitar(partidoJson.mt_date) ? null : "disabled";
           partidoJson.played = partido.mt_played == 1 ? "display: block" : "display: none";
           partidoJson.acerto = this.verificarResultadoPalpitado(partidoJson) ? "label-success" : "label-danger";
-          console.log(partidoJson.played);
           this.partidos.push(partidoJson);
         }
 

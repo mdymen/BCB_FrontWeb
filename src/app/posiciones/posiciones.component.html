@@ -1,0 +1,52 @@
+<ng4-loading-spinner> </ng4-loading-spinner>
+
+<div class="box">
+  <div class="box-header">
+    <h2>
+      <a href="javascript:void(0)" (click)="cargarTabla()">
+        <i class="fa fa-eye"></i>
+      </a>
+      <span class="break"></span>Tabela de Posições</h2>
+
+    <div class="box-icon">
+      <span>
+        <h2 style="margin-right: 30px !important"></h2>
+      </span>
+    </div>
+  </div>
+  <div class="box-content" [style]="vertabla">
+
+    <table class="table" *ngFor="let grupo of grupos">
+      <thead></thead>
+      <tbody>
+        
+        <tr>
+          <td></td>
+          <td> Grupo {{grupo.tm_grupo}}</td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        <tr *ngFor="let equipo of grupo.grupo, let i = index">
+            <td>
+                <span class="badge">{{i + 1}}</span>
+              </td>
+              <td>
+                <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{equipo.tm_logo}}">
+                {{equipo.tm_name}}
+              </td>
+              <td>{{equipo.tm_played}}</td>
+              <td>{{equipo.tm_points}}</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td> &nbsp;</td>
+            <td></td>
+            <td></td>
+          </tr>
+
+    </table>
+
+  </div>
+</div>
