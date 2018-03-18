@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { BackendService } from '../../backend.service';
 
 @Component({
   selector: 'app-adicionar-campeonato',
@@ -10,29 +12,34 @@ export class AdicionarCampeonatoComponent implements OnInit {
 
   campeonato: FormGroup;
 
-  constructor() { }
+  constructor(private http: HttpClient, private backendService: BackendService) { }
 
   ngOnInit() {
     this.campeonato = new FormGroup({
-      nome: new FormControl(),
-      sec1_ini: new FormControl(),
-      sec1_fin: new FormControl(),
-      sec2_ini: new FormControl(),
-      sec2_fin: new FormControl(),
-      sec3_ini: new FormControl(),
-      sec3_fin: new FormControl(),
-      sec1_desc: new FormControl(),
-      sec2_desc: new FormControl(),
-      sec3_desc: new FormControl(),
-      dchamp: new FormControl(),
-      djogo: new FormControl(),
-      drodada: new FormControl(),
-      dpalpite: new FormControl(),
-      descricao: new FormControl(),
-      data_inicio: new FormControl(),
-      data_termino: new FormControl(),
-      logocampeonato: new FormControl()
+      ch_nome: new FormControl(),
+      ch_sec1_ini: new FormControl(),
+      ch_sec1_fin: new FormControl(),
+      ch_sec2_ini: new FormControl(),
+      ch_sec2_fin: new FormControl(),
+      ch_sec3_ini: new FormControl(),
+      ch_sec3_fin: new FormControl(),
+      ch_sec1_desc: new FormControl(),
+      ch_sec2_desc: new FormControl(),
+      ch_sec3_desc: new FormControl(),
+      ch_dchamp: new FormControl(),
+      ch_djogo: new FormControl(),
+      ch_drodada: new FormControl(),
+      ch_dpalpite: new FormControl(),
+      ch_logocampeonato: new FormControl()
     });
   }
 
+  onSubmit() {
+    let form = this.campeonato.value;
+    console.log(form);
+    this.http.post(this.backendService.getBackEndAdmin() + "campeonato/index", { form })
+      .subscribe(result => {
+        console.log(result);
+      });
+  }
 }

@@ -30,6 +30,7 @@ import { RankingComponent } from './ranking/ranking.component';
 
 const routes: Routes = [
   {path: "setrodada", component: SetrodadaComponent, canActivate:[AdminGuard] },
+  {path: "adicionarcampeonato", component: AdicionarCampeonatoComponent, canActivate:[AdminGuard] },
   {path: "partidos", component: PartidosComponent, canActivate:[AdminGuard] },
   {path: "adicionarpartidos", component: AdicionarPartidosComponent, canActivate:[AdminGuard] },
   {path: "main", component: MainComponent },
