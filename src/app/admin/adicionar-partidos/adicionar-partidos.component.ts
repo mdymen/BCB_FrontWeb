@@ -64,8 +64,10 @@ export class AdicionarPartidosComponent implements OnInit {
 
 
   onSubmitPartidos(partidos) {
+    this.spinnerService.show();
     this.http.post(this.backend.getBackEndAdmin() + "index/salvarpartidos", { partidos: this.partidos })
       .subscribe(result => {
+        this.spinnerService.hide();
         console.log(result);
       })
   }

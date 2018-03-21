@@ -33,6 +33,12 @@ export class AdicionarEquipoComponent implements OnInit {
   }
 
   grabarEquipos(equipos) {
-    console.log(equipos);
+    this.spinnerService.show();
+    this.http.post(this.backendAdmin.getBackEndAdmin() + "/time/salvartime", {equipos:equipos})
+      .subscribe(result => {
+        console.log(result);
+        this.spinnerService.hide();
+      });
+    
   }
 }
