@@ -10,11 +10,13 @@ export class AppComponent {
   title = 'app';
   logado = false;
   menu = [];
+  usuario;
 
   constructor(private route: Router) {
     var usuario = localStorage.getItem("username");
     if (usuario) {
       this.logado = true;
+      this.usuario = usuario;
     }
     console.log("logado " + this.logado);
   }

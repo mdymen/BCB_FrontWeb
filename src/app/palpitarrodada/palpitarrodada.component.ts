@@ -81,7 +81,7 @@ export class PalpitarrodadaComponent implements OnInit {
   public onChange(): void {
 
     this.http.post(this.url + "/public/mobile/cellbolao",
-      { id: 3, champ: this.campeonatoActual, rodada: this.rodadaActual })
+      { id: localStorage.getItem("id"), champ: this.campeonatoActual, rodada: this.rodadaActual })
       .subscribe(res => {
         
         console.log(res);
@@ -135,7 +135,7 @@ export class PalpitarrodadaComponent implements OnInit {
   logForm(value: any) {
     console.log(value);
 
-    this.http.post(this.url + "/public/mobile/palpitarrodadatoda", { palpites: value, usuario: 3 })
+    this.http.post(this.url + "/public/mobile/palpitarrodadatoda", { palpites: value, usuario: localStorage.getItem("id") })
       .subscribe(resultado => {
         if (resultado == 200) {
           this.palpitesRealizados = true;

@@ -101,11 +101,13 @@ export class LoginComponent implements OnInit {
    * se loguea
    */
   onSubmitRegistro() {
+    this.spinnerService.show();
     var form = this.registro.value;
 
     this.http.post(this.backend.getBackEnd() + "cadastroweb",
       { username: form.usuario, password: form.password, email: form.email, grito: form.grito }).
       subscribe(result => {
+        this.spinnerService.hide();
         this.loguearse(form.usuario, form.password);
       })
   }
