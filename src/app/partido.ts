@@ -39,7 +39,10 @@ export class Partido {
         public tm_logo: string,
         public tm_name: string,
         public tm_played: number,
-        public tm_points: number
+        public tm_points: number,
+        public disabled: string,
+        public played: string,
+        public acerto: string
       ) {  }
     
     }

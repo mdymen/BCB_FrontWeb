@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box">
+      <div class="box-content">
+        <form #form="ngForm" (submit)="grabarEquipos(equipos)">
+
+          <div *ngFor="let equipo of equipos">
+
+            <!-- CARGAR CAMPEONATOS -->
+
+            <ng4-loading-spinner> </ng4-loading-spinner>
+
+            <div class="form-group">
+              <div class="controls">
+                <select [(ngModel)]="equipo.tm_idchampionship" [ngModel]="campeonatos" class="form-control" name="seleccion" name="ch_idchampionship">
+                  <option [value]="campeonato.ch_id" *ngFor="let campeonato of campeonatos">{{campeonato.ch_nome}}</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- FIN DE CARGAR CAMPEONATOS -->
+
+
+
+            <div class="form-group">
+              <div class="controls">
+                <div class="input-group col-sm-4">
+                  <span class="input-group-addon">
+                    <i class="fa fa-asterisk"></i>
+                  </span>
+                  <input type="text" name="tm_name" [(ngModel)]="equipo.tm_name" class="form-control" placeholder="Time">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="controls">
+                <div class="input-group col-sm-4">
+                  <span class="input-group-addon">
+                    <i class="fa fa-globe"></i>
+                  </span>
+                  <input type="text" name="tm_grupo" [(ngModel)]="equipo.tm_grupo" class="form-control" placeholder="Grupo">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="controls">
+                <div class="input-group col-sm-4">
+                  <span class="input-group-addon">
+                    <i class="fa fa-asterisk"></i>
+                  </span>
+                  <input type="text" name="tm_logo" [(ngModel)]="equipo.tm_logo" class="form-control" placeholder="Logo">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-actions">
+            <a (click)="adicionarequipo()">adicionar equipo</a>
+            <button id="salvar_team" class="btn btn-primary">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<pre>{{equipos | json }}</pre>

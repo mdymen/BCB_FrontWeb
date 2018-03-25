@@ -5,7 +5,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
-
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-login',
@@ -18,10 +18,12 @@ export class LoginComponent implements OnInit {
   registro: FormGroup;
   mostrarRegistrarse: boolean;
   mostrarLogin: boolean;
+  loginIncorrecto = false;
 
   constructor(private http: HttpClient,
     private router: Router,
-    private backend: BackendService) { }
+    private backend: BackendService,
+    private spinnerService: Ng4LoadingSpinnerService) { }
 
   /**
    * Crea el formulario de login
@@ -53,23 +55,28 @@ export class LoginComponent implements OnInit {
   }
 
   loguearse(usuario, password) {
-      this.http.post("http://www.dymenstein.com/public/mobile/cellogin",
-        { us: usuario, pass: password })
-        .subscribe(result => {
-          if (!result) {
-            localStorage.setItem("id", null);
-            localStorage.setItem("username", null);
-            localStorage.setItem("cash", null);
-            localStorage.setItem("jsonUsuario", null);
-          } else {
-            localStorage.setItem("id", result['us_id']);
-            localStorage.setItem("username", result['us_username']);
-            localStorage.setItem("cash", result['us_cash']);
-            localStorage.setItem("jsonUsuario", JSON.stringify(result));
-            this.router.navigate(['/']);
-            location.reload();
-          }
-        });    
+    this.spinnerService.show();
+    this.http.post("http://www.dymenstein.com/public/mobile/cellogin",
+      { us: usuario, pass: password })
+      .subscribe(result => {
+        if (!result) {
+          localStorage.setItem("id", null);
+          localStorage.setItem("username", null);
+          localStorage.setItem("cash", null);
+          localStorage.setItem("jsonUsuario", null);
+          localStorage.setItem("admin", null);
+          this.loginIncorrecto = true;
+        } else {
+          localStorage.setItem("id", result['us_id']);
+          localStorage.setItem("username", result['us_username']);
+          localStorage.setItem("cash", result['us_cash']);
+          localStorage.setItem("admin", result['us_admin']);
+          localStorage.setItem("jsonUsuario", JSON.stringify(result));
+          this.router.navigate(['/']);
+          location.reload();
+        }
+        this.spinnerService.hide();
+      });
   }
 
   /**

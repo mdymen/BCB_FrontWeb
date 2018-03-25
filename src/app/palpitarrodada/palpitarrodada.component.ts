@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { Partido } from '../partido';
 import { ActivatedRoute } from '@angular/router';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { FechaService } from '../fecha.service';
 
 @Component({
   selector: 'app-palpitarrodada',
@@ -13,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PalpitarrodadaComponent implements OnInit {
 
   campeonatos = [];
-  partidos = [];
+  @Input() partidos = [];
   campeonato;
   url = "http://www.dymenstein.com";
   rodadas = [];
@@ -28,15 +30,18 @@ export class PalpitarrodadaComponent implements OnInit {
   //sirve para mostrar el HTML en la pantalla;
   cargoCampeonato = false;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(private http: HttpClient, 
+    private route: ActivatedRoute, 
+    private spinnerService: Ng4LoadingSpinnerService,
+    private fechaService: FechaService) {
 
   }
 
   ngOnInit() {
-
+    
     //carga los dados del campeonato en funcion de los parametros de la url
     this.route.params.subscribe(params => {
-
+      
       //si no hay valor en la variable rodada, significa que el parametro
       //de la url rodada viene vacio, entonces tiene que cargar la 
       //rodada actual activa del campeonato
@@ -56,7 +61,7 @@ export class PalpitarrodadaComponent implements OnInit {
       }
 
     });
-
+    this.spinnerService.show();
     //carga todos los campeonatos disponibles
     this.http.post(this.url + "/public/mobile/cellgetcampeonatosabertos/?", {})
       .subscribe(result => {
@@ -66,6 +71,7 @@ export class PalpitarrodadaComponent implements OnInit {
           this.campeonatos.push(campeonato);
         }
         this.setCampeonatoActivo();
+        this.spinnerService.hide();
       });
   }
 
@@ -78,6 +84,8 @@ export class PalpitarrodadaComponent implements OnInit {
       { id: 3, champ: this.campeonatoActual, rodada: this.rodadaActual })
       .subscribe(res => {
         
+        console.log(res);
+
         this.cargoCampeonato = true;
 
         //carga la rodada actual
@@ -99,11 +107,25 @@ export class PalpitarrodadaComponent implements OnInit {
 
         //carga los partidos
         for (let partido of res['rodada']) {
-          this.partidos.push(<Partido>partido);
+          let partidoJson = <Partido>partido;
+          partidoJson.disabled = this.fechaService.puedePalpitar(partidoJson.mt_date) ? null : "disabled";
+          partidoJson.played = partido.mt_played == 1 ? "display: block" : "display: none";
+          partidoJson.acerto = this.verificarResultadoPalpitado(partidoJson) ? "label-success" : "label-danger";
+          console.log(partidoJson);
+          this.partidos.push(partidoJson);
         }
 
       })
   }
+
+  verificarResultadoPalpitado(partido: Partido) {
+    if (partido.mt_goal1 == partido.rs_res1
+      && partido.mt_goal2 == partido.rs_res2) {
+        return true;
+      }
+    return false;  
+  }
+
 
   /**
    * Crea o actualiza todos los palpites de la rodada this.rodadaActual 

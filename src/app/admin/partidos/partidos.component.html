@@ -1,0 +1,132 @@
+<!-- CARGAR CAMPEONATOS -->
+
+<ng4-loading-spinner> </ng4-loading-spinner>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box">
+      <div class="box-content">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="controls">
+              <select [ngModel]="campeonatos" class="form-control" (ngModelChange)="seleccionarCampeonato($event)" name="seleccion">
+                <option [value]="campeonato.ch_id" *ngFor="let campeonato of campeonatos">{{campeonato.ch_nome}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FIN DE CARGAR CAMPEONATOS -->
+
+<div [hidden]="!cargoCampeonato">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="box">
+        <div class="box-content">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="controls">
+                <select [ngModel]="rodadas" class="form-control" (ngModelChange)="seleccionarRodada($event)" name="seleccionRodada">
+                  <option [value]="rodada.rd_id" *ngFor="let rodada of rodadas">{{rodada.rd_round}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div [hidden]="!cargoRodada">
+  <form #form="ngForm" (submit)="grabarResultados(partidos)">
+    <div class="">
+      <div class="box">
+        <div class="box-header">
+          <h2>
+            <i class="fa fa-align-justify"></i>
+            <span class="break"></span> Resultados</h2>
+        </div>
+        <div class="box-content">
+          <div class="row">
+
+
+
+            <div *ngFor='let partido of partidos'>
+
+
+              <div class="col-lg-3 col-sm-6 col-xs-12 col-xxs-12 col-xxs-6" style="margin-top: 10px">
+                <div class="smallstat box" style="border:1px solid #dbdee0; padding:7px">
+                  <table width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="text-align:center">
+                          <b>{{partido.mt_date}}</b>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td width="55%" style="text-align:left">
+                          <span id="376">
+                            <img width="25px;" height="21px;" src="{{url}}/{{partido.t1logo}}"> {{partido.t1nome}}
+                          </span>
+                        </td>
+                        <td width="35%">
+                          <div class="row">
+                            <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                              <input disabled="{{partido.mt_played == 1}}" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal1" name="rs_res1{{partido.mt_id}}"
+                                type="text">
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td width="55%" style="text-align:left">
+                          <span id="372">
+                            <img width="25px;" height="21px;" src="{{url}}/{{partido.t2logo}}"> {{partido.t2nome}}
+                          </span>
+                        </td>
+                        <td width="35%">
+                          <div class="row">
+                            <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                              <input disabled="{{partido.mt_played == 1}}" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal2" name="rs_res2{{partido.mt_id}}"
+                                type="text">
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div id="466" style="margin: 15px 0 0 0; ">
+                    <div id="dvInfo_1114" style="display:none"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:100%">
+      <div style="display:table; margin: 0 auto;">
+        <button class="btn btn-lg btn-success" style="text-align: center;">Grabar resultados</button>
+      </div>
+    </div>
+    <pre>{{partidos | json}}</pre>
+  </form>
+</div>

@@ -1,0 +1,51 @@
+<ng4-loading-spinner> </ng4-loading-spinner>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box">
+      <div class="box-content">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="controls">
+              <select [ngModel]="campeonatos" class="form-control" (ngModelChange)="seleccionarCampeonato($event)" name="seleccion">
+                <option [value]="campeonato.ch_id" *ngFor="let campeonato of campeonatos">{{campeonato.ch_nome}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FIN DE CARGAR CAMPEONATOS -->
+
+<div [hidden]="!cargoCampeonato">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="box">
+        <div class="box-content">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="controls">
+                <select [ngModel]="rodadas" class="form-control" (ngModelChange)="seleccionarRodada($event)" name="seleccionRodada">
+                  <option [value]="rodada.rd_id" *ngFor="let rodada of rodadas">{{rodada.rd_round}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="width:100%">
+    <div style="display:table; margin: 0 auto;">
+      <button (click)="grabar()" class="btn btn-lg btn-success" style="text-align: center;">Set Rodada</button>
+    </div>
+  </div>
+
+
+  <pre>{{campeonato | json}}</pre>
+  <pre>{{rodada | json}}</pre>

@@ -20,10 +20,19 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.menu.push(new Opciones("Home", "fa fa-home", "/palpitarrodada"));
-    this.menu.push(new Opciones("Meu Perfil", "fa fa-user", "/meuperfil"));
-    this.menu.push(new Opciones("Ranking", "fa fa-star-o", "/ranking"));
-    this.menu.push(new Opciones("Caixa", "fa fa-dollar", "/caixa"));
+    this.menu.push(new Opciones("Inicio", "fa fa-home", "/palpitarrodada"));
+
+    let admin = localStorage.getItem("username");
+
+    if (admin == "m") {
+      this.menu.push(new Opciones("Adicionar Campeonato", "fa fa-home", "/adicionarcampeonato"));
+      this.menu.push(new Opciones("Adicionar Rodada", "fa fa-home", "/adicionarrodada"));
+      this.menu.push(new Opciones("Adicionar Equipos", "fa fa-home", "/adicionarequipos"));
+      this.menu.push(new Opciones("Adicionar Partidos", "fa fa-home", "/adicionarpartidos"));
+      this.menu.push(new Opciones("Resultados", "fa fa-user", "/partidos"));
+      this.menu.push(new Opciones("Setear Rodada", "fa fa-user", "/setrodada"));
+
+    }
 
   }
 

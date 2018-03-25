@@ -55,10 +55,10 @@
 
 <div [hidden]="!logado">
 
-<div class="container">
-  <div class="row">
+  <div class="container">
+    <div class="row">
 
-    <!-- start: Main Menu -->
+      <!-- start: Main Menu -->
       <div id="sidebar-left" class="col-lg-2 col-sm-1 ">
 
         <div class="sidebar-nav nav-collapse collapse navbar-collapse">
@@ -78,15 +78,17 @@
         </a>
       </div>
       <!-- end: Main Menu -->
-    </div>
 
-    <!-- start: Content -->
+          <!-- start: Content -->
     <div id="content" class="col-lg-10 col-sm-11 ">
 
-      <router-outlet></router-outlet>
-
+        <router-outlet></router-outlet>
+  
+      </div>
+      <!-- end: Content -->
     </div>
-    <!-- end: Content -->
+
+
 
   </div>
   <!--/row-->
@@ -151,6 +153,6 @@
 
 <div [hidden]="logado">
 
-  <app-login></app-login> 
+  <app-login></app-login>
 
 </div>
