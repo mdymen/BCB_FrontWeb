@@ -108,6 +108,31 @@
                       </tr>
                     </tbody>
                   </table>
+
+                  <!-- Para ver los usuarios que palpitaron el partido -->
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td width="100%" style="text-align:left">
+                          <i class="fa fa-user blue" (click)="verusuariospalpitaron(partido.mt_id, partido)"></i>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>                  
+                  <table [hidden]="!partido.ver_usuarios_palpitaron">
+                    <tbody>
+                      <tr>
+                        <td width="100%" style="text-align:left" *ngFor="let palpite of partido.palpites">
+                          <div>{{palpite.us_username}} - {{palpite.rs_res1}} - {{palpite.rs_res2}}</div>
+                        </td>          
+                        <td width="100%" style="text-align:left">
+                          <div><a href="javascript:void(0)" class="btn btn-lg btn-success" style="text-align: center;" (click)="emailParaPalpitadores(partido.mt_id)">Enviar Email</a></div>
+                        </td>              
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- Fin de ver los usuarios que palpitaron el partido -->
+
                   <div id="466" style="margin: 15px 0 0 0; ">
                     <div id="dvInfo_1114" style="display:none"></div>
                   </div>

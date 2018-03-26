@@ -12,6 +12,10 @@ import 'rxjs/add/operator/map';
   templateUrl: './partidos.component.html',
   styleUrls: ['./partidos.component.css']
 })
+/**
+ * El componente es el encargado de establecer 
+ * los resultados de los partidos que ya fueron jugados
+ */
 export class PartidosComponent implements OnInit {
 
   campeonatos = [];
@@ -25,9 +29,9 @@ export class PartidosComponent implements OnInit {
 
   url = "http://www.dymenstein.com";
 
-  constructor(private http: HttpClient, 
-    private backend: BackendService, 
-    private campeonatoService:CampeonatoService,
+  constructor(private http: HttpClient,
+    private backend: BackendService,
+    private campeonatoService: CampeonatoService,
     private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
@@ -36,9 +40,12 @@ export class PartidosComponent implements OnInit {
     this.campeonatoService.getCampeonatos().subscribe(result => {
       this.campeonatos = result as any[];
       this.spinnerService.hide();
-    });  
+    });
   }
 
+  /**
+   * Cuando el usuario selecciona el campeonato para poner los resultados
+   */
   seleccionarCampeonato(campeonato) {
     this.campeonato = campeonato;
     this.spinnerService.show();
@@ -50,6 +57,11 @@ export class PartidosComponent implements OnInit {
       })
   }
 
+  /**
+   * Cuando el usuario selecciona la rodada para traer los partidos para 
+   * poner los resultados
+   * @param rodada
+   */
   seleccionarRodada(rodada) {
     this.spinnerService.show();
     this.http.post(this.backend.getBackEndAdmin() + "resultados/cargarpartidos?",
@@ -57,11 +69,21 @@ export class PartidosComponent implements OnInit {
       .subscribe(result => {
         this.cargoRodada = true;
         this.partidos = [];
-        result['matchs'].map(match => { this.partidos.push(match); });
+        result['matchs']
+          .map(match => 
+            { 
+              match.ver_usuarios_palpitaron = false; 
+              this.partidos.push(match); 
+            }
+          );
         this.spinnerService.hide();
       });
   }
 
+  /**
+   * Graba los resultados en la base
+   * @param partidos 
+   */
   grabarResultados(partidos: any) {
     this.spinnerService.show();
     partidos.map(partido => {
@@ -85,6 +107,28 @@ export class PartidosComponent implements OnInit {
       })
   }
 
+  verusuariospalpitaron(idmatch:Number, partido: any) {
+    console.log(partido);
+    this.http.post(this.backend.getBackEndAdmin() + "mail/palpitaronpartido", {mt_id:idmatch})
+      .subscribe(result => {
+        partido.palpites = result;
+        partido.ver_usuarios_palpitaron = true;
+        console.log(partido);
+      })
+  }
+
+  /**
+   * Envia email a los que palpitaron el partido
+   * @param palpites los palpites que el partido tuvo
+   */
+  emailParaPalpitadores(idmatch:Number) {
+    this.spinnerService.show();
+    this.http.post(this.backend.getBackEndAdmin() + "mail/emailparapalpitadores", {mt_id:idmatch})
+    .subscribe(result => {
+      this.spinnerService.hide();
+      console.log(result);
+    })
+  }
 
 }
 
