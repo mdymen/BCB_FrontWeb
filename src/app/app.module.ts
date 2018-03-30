@@ -38,6 +38,7 @@ const routes: Routes = [
   {path: "main", component: MainComponent },
   {path: "cadastro", component: RegistrarseComponent },
   {path: "login", component: LoginComponent },
+  {path: "meuperfil", component : MeuPerfilComponent},
   {path: "", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
   {path: "palpitarrodada", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
   {path: "palpitarrodada/:campeonato", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
@@ -60,7 +61,8 @@ const routes: Routes = [
     CargarcampeonatoComponent,
     SetrodadaComponent,
     PosicionesComponent,
-    RankingComponent
+    RankingComponent,
+    MeuPerfilComponent
   ],
   imports: [
     BrowserModule,

@@ -65,12 +65,18 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("cash", null);
           localStorage.setItem("jsonUsuario", null);
           localStorage.setItem("admin", null);
+          localStorage.setItem("res_pal", null);
+          localStorage.setItem("res_rod_pal", null);
+          localStorage.setItem("info_rod", null);
           this.loginIncorrecto = true;
         } else {
           localStorage.setItem("id", result['us_id']);
           localStorage.setItem("username", result['us_username']);
           localStorage.setItem("cash", result['us_cash']);
           localStorage.setItem("admin", result['us_admin']);
+          localStorage.setItem("res_pal", result['res_pal']);
+          localStorage.setItem("res_rod_pal", result['res_rod_pal']);
+          localStorage.setItem("info_rod", result['info_rod']);
           localStorage.setItem("jsonUsuario", JSON.stringify(result));
           this.router.navigate(['/']);
           location.reload();

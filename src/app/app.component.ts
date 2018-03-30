@@ -23,6 +23,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.menu.push(new Opciones("Inicio", "fa fa-home", "/palpitarrodada"));
+    this.menu.push(new Opciones("Meu Perfil", "fa fa-user", "/meuperfil"));
 
     let admin = localStorage.getItem("username");
 

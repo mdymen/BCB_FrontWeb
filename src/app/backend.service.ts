@@ -5,6 +5,7 @@ export class BackendService {
 
   backend = "http://www.dymenstein.com/public/mobile/";
   backendAdmin = "http://www.dymenstein.com/public/admin/";;
+  backendNormal = "http://www.dymenstein.com/public/";
 
   constructor() { }
 
@@ -16,4 +17,7 @@ export class BackendService {
     return this.backendAdmin;
   }
 
+  getBackEndNormal() {
+    return this.backendNormal;
+  }
 }
