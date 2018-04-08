@@ -133,10 +133,20 @@ export class PalpitarrodadaComponent implements OnInit {
    * @param value todos los partidos con los palpites realizados
    */
   logForm(value: any) {
-    console.log(value);
+    this.spinnerService.show();
+    let palpitados = [];
+    for (let partido of value) {
+      let pJson = <Partido>partido;
+      if (pJson.rs_res1 !== null && pJson.rs_res2 !== null) {
+        palpitados.push(partido);
+      }
+    }
 
-    this.http.post(this.url + "/public/mobile/palpitarrodadatoda", { palpites: value, usuario: localStorage.getItem("id") })
+    console.log(palpitados);
+
+    this.http.post(this.url + "/public/mobile/palpitarrodadatoda", { palpites: palpitados, usuario: localStorage.getItem("id") })
       .subscribe(resultado => {
+        this.spinnerService.hide();
         if (resultado == 200) {
           this.palpitesRealizados = true;
         } else {

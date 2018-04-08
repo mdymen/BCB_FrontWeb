@@ -26,9 +26,11 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { SetrodadaComponent } from './admin/setrodada/setrodada.component';
 import { PosicionesComponent } from './posiciones/posiciones.component';
 import { RankingComponent } from './ranking/ranking.component';
+import { RankingsComponent } from './rankings/rankings.component';
 
 
 const routes: Routes = [
+  {path: "caixa", component: CaixaComponent, canActivate:[AuthGuard] },
   {path: "setrodada", component: SetrodadaComponent, canActivate:[AdminGuard] },
   {path: "adicionarrodada", component: AdicionarRodadaComponent, canActivate:[AdminGuard] },
   {path: "adicionarequipos", component: AdicionarEquipoComponent, canActivate:[AdminGuard] },
@@ -62,7 +64,9 @@ const routes: Routes = [
     SetrodadaComponent,
     PosicionesComponent,
     RankingComponent,
-    MeuPerfilComponent
+    MeuPerfilComponent,
+    RankingsComponent,
+    CaixaComponent
   ],
   imports: [
     BrowserModule,

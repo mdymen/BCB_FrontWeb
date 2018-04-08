@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BackendService } from '../backend.service';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-caixa',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CaixaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient,
+    private backend:BackendService,
+    private spinnerService:Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
   }
 
+  plano1() {
+    this.spinnerService.show();
+    this.http.post(this.backend.getBackEndNormal() + "caixa/plano", {p:1, user:localStorage.getItem("id"), email:"martin@dymenstein.com"})
+      .subscribe(result => {
+        this.spinnerService.hide();
+        console.log(result);
+        window.location.href='https://pagseguro.uol.com.br/v2/checkout/payment.html?code=' + result;
+      });
+  }
 }

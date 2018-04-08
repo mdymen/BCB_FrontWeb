@@ -14,39 +14,80 @@
       </span>
     </div>
   </div>
-  <div class="box-content" [style]="vertabla">
+  <div class="box-content">
 
-    <table class="table" *ngFor="let grupo of grupos">
-      <thead></thead>
-      <tbody>
-        
-        <tr>
-          <td></td>
-          <td> Grupo {{grupo.tm_grupo}}</td>
-          <td></td>
-          <td></td>
-        </tr>
+    <!-- TABLA CREADA PARA EL CAMPEONATO QUE NO ES POR GRUPOS -->
 
-        <tr *ngFor="let equipo of grupo.grupo, let i = index">
+    <div *ngIf="!isGrupos">
+      <table class="table">
+        <thead></thead>
+        <tbody>
+
+          <tr *ngFor="let equipo of equipos, let i = index">
             <td>
-                <span class="badge">{{i + 1}}</span>
-              </td>
-              <td>
-                <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{equipo.tm_logo}}">
-                {{equipo.tm_name}}
-              </td>
-              <td>{{equipo.tm_played}}</td>
-              <td>{{equipo.tm_points}}</td>
-        </tr>
+              <span class="badge">{{i + 1}}</span>
+            </td>
+            <td>
+              <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{equipo.tm_logo}}"> {{equipo.tm_name}}
+            </td>
+            <td>{{equipo.tm_played}}</td>
+            <td>{{equipo.tm_points}}</td>
+          </tr>
 
-        <tr>
+          <tr>
             <td></td>
             <td> &nbsp;</td>
             <td></td>
             <td></td>
           </tr>
 
-    </table>
+      </table>
+
+    </div>
+
+    <!-- FIN DE LA TABLA CREADA PARA EL CAMPEONATO QUE NO ES POR GRUPOS -->
+
+
+    <!-- TABLA CREADA PARA EL CAMPEONATO QUE ES POR GRUPOS -->
+
+
+    <div *ngIf="isGrupos">
+
+      <table class="table" *ngFor="let grupo of grupos">
+        <thead></thead>
+        <tbody>
+
+          <tr>
+            <td></td>
+            <td> Grupo {{grupo.tm_grupo}}</td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          <tr *ngFor="let equipo of grupo.grupo, let i = index">
+            <td>
+              <span class="badge">{{i + 1}}</span>
+            </td>
+            <td>
+              <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{equipo.tm_logo}}"> {{equipo.tm_name}}
+            </td>
+            <td>{{equipo.tm_played}}</td>
+            <td>{{equipo.tm_points}}</td>
+          </tr>
+
+          <tr>
+            <td></td>
+            <td> &nbsp;</td>
+            <td></td>
+            <td></td>
+          </tr>
+
+      </table>
+
+    </div>
+
+    <!-- FIN DE LA TABLA CREADA PARA EL CAMPEONATO QUE ES POR GRUPOS -->
+
 
   </div>
 </div>

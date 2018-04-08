@@ -81,8 +81,8 @@
                         <td width="35%">
                           <div class="row">
                             <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                              <input disabled="{{partido.mt_played == 1}}" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal1" name="rs_res1{{partido.mt_id}}"
-                                type="text">
+                              <input disabled="{{partido.mt_played == 1}}" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal1"
+                                name="rs_res1{{partido.mt_id}}" type="text">
                             </div>
                           </div>
                         </td>
@@ -100,8 +100,8 @@
                         <td width="35%">
                           <div class="row">
                             <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                              <input disabled="{{partido.mt_played == 1}}" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal2" name="rs_res2{{partido.mt_id}}"
-                                type="text">
+                              <input disabled="{{partido.mt_played == 1}}" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal2"
+                                name="rs_res2{{partido.mt_id}}" type="text">
                             </div>
                           </div>
                         </td>
@@ -114,20 +114,26 @@
                     <tbody>
                       <tr>
                         <td width="100%" style="text-align:left">
-                          <i class="fa fa-user blue" (click)="verusuariospalpitaron(partido.mt_id, partido)"></i>
+                          <i class="fa fa-user blue" (click)="verusuariospalpitaron(partido.mt_id, partido)" style="width:25px;font-size:15px;padding: 5px 0" ></i>
                         </td>
                       </tr>
                     </tbody>
-                  </table>                  
-                  <table [hidden]="!partido.ver_usuarios_palpitaron">
-                    <tbody>
-                      <tr>
-                        <td width="100%" style="text-align:left" *ngFor="let palpite of partido.palpites">
+                  </table>
+                  <table>
+                    <tbody [hidden]="!partido.ver_usuarios_palpitaron">
+                      <tr *ngFor="let palpite of partido.palpites">
+                        <td width="100%" style="text-align:left" >
                           <div>{{palpite.us_username}} - {{palpite.rs_res1}} - {{palpite.rs_res2}}</div>
-                        </td>          
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody *ngIf="partido.ver_usuarios_palpitaron">
+                      <tr>
                         <td width="100%" style="text-align:left">
-                          <div><a href="javascript:void(0)" class="btn btn-lg btn-success" style="text-align: center;" (click)="emailParaPalpitadores(partido.mt_id)">Enviar Email</a></div>
-                        </td>              
+                          <div>
+                            <a href="javascript:void(0)" class="btn btn-lg btn-success" style="text-align: center;" (click)="emailParaPalpitadores(partido.mt_id)">Enviar Email</a>
+                          </div>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -149,12 +155,160 @@
 
     <div style="width:100%">
       <div style="display:table; margin: 0 auto;">
-        <a href="javascript:void(0)" class="btn btn-lg btn-success" style="text-align: center;">HTML Resultados</a>
-      </div>      
-      <div style="display:table; margin: 0 auto;">
         <button class="btn btn-lg btn-success" style="text-align: center;">Grabar resultados</button>
       </div>
     </div>
-    <pre>{{partidos | json}}</pre>
   </form>
 </div>
+
+
+
+  <div style="width:100%;" align="center">
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <td align="center" valign="top" style="background-color:#53636e;" bgcolor="#53636e;">
+
+            <br>
+            <br>
+            <table width="683" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td align="left" valign="top" bgcolor="#FFFFFF" style="background-color:#FFFFFF;">
+                    <a href="http://www.bolaocraquedebola.com.br/public" TARGET="_blank">
+                      <img src="http://www.bolaocraquedebola.com.br/public/assets/img/banneremail.jpg" width="583" height="118">
+                    </a>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" bgcolor="#FFFFFF" style="background-color:#FFFFFF;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tbody>
+                        <tr>
+                          <td width="35" align="left" valign="top">&nbsp;</td>
+                          <td align="left" valign="top">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                              <tbody>
+                                <tr>
+                                  <td align="center" valign="top">
+                                    <div style="color:#245da5; font-family:Times New Roman, Times, serif; font-size:48px;">
+                                        {{nomeCampeonato}}
+                                    </div>
+                                    <div style="font-family: Verdana, Geneva, sans-serif; color:#898989; font-size:12px;">Rodada:
+                                       {{nomeRodada}}
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#525252;">
+
+                                    <div style="color:#3482ad; font-size:19px;">
+
+                                    </div>
+                                    <br>
+
+                                    <div class="box">
+                                      <div class="box-content">
+                                        <div class="row">
+
+
+                                          <div  id="958" class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12 col-xxs-12">
+                                            <div class="smallstat box">
+
+
+
+                                              <table width="100%">
+                                                <tbody>
+                                                  <tr *ngFor='let partido of partidos'>
+                                                    <td style="text-align:center;width:16%">
+                                                      <b>{{partido.mt_date}}</b>
+                                                    </td>
+                                                    <td style="text-align:center;width:5%">
+                                                      <b>
+                                                        <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.t1logo}}">
+                                                      </b>
+                                                    </td>
+                                                    <td style="text-align:center;width:20%">
+                                                      <b>{{partido.t1nome}}</b>
+                                                    </td>
+                                                    <td style="text-align:center;width:7%">
+                                                      <b>{{partido.mt_goal1}}</b>
+                                                    </td>
+                                                    <td style="text-align:center;width:5%">
+                                                      <b>x</b>
+                                                    </td>
+                                                    <td style="text-align:center;width:7%">
+                                                      <b>{{partido.mt_goal2}}</b>
+                                                    </td>
+                                                    <td style="text-align:center;width:20%">
+                                                      <b>{{partido.t2nome}}</b>
+                                                    </td>
+                                                    <td style="text-align:center;width:5%">
+                                                      <b>
+                                                        <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br//{{partido.t2logo}}">
+                                                      </b>
+                                                    </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+
+
+                                            </div>
+                                          </div>
+
+
+                                          <div class="form-action">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <br>
+
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#525252;">&nbsp;</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                          <td width="35" align="left" valign="top">&nbsp;</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top" bgcolor="#3d90bd" style="background-color:#3d90bd;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tbody>
+                        <tr>
+                          <td width="35">&nbsp;</td>
+                          <td height="50" valign="middle" style="color:#FFFFFF; font-size:11px; font-family:Arial, Helvetica, sans-serif;">Cadastre-se e participe em:
+                            <b>http://www.bolaocraquedebola.com.br</b>, ou baixe nosso aplicativo na Play Store
+                            <br>
+                            <td width="35">&nbsp;</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+            <br>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div style="width:100%">
+      <div style="display:table; margin: 0 auto;">
+        <a href="javascript:void(0)" (click)="enviarHTML()" class="btn btn-lg btn-success" style="text-align: center;">Enviar HTML</a>
+      </div>
+    </div>

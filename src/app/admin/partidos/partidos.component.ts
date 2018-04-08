@@ -22,10 +22,14 @@ export class PartidosComponent implements OnInit {
   cargoCampeonato = false;
   partidos = [];
   campeonato: any;
+  rodada:any;
 
   cargoRodada = false;
   rodadas = [];
   resultados = [];
+
+  nomeCampeonato: string;
+  nomeRodada: string;
 
   url = "http://www.dymenstein.com";
 
@@ -48,6 +52,9 @@ export class PartidosComponent implements OnInit {
    */
   seleccionarCampeonato(campeonato) {
     this.campeonato = campeonato;
+    this.nomeCampeonato = this.campeonatos.filter(camp => {return camp.ch_id == campeonato })
+                            .map(champ => { return champ.ch_nome } )[0];
+
     this.spinnerService.show();
     this.http.post(this.backend.getBackEndAdmin() + "resultados/cargarpartidos?", { champ: campeonato })
       .subscribe(result => {
@@ -58,23 +65,27 @@ export class PartidosComponent implements OnInit {
   }
 
   /**
-   * Cuando el usuario selecciona la rodada para traer los partidos para 
+   * Cuando el administrador selecciona la rodada para traer los partidos para 
    * poner los resultados
    * @param rodada
    */
   seleccionarRodada(rodada) {
+    this.rodada = rodada;
     this.spinnerService.show();
+    this.nomeRodada = this.rodadas.filter(r => {return r.rd_id == rodada })
+                          .map(r => {return r.rd_round})[0];
+
     this.http.post(this.backend.getBackEndAdmin() + "resultados/cargarpartidos?",
       { champ: this.campeonato, ronda: rodada })
       .subscribe(result => {
+        console.log(result);
         this.cargoRodada = true;
         this.partidos = [];
         result['matchs']
-          .map(match => 
-            { 
-              match.ver_usuarios_palpitaron = false; 
-              this.partidos.push(match); 
-            }
+          .map(match => {
+            match.ver_usuarios_palpitaron = false;
+            this.partidos.push(match);
+          }
           );
         this.spinnerService.hide();
       });
@@ -107,13 +118,18 @@ export class PartidosComponent implements OnInit {
       })
   }
 
-  verusuariospalpitaron(idmatch:Number, partido: any) {
+  /**
+   * Devuelve la lista de usuarios que palpitaron el partido @param idmatch
+   */
+  verusuariospalpitaron(idmatch: Number, partido: any) {
+    this.spinnerService.show();
     console.log(partido);
-    this.http.post(this.backend.getBackEndAdmin() + "mail/palpitaronpartido", {mt_id:idmatch})
+    this.http.post(this.backend.getBackEndAdmin() + "mail/palpitaronpartido", { mt_id: idmatch })
       .subscribe(result => {
         partido.palpites = result;
         partido.ver_usuarios_palpitaron = true;
         console.log(partido);
+        this.spinnerService.hide();
       })
   }
 
@@ -121,13 +137,23 @@ export class PartidosComponent implements OnInit {
    * Envia email a los que palpitaron el partido
    * @param palpites los palpites que el partido tuvo
    */
-  emailParaPalpitadores(idmatch:Number) {
+  emailParaPalpitadores(idmatch: Number) {
     this.spinnerService.show();
-    this.http.post(this.backend.getBackEndAdmin() + "mail/emailparapalpitadores", {mt_id:idmatch})
-    .subscribe(result => {
-      this.spinnerService.hide();
-      console.log(result);
-    })
+    this.http.post(this.backend.getBackEndAdmin() + "mail/emailparapalpitadores", { mt_id: idmatch })
+      .subscribe(result => {
+        this.spinnerService.hide();
+        console.log(result);
+      })
+  }
+
+  /**
+   * Envia el HTML a los usuarios que tienen configurado para recibir
+   */
+  enviarHTML() {
+    console.log("champ " + this.campeonato + " rodada" + this.rodada);
+    this.http.post(this.backend.getBackEndAdmin() + "index/emailrodada", 
+      {champ : this.campeonato , rodada: this.rodada})
+        .subscribe(result => console.log(result));
   }
 
 }
