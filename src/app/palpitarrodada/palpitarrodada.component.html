@@ -41,6 +41,9 @@
               </li>
             </ul>
           </div>
+          <div *ngIf="rodadaPaga" >
+            <button class="btn btn-lg btn-success" style="text-align: center;" (click)="comprarRodada(rodada)">Palpitar  (R$: {{rodadaActualObjeto.rd_custo}})</button>
+          </div>
         </div>
       </div>
     </div>
@@ -159,7 +162,7 @@
           </div>
         </div>
 
-        <div style="width:100%">
+        <div style="width:100%;margin-bottom:10px" *ngIf="!rodadaPaga">
           <div style="display:table; margin: 0 auto;">
             <button class="btn btn-lg btn-success" style="text-align: center;">Palpitar</button>
           </div>

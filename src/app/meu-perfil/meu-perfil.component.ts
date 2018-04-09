@@ -16,6 +16,7 @@ export class MeuPerfilComponent implements OnInit {
   resPalpite:boolean;
   infoRodadaGeral:boolean;
   usuario:string;
+  cash:string;
 
   emailForm: FormGroup;
 
@@ -25,6 +26,7 @@ export class MeuPerfilComponent implements OnInit {
     this.resPalpite = Number.parseInt(localStorage.getItem("res_pal")) == 0 ? false : true;
     this.infoRodadaGeral = Number.parseInt(localStorage.getItem("info_rod")) == 0 ? false : true;
     this.usuario = localStorage.getItem("username");
+    this.cash = localStorage.getItem("cash");
   }
 
   ngOnInit() {

@@ -32,6 +32,7 @@ export class PartidosComponent implements OnInit {
   nomeRodada: string;
 
   url = "http://www.dymenstein.com";
+  fotos = "http://www.bolaocraquedebola.com.br";
 
   constructor(private http: HttpClient,
     private backend: BackendService,

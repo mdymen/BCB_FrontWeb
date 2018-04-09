@@ -5,6 +5,8 @@ import { Partido } from '../partido';
 import { ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FechaService } from '../fecha.service';
+import { BackendService } from '../backend.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-palpitarrodada',
@@ -30,18 +32,24 @@ export class PalpitarrodadaComponent implements OnInit {
   //sirve para mostrar el HTML en la pantalla;
   cargoCampeonato = false;
 
-  constructor(private http: HttpClient, 
-    private route: ActivatedRoute, 
+  //toda la informacion de la rodada marcada
+  rodadaActualObjeto: any;
+  rodadaPaga:boolean;
+
+  constructor(private http: HttpClient,
+    private route: ActivatedRoute,
     private spinnerService: Ng4LoadingSpinnerService,
-    private fechaService: FechaService) {
+    private fechaService: FechaService,
+    private backEndService: BackendService,
+    private location: Location) {
 
   }
 
   ngOnInit() {
-    
+
     //carga los dados del campeonato en funcion de los parametros de la url
     this.route.params.subscribe(params => {
-      
+
       //si no hay valor en la variable rodada, significa que el parametro
       //de la url rodada viene vacio, entonces tiene que cargar la 
       //rodada actual activa del campeonato
@@ -83,36 +91,53 @@ export class PalpitarrodadaComponent implements OnInit {
     this.http.post(this.url + "/public/mobile/cellbolao",
       { id: localStorage.getItem("id"), champ: this.campeonatoActual, rodada: this.rodadaActual })
       .subscribe(res => {
-        
+
         console.log(res);
 
-        this.cargoCampeonato = true;
+        if (res['status'] === 200) {
+          console.log(res);
 
-        //carga la rodada actual
-        this.rodadaActual = res['n_rodada'];
+          this.cargoCampeonato = true;
 
-        //carga los numeros de las rodadas para ser seleccionadas
-        let rondas = [];
-        rondas.push(res['rondas']);
-        this.rodadas = rondas[0];
+          //carga la rodada actual
+          this.rodadaActual = res['n_rodada'];
 
-        //para pintar la rodada activa
-        for (let rodada of this.rodadas) {
-          if (rodada.rd_id == this.rodadaActual) {
-            rodada.active = "active";
+          //carga los numeros de las rodadas para ser seleccionadas
+          let rondas = [];
+          rondas.push(res['rondas']);
+          this.rodadas = rondas[0];
+
+          //para pintar la rodada activa
+          for (let rodada of this.rodadas) {
+            if (rodada.rd_id == this.rodadaActual) {
+              rodada.active = "active";
+              this.rodadaActualObjeto = rodada;
+            }
           }
-        }
 
-        this.setCampeonatoActivo();
+          this.setCampeonatoActivo();
 
-        //carga los partidos
-        for (let partido of res['rodada']) {
-          let partidoJson = <Partido>partido;
-          partidoJson.disabled = this.fechaService.puedePalpitar(partidoJson.mt_date) ? null : "disabled";
-          partidoJson.played = partido.mt_played == 1 ? "display: block" : "display: none";
-          partidoJson.acerto = this.verificarResultadoPalpitado(partidoJson) ? "label-success" : "label-danger";
-          console.log(partidoJson);
-          this.partidos.push(partidoJson);
+          //carga los partidos
+          for (let partido of res['rodada']) {
+            let partidoJson = <Partido>partido;
+            partidoJson.disabled = this.fechaService.puedePalpitar(partidoJson.mt_date) ? null : "disabled";
+            partidoJson.played = partido.mt_played == 1 ? "display: block" : "display: none";
+            partidoJson.acerto = this.verificarResultadoPalpitado(partidoJson) ? "label-success" : "label-danger";
+            this.partidos.push(partidoJson);
+          }
+
+          this.rodadaActualObjeto = res['rodadaAtual'][0];
+          this.rodadaPaga = true;          
+          if (res['rodadaAtual'][0].rd_custo === null || res['rodadaAtual'][0].rd_custo === "0") {
+            this.rodadaPaga = false;
+          }
+
+          if (res['rodadaAtual'][0].ru_pago === "1") {
+            this.rodadaPaga = false;
+          }
+
+        } else {
+          console.log(res);
         }
 
       })
@@ -121,9 +146,9 @@ export class PalpitarrodadaComponent implements OnInit {
   verificarResultadoPalpitado(partido: Partido) {
     if (partido.mt_goal1 == partido.rs_res1
       && partido.mt_goal2 == partido.rs_res2) {
-        return true;
-      }
-    return false;  
+      return true;
+    }
+    return false;
   }
 
 
@@ -166,5 +191,17 @@ export class PalpitarrodadaComponent implements OnInit {
         campeonato.active = "white";
       }
     }
+  }
+
+  comprarRodada() {
+    this.spinnerService.show();
+    this.http.post(this.backEndService.getBackEnd() +"comprarrodada", 
+      {usuario: localStorage.getItem("id"), rodada: this.rodadaActual})
+      .subscribe(res => {
+        console.log(res); 
+        this.spinnerService.hide();
+        window.location.reload();
+      });
+    
   }
 }
