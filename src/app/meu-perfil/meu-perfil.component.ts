@@ -12,13 +12,22 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 })
 export class MeuPerfilComponent implements OnInit {
 
-  resRodadaPalpite:boolean;
-  resPalpite:boolean;
-  infoRodadaGeral:boolean;
-  usuario:string;
-  cash:string;
+  resRodadaPalpite: boolean;
+  resPalpite: boolean;
+  infoRodadaGeral: boolean;
+  usuario: string;
+  cash: string;
 
   emailForm: FormGroup;
+
+  tabPalpitesCargado = false;
+
+  erros;
+  acertos;
+  palpitados;
+  pontos;
+
+  cargoInfoPalpites = false;
 
   constructor(private backend: BackendService, private http: HttpClient,
     private spinnerService: Ng4LoadingSpinnerService) {
@@ -59,5 +68,22 @@ export class MeuPerfilComponent implements OnInit {
 
 
 
+  }
+
+  palpites() {
+    if (!this.cargoInfoPalpites) {
+      this.spinnerService.show();
+      this.http.post(this.backend.getBackEndNormal() + "usuario/infopalpitesusuario",
+        { usuario: localStorage.getItem("id") })
+        .subscribe(res => {
+          console.log(res);
+          this.spinnerService.hide();
+          this.erros = res['erros'],
+          this.acertos = res['acertos'],
+          this.palpitados = res['palpitados'],
+          this.pontos = res['pontos']
+          this.cargoInfoPalpites = true;
+        })
+    }
   }
 }

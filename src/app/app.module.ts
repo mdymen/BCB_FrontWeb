@@ -27,6 +27,7 @@ import { SetrodadaComponent } from './admin/setrodada/setrodada.component';
 import { PosicionesComponent } from './posiciones/posiciones.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { RankingsComponent } from './rankings/rankings.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 
 const routes: Routes = [
@@ -45,7 +46,9 @@ const routes: Routes = [
   {path: "palpitarrodada", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
   {path: "palpitarrodada/:campeonato", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
   {path: "palpitarrodada/:campeonato/rodada/:rodada", 
-    component: PalpitarrodadaComponent, canActivate:[AuthGuard] }
+    component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
+  {path: "inicio", component:InicioComponent}
+
 ];
 
 @NgModule({
@@ -66,7 +69,8 @@ const routes: Routes = [
     RankingComponent,
     MeuPerfilComponent,
     RankingsComponent,
-    CaixaComponent
+    CaixaComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

@@ -4,20 +4,26 @@
       <a href="javascript:void(0)" (click)="cargarTabla()">
       <i class="fa fa-eye" ></i>
     </a>
-      <span class="break"></span>Ranking</h2>
+      Ranking</h2>
 
   </div>
   <div class="box-content" [style]="vertabla">
-    <table class="table">
-      <tbody>
 
-        <tr *ngFor="let ranking of rankings, let i = index">
-          <td>{{i + 1}}</td>
-          <td>{{ranking.points}}</td>
-          <td>{{ranking.rk_username}}</td>
-        </tr>
-
-      </tbody>
-    </table>
+      <div>
+          <div class="box">
+            <div class="box-content">
+              <ul class="dashboard-list">
+                <li *ngFor="let ranking of rankings, let i = index">
+                  <a href="javascript:void(0)">                                                
+                    <span>{{i + 1}}</span>
+                    <span >{{ranking.points}}</span>
+                    {{ranking.rk_username}}      
+                    <i class="fa fa-star green" *ngIf="i == 0"></i>        
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
   </div>
 </div>

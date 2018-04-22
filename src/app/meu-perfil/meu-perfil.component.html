@@ -1,5 +1,7 @@
 <ng4-loading-spinner> </ng4-loading-spinner>
 
+
+
 <div class="row profile">
 
   <div class="col-sm-3">
@@ -35,11 +37,15 @@
       <li class="active">
         <a href="page-profile.html#skills">Emails</a>
       </li>
+      <li class="">
+        <a href="page-profile.html#friends" (click)="palpites()">Palpites</a>
+      </li>      
     </ul>
 
 
 
     <div class="tab-content">
+      
       <div class="tab-pane active" id="skills">
 
         <div class="row">
@@ -92,9 +98,30 @@
 
       </div>
       <div class="tab-pane" id="friends">
-
+          <div class="row">
+        <div class="col-sm-7">
+          <ul class="skill-bar">
+                <li>
+                    <h5>Palpites {{palpitados}}</h5>
+                    <div class="meter"><span class="lightBlue" style="width: 40%;">40%</span></div>
+                  </li>
+                  <li>
+                    <h5>Acertos {{acertos}}</h5>
+                    <div class="meter"><span class="green" style="width: 80%;">80%</span></div>
+                  </li>
+                  <li>
+                    <h5>Pontos {{pontos}}</h5>
+                    <div class="meter"><span class="red" style="width: 100%;">100%</span></div>
+                  </li>
+                  <li>
+                    <h5>Errados {{erros}}</h5>
+                    <div class="meter"><span class="lightOrange" style="width: 60%;">60%</span></div>
+                  </li>
+            
+              </ul>                
+        </div>
       </div>
-
+      </div>
     </div>
 
   </div>

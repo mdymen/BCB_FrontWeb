@@ -65,7 +65,7 @@ export class FechaService {
     if (Number(anoJogo) == Number(anoAtual)
       && Number(mesJogo) == Number(mesAtual)
       && Number(diaJogo) == Number(diaAtual)
-      && Number(horaJogo) >= Number(horaAtual)) {
+      && Number(horaJogo) > Number(horaAtual)) {
       return true;
     }
 
