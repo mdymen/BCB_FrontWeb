@@ -28,6 +28,7 @@ import { PosicionesComponent } from './posiciones/posiciones.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { RankingsComponent } from './rankings/rankings.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { InfocampeonatoComponent } from './infocampeonato/infocampeonato.component';
 
 
 const routes: Routes = [
@@ -70,7 +71,8 @@ const routes: Routes = [
     MeuPerfilComponent,
     RankingsComponent,
     CaixaComponent,
-    InicioComponent
+    InicioComponent,
+    InfocampeonatoComponent
   ],
   imports: [
     BrowserModule,

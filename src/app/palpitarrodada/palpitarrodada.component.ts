@@ -19,6 +19,7 @@ export class PalpitarrodadaComponent implements OnInit {
   campeonatos = [];
   @Input() partidos = [];
   campeonato;
+  campeonatoActualObjeto:any;
   url = "http://www.dymenstein.com";
   rodadas = [];
   campeonatoActual = 0;
@@ -96,7 +97,8 @@ export class PalpitarrodadaComponent implements OnInit {
 
         if (res['status'] === 200) {
           console.log(res);
-
+          this.campeonatoActualObjeto = res['championship'];
+          console.log(this.campeonatoActualObjeto);
           this.cargoCampeonato = true;
 
           //carga la rodada actual
@@ -128,7 +130,7 @@ export class PalpitarrodadaComponent implements OnInit {
 
           this.rodadaActualObjeto = res['rodadaAtual'][0];
           this.rodadaPaga = true;          
-          if (res['rodadaAtual'][0].rd_custo === null || res['rodadaAtual'][0].rd_custo === "0") {
+          if (!res['rodadaAtual'][0].rd_custo) {
             this.rodadaPaga = false;
           }
 

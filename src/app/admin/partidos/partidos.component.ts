@@ -99,7 +99,7 @@ export class PartidosComponent implements OnInit {
   grabarResultados(partidos: any) {
     this.spinnerService.show();
     partidos.map(partido => {
-      if (partido.mt_goal1 && partido.mt_goal2) {
+      if (partido.mt_goal1 && partido.mt_goal2 && partido.mt_played == 0) {
         this.resultados.push(new Resultado(
           partido.mt_id,
           partido.mt_goal1,
