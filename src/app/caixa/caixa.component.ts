@@ -17,9 +17,9 @@ export class CaixaComponent implements OnInit {
   ngOnInit() {
   }
 
-  plano1() {
+  plano(plano:Number) {
     this.spinnerService.show();
-    this.http.post(this.backend.getBackEndNormal() + "caixa/plano", {p:1, user:localStorage.getItem("id"), email:"martin@dymenstein.com"})
+    this.http.post(this.backend.getBackEndNormal() + "caixa/plano", {p:plano, user:localStorage.getItem("id"), email:"martin@dymenstein.com"})
       .subscribe(result => {
         this.spinnerService.hide();
         console.log(result);

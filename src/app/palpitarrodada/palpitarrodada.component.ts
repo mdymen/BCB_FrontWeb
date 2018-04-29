@@ -19,7 +19,7 @@ export class PalpitarrodadaComponent implements OnInit {
   campeonatos = [];
   @Input() partidos = [];
   campeonato;
-  campeonatoActualObjeto:any;
+  campeonatoActualObjeto: any;
   url = "http://www.dymenstein.com";
   rodadas = [];
   campeonatoActual = 0;
@@ -35,7 +35,11 @@ export class PalpitarrodadaComponent implements OnInit {
 
   //toda la informacion de la rodada marcada
   rodadaActualObjeto: any;
-  rodadaPaga:boolean;
+  rodadaPaga: boolean;
+
+  //si intenta comprar una rodada y no tiene guita suficiente
+  //esta variable es usada para mostrar el mensaje de error.
+  semDinheiro:boolean = false;
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
@@ -129,7 +133,7 @@ export class PalpitarrodadaComponent implements OnInit {
           }
 
           this.rodadaActualObjeto = res['rodadaAtual'][0];
-          this.rodadaPaga = true;          
+          this.rodadaPaga = true;
           if (!res['rodadaAtual'][0].rd_custo) {
             this.rodadaPaga = false;
           }
@@ -197,13 +201,17 @@ export class PalpitarrodadaComponent implements OnInit {
 
   comprarRodada() {
     this.spinnerService.show();
-    this.http.post(this.backEndService.getBackEnd() +"comprarrodada", 
-      {usuario: localStorage.getItem("id"), rodada: this.rodadaActual})
+    this.http.post(this.backEndService.getBackEnd() + "comprarrodada",
+      { usuario: localStorage.getItem("id"), rodada: this.rodadaActual })
       .subscribe(res => {
-        console.log(res); 
+        console.log(res);
         this.spinnerService.hide();
-        window.location.reload();
+        if (res['status'] === 200) {          
+          window.location.reload();
+        } else {
+          this.semDinheiro = true;
+        }
       });
-    
+
   }
 }
