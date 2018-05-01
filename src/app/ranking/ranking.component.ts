@@ -16,6 +16,7 @@ export class RankingComponent implements OnInit {
   campeonato;
   vertabla = "display:none";
   rankings = [];
+  rankingCargado:boolean = false;
 
   constructor(private http: HttpClient,
     private backend: BackendService,
@@ -34,7 +35,7 @@ export class RankingComponent implements OnInit {
         this.spinnerService.show();
         this.http.post(this.backend.getBackEnd() + "/ranking", { champ: this.campeonato })
           .subscribe(result => {
-
+            this.rankingCargado = true;
             for (let ranking of result['ranking']) {
               let rankingJson = <Ranking>ranking;
               this.rankings.push(rankingJson);

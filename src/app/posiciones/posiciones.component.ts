@@ -20,6 +20,7 @@ export class PosicionesComponent implements OnInit {
   vertabla = "display:none";
   equipos = [];
   isGrupos:boolean;
+  tablaCargada:boolean = false;
 
   constructor(private http: HttpClient,
     private backend: BackendService,
@@ -40,7 +41,7 @@ export class PosicionesComponent implements OnInit {
         this.spinnerService.show();
         this.http.post(this.backend.getBackEnd() + "/equipos", { champ: this.campeonato })
           .subscribe(result => {
-
+            this.tablaCargada = true;
             if (result['teams'][0].tem_grupo == false) {
               console.log(result);
               result['teams'].map(team => {this.equipos.push(team);});

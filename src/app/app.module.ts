@@ -29,7 +29,7 @@ import { RankingComponent } from './ranking/ranking.component';
 import { RankingsComponent } from './rankings/rankings.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { InfocampeonatoComponent } from './infocampeonato/infocampeonato.component';
-
+import { FormEditarPartidoComponent } from './admin/componentes/form-editar-partido/form-editar-partido.component';
 
 const routes: Routes = [
   {path: "caixa", component: CaixaComponent, canActivate:[AuthGuard] },
@@ -72,7 +72,8 @@ const routes: Routes = [
     RankingsComponent,
     CaixaComponent,
     InicioComponent,
-    InfocampeonatoComponent
+    InfocampeonatoComponent,
+    FormEditarPartidoComponent
   ],
   imports: [
     BrowserModule,

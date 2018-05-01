@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { CargarcampeonatoComponent } from '../cargarcampeonato/cargarcampeonato.component';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
@@ -6,6 +6,7 @@ import { CampeonatoService } from '../../entidades/campeonato.service';
 import { Observable } from 'rxjs/Observable';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import 'rxjs/add/operator/map';
+import { FormEditarPartidoComponent } from '../componentes/form-editar-partido/form-editar-partido.component';
 
 @Component({
   selector: 'app-partidos',
@@ -16,13 +17,13 @@ import 'rxjs/add/operator/map';
  * El componente es el encargado de establecer 
  * los resultados de los partidos que ya fueron jugados
  */
-export class PartidosComponent implements OnInit {
+export class PartidosComponent implements OnInit, AfterViewInit {
 
   campeonatos = [];
   cargoCampeonato = false;
   partidos = [];
   campeonato: any;
-  rodada:any;
+  rodada: any;
 
   cargoRodada = false;
   rodadas = [];
@@ -33,6 +34,10 @@ export class PartidosComponent implements OnInit {
 
   url = "http://www.dymenstein.com";
   fotos = "http://www.bolaocraquedebola.com.br";
+
+  mostrarModalEditarPartido: boolean = false;
+  partidoParaEditar: any;
+  @ViewChild(FormEditarPartidoComponent) modalParaEditar;
 
   constructor(private http: HttpClient,
     private backend: BackendService,
@@ -53,8 +58,8 @@ export class PartidosComponent implements OnInit {
    */
   seleccionarCampeonato(campeonato) {
     this.campeonato = campeonato;
-    this.nomeCampeonato = this.campeonatos.filter(camp => {return camp.ch_id == campeonato })
-                            .map(champ => { return champ.ch_nome } )[0];
+    this.nomeCampeonato = this.campeonatos.filter(camp => { return camp.ch_id == campeonato })
+      .map(champ => { return champ.ch_nome })[0];
 
     this.spinnerService.show();
     this.http.post(this.backend.getBackEndAdmin() + "resultados/cargarpartidos?", { champ: campeonato })
@@ -73,8 +78,8 @@ export class PartidosComponent implements OnInit {
   seleccionarRodada(rodada) {
     this.rodada = rodada;
     this.spinnerService.show();
-    this.nomeRodada = this.rodadas.filter(r => {return r.rd_id == rodada })
-                          .map(r => {return r.rd_round})[0];
+    this.nomeRodada = this.rodadas.filter(r => { return r.rd_id == rodada })
+      .map(r => { return r.rd_round })[0];
 
     this.http.post(this.backend.getBackEndAdmin() + "resultados/cargarpartidos?",
       { champ: this.campeonato, ronda: rodada })
@@ -152,11 +157,48 @@ export class PartidosComponent implements OnInit {
    */
   enviarHTML() {
     console.log("champ " + this.campeonato + " rodada" + this.rodada);
-    this.http.post(this.backend.getBackEndAdmin() + "index/emailrodada", 
-      {champ : this.campeonato , rodada: this.rodada})
-        .subscribe(result => console.log(result));
+    this.http.post(this.backend.getBackEndAdmin() + "index/emailrodada",
+      { champ: this.campeonato, rodada: this.rodada })
+      .subscribe(result => console.log(result));
   }
 
+  /**
+   * Abre un modal para editar la informacion del partido
+   */
+  editar(partido) {
+    console.log(partido);
+    let rodadaAtual = {
+      rd_round:partido.rd_round,
+      rd_id:partido.rd_id
+    };
+    this.http.post(this.backend.getBackEndAdmin() + "index/adicionarpartido?", { champ: this.campeonato })
+      .subscribe(result => {
+
+        let auxiliarRodadas = result['rondas'];
+        for (let rodada of auxiliarRodadas) {
+          let r = {
+            rd_round:rodada.rd_round,
+            rd_id:rodada.rd_id
+          }
+          this.modalParaEditar.rodadas.push(r);
+        }
+
+        result['teams'].map(team => {
+          this.modalParaEditar.equipos1.push(team);
+          this.modalParaEditar.equipos2.push(team);
+        })
+        this.modalParaEditar.partido = partido;
+        this.modalParaEditar.rodada = rodadaAtual;
+        this.modalParaEditar.mostrarModal = true;
+
+        console.log(this.modalParaEditar.rodada);
+      })
+  }
+
+  ngAfterViewInit() {
+    this.modalParaEditar.rodada = this.rodada;
+    this.modalParaEditar.mostrarModal = false;
+  }
 }
 
 export class Resultado {

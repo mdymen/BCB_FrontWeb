@@ -9,7 +9,11 @@
   </div>
   <div class="box-content" [style]="vertabla">
 
-      <div>
+      <div *ngIf="!rankingCargado">
+          <button class="btn btn-sm btn-info" (click)="cargarTabla()">Carregar Ranking</button>
+      </div>
+
+      <div *ngIf="rankingCargado">
           <div class="box">
             <div class="box-content">
               <ul class="dashboard-list">

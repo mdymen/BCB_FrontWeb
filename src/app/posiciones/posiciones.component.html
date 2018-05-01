@@ -16,10 +16,14 @@
   </div>
   <div class="box-content">
 
+      <div *ngIf="!tablaCargada">
+          <button class="btn btn-sm btn-info" (click)="cargarTabla()">Carregar Tabela</button>
+      </div>
+
     <!-- TABLA CREADA PARA EL CAMPEONATO QUE NO ES POR GRUPOS -->
 
     <div *ngIf="!isGrupos">
-      <table class="table">
+      <table class="table" *ngIf="tablaCargada">
         <thead></thead>
         <tbody>
 
@@ -51,7 +55,7 @@
     <!-- TABLA CREADA PARA EL CAMPEONATO QUE ES POR GRUPOS -->
 
 
-    <div *ngIf="isGrupos">
+    <div *ngIf="isGrupos && tablaCargada">
 
       <table class="table" *ngFor="let grupo of grupos">
         <thead></thead>

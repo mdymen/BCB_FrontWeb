@@ -1,0 +1,73 @@
+<div *ngIf="mostrarModal" class="modal fade in" id="myModal" aria-hidden="false" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button (click)="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">{{partido.t1nome}} vs {{partido.t2nome}}</h4>
+      </div>
+      <div class="modal-body">
+
+        <form #form="ngForm" class="form-horizontal" (submit)="salvar(partido)">
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group col-sm-4">
+                <select class="form-control" [(ngModel)]="rodada" name="ronda">
+                  <option [ngValue]="r" *ngFor="let r of rodadas">{{r.rd_round}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group col-sm-4">
+                <span class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </span>
+                <input type="text" id="date" name="date" class="form-control" [(ngModel)]="partido.mt_date">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group date col-sm-12">
+                <span class="input-group-addon">
+                  <i class="fa  fa-search"></i>
+                </span>
+                <div class="controls">
+                  <select name="team1{{partido.team1}}" [(ngModel)]="partido.mt_team1" class="form-control">
+                    <option [value]="equipo1.tm_id" *ngFor="let equipo1 of equipos1">{{equipo1.tm_name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="controls">
+              <div class="input-group date col-sm-12">
+                <span class="input-group-addon">
+                  <i class="fa  fa-search"></i>
+                </span>
+                <div class="controls">
+                  <select name="team2{{partido.team2}}" [(ngModel)]="partido.mt_team2" class="form-control">
+                    <option [value]="equipo2.tm_id" *ngFor="let equipo2 of equipos2">{{equipo2.tm_name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button (click)="cerrarModal()" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button (click)="salvar()" type="button" class="btn btn-primary">Salvar</button>
+      </div>
+
+      <pre>{{partido | json}}</pre>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

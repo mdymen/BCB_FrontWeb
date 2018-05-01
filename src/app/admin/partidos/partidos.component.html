@@ -115,6 +115,7 @@
                       <tr>
                         <td width="100%" style="text-align:left">
                           <i class="fa fa-user blue" (click)="verusuariospalpitaron(partido.mt_id, partido)" style="width:25px;font-size:15px;padding: 5px 0" ></i>
+                          <i class="fa fa-edit blue" (click)="editar(partido)" style="width:25px;font-size:15px;padding: 5px 0" ></i>
                         </td>
                       </tr>
                     </tbody>
@@ -312,3 +313,5 @@
         <a href="javascript:void(0)" (click)="enviarHTML()" class="btn btn-lg btn-success" style="text-align: center;">Enviar HTML</a>
       </div>
     </div>
+
+    <app-form-editar-partido></app-form-editar-partido>
