@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("res_pal", null);
           localStorage.setItem("res_rod_pal", null);
           localStorage.setItem("info_rod", null);
+          localStorage.setItem("img", null);
           this.loginIncorrecto = true;
         } else {
           localStorage.setItem("id", result['us_id']);
@@ -77,6 +78,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("res_pal", result['res_pal']);
           localStorage.setItem("res_rod_pal", result['res_rod_pal']);
           localStorage.setItem("info_rod", result['info_rod']);
+          localStorage.setItem("foto", result['us_foto']);
           localStorage.setItem("jsonUsuario", JSON.stringify(result));
           this.router.navigate(['/']);
           location.reload();
@@ -117,5 +119,7 @@ export class LoginComponent implements OnInit {
         this.loguearse(form.usuario, form.password);
       })
   }
+
+
 
 }

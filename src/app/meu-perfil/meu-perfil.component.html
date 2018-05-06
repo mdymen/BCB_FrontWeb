@@ -9,6 +9,13 @@
     <!-- informacion personal del usuario -->
 
     <div class="row">
+        <div class="col-xs-7 col-sm-12 profile-img-container">
+            <img class="profile-image" [src]="foto">
+            <a href="javascript:void(0)" class="positioner" onclick="document.getElementById('fileToUpload').click()">
+                <i class="fa fa-pencil blue icon" style="width:25px;font-size:25px;padding: 5px 0" ></i>
+              </a>
+          </div>
+
       <div class="col-xs-5 col-sm-12">
         <h3>Dados Gerais</h3>
 
@@ -23,7 +30,7 @@
           </li>
         </ul>
 
-       
+          <input id="fileToUpload" type="file" style="display:none;" (change)="handleFileInput($event.target.files)">
       </div>
     </div>
 

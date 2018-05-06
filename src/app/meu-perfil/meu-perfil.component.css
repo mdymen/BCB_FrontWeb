@@ -1,0 +1,30 @@
+.container-img {
+    display: inline-block;
+    border: 1px solid;
+    position: absolute;
+  }
+  
+  .container-img img {
+    display: block;
+  }
+  
+  .positioner {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  
+  .icon {
+    position: absolute;
+    right: -20px;
+    bottom: -20px;
+    width: 32px;
+    height: 32px;
+    opacity: 0;
+  }
+
+  .profile-img-container:hover > icon {
+    opacity: 1;
+  }
