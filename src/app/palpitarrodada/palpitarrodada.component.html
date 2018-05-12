@@ -169,7 +169,7 @@
 
         <div style="width:100%;margin-bottom:10px" *ngIf="!rodadaPaga">
           <div style="display:table; margin: 0 auto;">
-            <button class="btn btn-lg btn-success" style="text-align: center;">Palpitar</button>
+            <button [disabled]="palpitando" class="btn btn-lg btn-success" style="text-align: center;">Palpitar</button>
           </div>
         </div>
 

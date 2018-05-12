@@ -43,6 +43,8 @@ const routes: Routes = [
   {path: "cadastro", component: RegistrarseComponent },
   {path: "login", component: LoginComponent },
   {path: "meuperfil", component : MeuPerfilComponent},
+  {path: "meuperfil/:limit", component : MeuPerfilComponent},
+  {path: "perfil/:limit/usuario/:usuario", component : MeuPerfilComponent},
   {path: "", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
   {path: "palpitarrodada", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
   {path: "palpitarrodada/:campeonato", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },

@@ -35,9 +35,17 @@ export class RankingComponent implements OnInit {
         this.spinnerService.show();
         this.http.post(this.backend.getBackEnd() + "/ranking", { champ: this.campeonato })
           .subscribe(result => {
+            console.log(result);
             this.rankingCargado = true;
             for (let ranking of result['ranking']) {
+              if (ranking['rk_foto']) {
+                ranking['rk_foto'] = "http://www.dymenstein.com/public/assets/img/perfil/" + ranking['rk_foto'];
+              } else {
+                ranking['rk_foto'] = "http://www.dymenstein.com/public/assets/img/perfil/user.png";
+              }
+
               let rankingJson = <Ranking>ranking;
+
               this.rankings.push(rankingJson);
             }
 

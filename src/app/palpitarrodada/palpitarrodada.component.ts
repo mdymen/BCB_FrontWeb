@@ -41,6 +41,8 @@ export class PalpitarrodadaComponent implements OnInit {
   //esta variable es usada para mostrar el mensaje de error.
   semDinheiro:boolean = false;
 
+  palpitando:boolean = false;
+
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
     private spinnerService: Ng4LoadingSpinnerService,
@@ -164,6 +166,7 @@ export class PalpitarrodadaComponent implements OnInit {
    * @param value todos los partidos con los palpites realizados
    */
   logForm(value: any) {
+    this.palpitando = true;
     this.spinnerService.show();
     let palpitados = [];
     for (let partido of value) {
@@ -183,6 +186,7 @@ export class PalpitarrodadaComponent implements OnInit {
         } else {
           this.palpitesRealizados = false;
         }
+        this.palpitando = false;
       })
   }
 

@@ -18,7 +18,10 @@
             <div class="box-content">
               <ul class="dashboard-list">
                 <li *ngFor="let ranking of rankings, let i = index">
-                  <a href="javascript:void(0)">                                                
+                  <a href="/perfil/9/usuario/{{ranking.rk_iduser}}">     
+                      <span class="author" style="width:0px">
+                          <img src="{{ranking.rk_foto}}" alt="avatar" width="18px">
+                      </span>                                           
                     <span>{{i + 1}}</span>
                     <span >{{ranking.points}}</span>
                     {{ranking.rk_username}}      

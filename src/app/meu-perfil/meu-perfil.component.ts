@@ -4,6 +4,9 @@ import { BackendService } from '../backend.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Partido } from '../partido';
+import { ActivatedRoute } from '@angular/router';
+//import { LocalStorageService } from '../services/local-storage.service';
 
 
 @Component({
@@ -33,31 +36,80 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
   fileToUpload: any;
 
   idUsuario;
-  urlIframe;
 
   foto:string;
 
+  partidos = [];
+
+  limit:Number = 9;
+  proximo:Number = 9;
+
+  usuarioObj = null;
+
+  grito = "";
+  equipo = "";
+
+  usuarioCargado = false;
+
   constructor(private backend: BackendService, private http: HttpClient,
-    private spinnerService: Ng4LoadingSpinnerService,
-    private sanitazer: DomSanitizer) {
+    private sanitazer: DomSanitizer,
+    private route:ActivatedRoute, 
+    private spinnerService:Ng4LoadingSpinnerService
+    /*private localStorageService:LocalStorageService*/) {
 
-      if (localStorage.getItem("foto")) {
-        this.foto = "http://dymenstein.com/public/assets/img/perfil/" + localStorage.getItem("foto");
-      } else {
-        this.foto = "http://dymenstein.com/public/assets/img/perfil/user.png";
-      }
+      this.route.params.subscribe(params => {
+        if (params['limit']) {
+          this.limit = params['limit'];
+          this.proximo = parseInt(params['limit']) + 9;          
+        }
 
-    this.resRodadaPalpite = Number.parseInt(localStorage.getItem("res_rod_pal")) === 0 ? false : true;
-    this.resPalpite = Number.parseInt(localStorage.getItem("res_pal")) == 0 ? false : true;
-    this.infoRodadaGeral = Number.parseInt(localStorage.getItem("info_rod")) == 0 ? false : true;
-    this.usuario = localStorage.getItem("username");
-    this.idUsuario = localStorage.getItem("id");
-    this.cash = localStorage.getItem("cash");
-
+        if (params['usuario']) {
+          this.idUsuario = params['usuario'];
+        } else {
+          this.resRodadaPalpite = Number.parseInt(localStorage.getItem("res_rod_pal")) === 0 ? false : true;
+          this.resPalpite = Number.parseInt(localStorage.getItem("res_pal")) == 0 ? false : true;
+          this.infoRodadaGeral = Number.parseInt(localStorage.getItem("info_rod")) == 0 ? false : true;
+          this.usuario = localStorage.getItem("username");
+          this.idUsuario = localStorage.getItem("id");
+          this.cash = localStorage.getItem("cash");            
+        }
+        this.foto = "http://dymenstein.com/public/assets/img/perfil/" + this.idUsuario + ".jpg";
+      })
+    
     console.log("id usuario", this.idUsuario);
 
-    this.urlIframe = this.sanitazer.bypassSecurityTrustResourceUrl("http://www.dymenstein.com/public/usuario/subirfoto?id="+this.idUsuario);
+    this.spinnerService.show();
+    this.http.post(this.backend.getBackEndNormal() + "/usuario/palpitesusuario", {id:this.idUsuario, limit:this.limit})
+    .subscribe(result => {
+      for (let partido of result['partidos']) {
+        this.partidos.push(partido);
+        this.tabPalpitesCargado = true;
+        this.spinnerService.hide();
+      }
+    });
 
+    this.http.post(this.backend.getBackEndNormal() + "/usuario/usuario", {usuario:this.idUsuario})
+    .subscribe(result => {
+      this.usuarioObj = result;
+      this.usuario = this.usuarioObj.us_username;
+      if (this.usuarioObj.us_grito) {
+        this.grito = this.usuarioObj.us_grito;
+      }
+      if (this.usuarioObj.us_teamname) {
+        this.equipo = this.usuarioObj.us_teamname;
+      }
+
+      this.acertos = this.usuarioObj.palpites.acertos;
+      this.erros = this.usuarioObj.palpites.erros;
+      this.palpitados = this.usuarioObj.palpites.palpitados;
+      this.pontos = this.usuarioObj.palpites.pontos;
+
+      this.usuarioCargado = true;
+
+      console.log(result);
+    });
+
+    console.log("xxxxxxxxxxxxxxxxx");
   }
 
   ngOnInit() {
@@ -70,12 +122,6 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
  */
   salvarConfiguracionEmail() {
 
-  /*  this.http.post(this.backend.getBackEndNormal() + "usuario/datosperfil", {id:localStorage.getItem("id")})
-      .subscribe( result => {
-
-      })
-*/
-    this.spinnerService.show();
     this.http.post(this.backend.getBackEndNormal() + "usuario/emailconfiguracion",
       {
         res_pal: this.resPalpite,
@@ -88,15 +134,25 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
         localStorage.setItem("res_pal", Number(this.resRodadaPalpite).toString());
         localStorage.setItem("info_rod", Number(this.resRodadaPalpite).toString());
 
-        this.spinnerService.hide();
         console.log(result);
       },
-        error => { console.log(error); this.spinnerService.hide() })
+        error => { })
 
 
 
   }
 
+  /**
+   * Devuelve true si el resultado palpitado fue acertado
+   * @param partido 
+   */
+  verificarSuceso(partido: Partido) {
+    return partido.mt_goal1 === partido.rs_res1 && partido.mt_goal2 === partido.rs_res2;
+  }
+
+  /**
+   * Informacion estadisticamente de los palpites de un usuario
+   */
   palpites() {
     if (!this.cargoInfoPalpites) {
       this.spinnerService.show();
@@ -114,6 +170,10 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
     }
   }
 
+  /**
+   * Transferencia de la foto
+   * @param files 
+   */
   handleFileInput(files: FileList) {
 
     this.fileToUpload = files.item(0);
@@ -127,7 +187,7 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
       headers: hs
     };
 
-    this.spinnerService.show();
+
     this.http.post(this.backend.getBackEndNormal() + "usuario/uploadimage", formData, options)
       .subscribe(res => {        
         localStorage.setItem("foto", res['foto']); 
@@ -136,4 +196,19 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
       });
   }
 
+  /**
+   * Verifica si el usuario que está logado en este momento es el mismo usuario
+   * al cual se accedio para ver el perfil
+   */
+  isUsuarioLogado():boolean {
+    return localStorage.getItem("id") === this.idUsuario;
+  }
+  
+  /**
+   * Cuando el usuario no tiene foto carga la foto padron
+   * @param  
+   */
+  notExistImage($event) {
+    this.foto = "http://dymenstein.com/public/assets/img/perfil/user.png";
+  }
 }
