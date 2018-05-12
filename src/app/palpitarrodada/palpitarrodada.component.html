@@ -190,3 +190,21 @@
   <!-- FIN DE LA LISTA DE PARTIDOS DEL CAMPEONATO EN LA RODADA ACTIVA -->
 
 </div>
+
+<div *ngIf="!cargoCampeonato">
+  <div class="row">
+    <div class="col-lg-6 col-sm-12 col-xs-12 col-xxs-12">
+      <app-caixa></app-caixa>
+    </div>
+    <div class="col-lg-6 col-sm-12 col-xs-12 col-xxs-12">
+      <a href="/palpitarrodada/25">
+        <img src="http://www.dymenstein.com/public/assets/img/ganhe100.jpg" style="width:500px">
+      </a>
+    </div>
+  </div>
+  <div class="row" style="padding-top:10px">
+      <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12">
+        <app-noticias></app-noticias>
+      </div>
+    </div>  
+</div>

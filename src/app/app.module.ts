@@ -30,6 +30,7 @@ import { RankingsComponent } from './rankings/rankings.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { InfocampeonatoComponent } from './infocampeonato/infocampeonato.component';
 import { FormEditarPartidoComponent } from './admin/componentes/form-editar-partido/form-editar-partido.component';
+import { NoticiasComponent } from './noticias/noticias.component';
 
 const routes: Routes = [
   {path: "caixa", component: CaixaComponent, canActivate:[AuthGuard] },
@@ -50,7 +51,8 @@ const routes: Routes = [
   {path: "palpitarrodada/:campeonato", component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
   {path: "palpitarrodada/:campeonato/rodada/:rodada", 
     component: PalpitarrodadaComponent, canActivate:[AuthGuard] },
-  {path: "inicio", component:InicioComponent}
+  {path: "inicio", component:InicioComponent},
+  {path: "noticias", component:NoticiasComponent}
 
 ];
 
@@ -75,7 +77,8 @@ const routes: Routes = [
     CaixaComponent,
     InicioComponent,
     InfocampeonatoComponent,
-    FormEditarPartidoComponent
+    FormEditarPartidoComponent,
+    NoticiasComponent
   ],
   imports: [
     BrowserModule,

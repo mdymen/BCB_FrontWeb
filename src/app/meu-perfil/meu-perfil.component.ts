@@ -73,7 +73,6 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
           this.idUsuario = localStorage.getItem("id");
           this.cash = localStorage.getItem("cash");            
         }
-        this.foto = "http://dymenstein.com/public/assets/img/perfil/" + this.idUsuario + ".jpg";
       })
     
     console.log("id usuario", this.idUsuario);
@@ -105,6 +104,8 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
       this.pontos = this.usuarioObj.palpites.pontos;
 
       this.usuarioCargado = true;
+
+      this.foto = "http://dymenstein.com/public/assets/img/perfil/" + this.usuarioObj.foto;
 
       console.log(result);
     });
