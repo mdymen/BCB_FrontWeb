@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService, SocialUser } from "angularx-social-login";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ export class AppComponent {
   usuario;
   cash;
 
-  constructor(private route: Router) {
+  constructor(private route: Router,
+    private authService: AuthService) {
     var usuario = localStorage.getItem("username");
     if (usuario) {
       this.logado = true;
@@ -39,12 +41,13 @@ export class AppComponent {
       this.menu.push(new Opciones("Setear Rodada", "fa fa-user", "/setrodada"));
 
     }
-
+    this.menu.push(new Opciones("Caixa", "fa fa-power-off", "/logout"));
   }
 
   logout() {
     localStorage.clear();
     location.reload();
+    this.authService.signOut();
   }
 
 }

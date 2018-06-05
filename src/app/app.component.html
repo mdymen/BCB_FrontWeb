@@ -53,6 +53,32 @@
 </div>
 <!-- end: Header -->
 
+<div [hidden]="logado">
+
+    <div class="container">
+        <div class="row">
+    
+          <!-- start: Main Menu -->
+
+          <!-- end: Main Menu -->
+    
+              <!-- start: Content -->
+        <div id="content" class="col-lg-10 col-sm-11 " style="padding: 0px !important; width:100% !important">            
+
+            <app-login></app-login>
+      
+          </div>
+          <!-- end: Content -->
+        </div>
+    
+    
+    
+      </div>
+      <!--/row-->
+
+  
+  </div>
+
 <div [hidden]="!logado">
 
   <div class="container">
@@ -150,9 +176,3 @@
 <!-- inline scripts related to this page -->
 
 <!-- end: JavaScript-->
-
-<div [hidden]="logado">
-
-  <app-login></app-login>
-
-</div>

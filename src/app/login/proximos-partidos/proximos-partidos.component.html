@@ -1,0 +1,103 @@
+<div class="col-lg-12" style="padding: 0px">
+
+  <form #form="ngForm" (submit)="logForm(partidos)">
+    <div class="">
+      <div class="box">
+        <div class="box-header">
+          <h2>
+            <i class="fa fa-align-justify"></i>
+            <span class="break"></span> Próximos Jogos</h2>
+        </div>
+        <div class="box-content">
+          <div class="row">
+
+            <div *ngIf="erro" class="alert alert-danger">
+              Ops! Erro inesperado ao carregar próximos jogos, tente novamente ou envie uma mensagem pelo Whatsapp (19) 98-264-2861
+            </div>
+
+            <div *ngFor='let partido of partidos'>
+
+
+              <div class="col-lg-3 col-sm-4 col-xs-6 col-xxs-12" style="margin-top: 10px">
+                <div class="smallstat box" style="border:1px solid #dbdee0; padding:7px;box-shadow: 2px 2px 6px 5px #888888">
+                  <table width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="text-align:center">
+                          <b>
+                            <a href="{{url}}/public/campeonatos/index?champ={{partido.ch_id}}">{{partido.ch_nome}}</a>
+                          </b>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table width="100%">
+                    <tbody>
+                      <tr>
+                        <td style="text-align:center">
+                          <b>{{partido.mt_date | date: 'dd/MM/yyyy HH:mm'}}</b>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td width="55%" style="text-align:left">
+                          <span id="376">
+                            <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm1_logo}}"> {{partido.t1nome}}
+                          </span>
+                        </td>
+                        <td [style]=partido.played width="10%" style="text-align:right">
+                          <span class="label {{partido.acerto}}">{{partido.mt_goal1}}</span>
+                        </td>
+                        <td width="35%">
+                          <div class="row">
+                            <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                              <input [disabled]="partido.disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res1"
+                                name="rs_res1{{partido.mt_id}}" type="text">
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table>
+                    <tbody>
+                      <tr>
+                        <td width="55%" style="text-align:left">
+                          <span id="372">
+                            <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm2_logo}}"> {{partido.t2nome}}
+                          </span>
+                        </td>
+                        <td [style]=partido.played width="10%" style="text-align:right">
+                          <span class="label {{partido.acerto}}">{{partido.mt_goal2}}</span>
+                        </td>
+                        <td width="35%">
+                          <div class="row">
+                            <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                              <input [disabled]="partido.disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res2"
+                                name="rs_res2{{partido.mt_id}}" type="text">
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div id="466" style="margin: 15px 0 0 0; ">
+                    <a href="#login" class="btn btn-success">Palpitar</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+</div>

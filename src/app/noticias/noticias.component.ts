@@ -10,29 +10,37 @@ import { BackendService } from '../backend.service';
 export class NoticiasComponent implements OnInit {
 
   noticias = [];
-  cargadas:boolean = false;
+  cargadas: boolean = false;
   noticia;
-  ver:boolean = false;
+  ver: boolean = false;
 
-  constructor(private http:HttpClient, 
+  constructor(private http: HttpClient,
     private backEndService: BackendService) { }
 
   ngOnInit() {
     this.http.get(this.backEndService.getBackEndNormal() + "/index/noticias")
       .subscribe(result => {
-        for(let r of result['noticias']) {
-          this.noticias.push(r);
-        }
-        this.cargadas = true;
         console.log(result);
-      } 
-    );
+
+        this.noticias.push(result['noticias'][0]);
+        this.noticias.push(result['noticias'][1]);
+        this.noticias.push(result['noticias'][2]);
+        this.noticias.push(result['noticias'][3]);
+        this.noticias.push(result['noticias'][4]);
+        this.noticias.push(result['noticias'][5]);
+        this.noticias.push(result['noticias'][6]);
+        this.noticias.push(result['noticias'][7]);
+
+        this.cargadas = true;
+        console.log(result['noticias'][0]);
+      }
+      );
   }
 
   verNoticia(noticia) {
     this.noticia = noticia;
     this.ver = true;
-  } 
+  }
 
   cerrar() {
     this.ver = false;

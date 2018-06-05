@@ -167,9 +167,9 @@
           </div>
         </div>
 
-        <div style="width:100%;margin-bottom:10px" *ngIf="!rodadaPaga">
+        <div style="width:100%;margin-bottom:10px" >
           <div style="display:table; margin: 0 auto;">
-            <button [disabled]="palpitando" class="btn btn-lg btn-success" style="text-align: center;">Palpitar</button>
+            <button class="btn btn-lg btn-success" style="text-align: center;">Palpitar</button>
           </div>
         </div>
 
@@ -191,14 +191,14 @@
 
 </div>
 
-<div *ngIf="!cargoCampeonato">
+<div *ngIf="!campeonatoActual">
   <div class="row">
     <div class="col-lg-6 col-sm-12 col-xs-12 col-xxs-12">
       <app-caixa></app-caixa>
     </div>
     <div class="col-lg-6 col-sm-12 col-xs-12 col-xxs-12">
       <a href="/palpitarrodada/25">
-        <img src="http://www.dymenstein.com/public/assets/img/ganhe100.jpg" style="width:500px">
+        <img src="http://www.dymenstein.com/public/assets/img/ganhe100.jpg" style="width:100%">
       </a>
     </div>
   </div>

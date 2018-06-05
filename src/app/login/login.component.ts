@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Partido } from '../partido';
+import { AuthService, SocialUser } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-login',
@@ -19,11 +22,18 @@ export class LoginComponent implements OnInit {
   mostrarRegistrarse: boolean;
   mostrarLogin: boolean;
   loginIncorrecto = false;
+  partidos = [];
+  erro = false;
+  private user: SocialUser;
+  private loggedIn: boolean;
 
   constructor(private http: HttpClient,
     private router: Router,
     private backend: BackendService,
-    private spinnerService: Ng4LoadingSpinnerService) { }
+    private spinnerService: Ng4LoadingSpinnerService,
+    private authService: AuthService) {
+
+  }
 
   /**
    * Crea el formulario de login
@@ -43,14 +53,67 @@ export class LoginComponent implements OnInit {
     });
     this.mostrarRegistrarse = false;
     this.mostrarLogin = true;
+
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      console.log("usuario1", this.user);
+      this.loggedIn = (user != null);
+      if (this.loggedIn) {
+      
+        /*this.http.post(this.backend.getBackEndNormal() + "/usuariobyfacebookidoremail",
+          { idFacebook: this.user.id, email: this.user.email, nome: this.user.name })
+          .subscribe(result => {
+            this.guardarLocalStorage(result);
+          }, error => {
+            this.spinnerService.hide();
+            this.erro = true;
+          });*/
+
+      }
+      console.log("loggedIn1", this.loggedIn);
+    });
+
+    console.log("loggedIn", this.loggedIn);
+    console.log("usuario", this.user);
   }
 
   /**
    * por ahora sin validar mucho el formulario consigue logarse
    */
-  onSubmitLogin() {
+  onSubmit() {
     if (this.login.valid) {
       this.loguearse(this.login.value.usuario, this.login.value.password);
+    }
+  }
+
+  guardarLocalStorage(result) {
+    if (result == false) {
+      localStorage.setItem("id", null);
+      localStorage.setItem("username", null);
+      localStorage.setItem("cash", null);
+      localStorage.setItem("jsonUsuario", null);
+      localStorage.setItem("admin", null);
+      localStorage.setItem("res_pal", null);
+      localStorage.setItem("res_rod_pal", null);
+      localStorage.setItem("info_rod", null);
+      localStorage.setItem("img", null);
+      localStorage.setItem("email", null);
+      this.loginIncorrecto = true;
+    } else {
+      this.loginIncorrecto = false;
+      localStorage.setItem("id", result['us_id']);
+      localStorage.setItem("username", result['us_username']);
+      localStorage.setItem("email", result['us_email']);
+      localStorage.setItem("cash", result['us_cash']);
+      localStorage.setItem("admin", result['us_admin']);
+      localStorage.setItem("res_pal", result['res_pal']);
+      localStorage.setItem("res_rod_pal", result['res_rod_pal']);
+      localStorage.setItem("info_rod", result['info_rod']);
+      localStorage.setItem("foto", result['us_foto']);
+      localStorage.setItem("jsonUsuario", JSON.stringify(result));
+      this.router.navigate(['/']);
+      location.reload();
+      this.erro = false;
     }
   }
 
@@ -59,32 +122,13 @@ export class LoginComponent implements OnInit {
     this.http.post("http://www.dymenstein.com/public/mobile/cellogin",
       { us: usuario, pass: password })
       .subscribe(result => {
-        if (!result) {
-          localStorage.setItem("id", null);
-          localStorage.setItem("username", null);
-          localStorage.setItem("cash", null);
-          localStorage.setItem("jsonUsuario", null);
-          localStorage.setItem("admin", null);
-          localStorage.setItem("res_pal", null);
-          localStorage.setItem("res_rod_pal", null);
-          localStorage.setItem("info_rod", null);
-          localStorage.setItem("img", null);
-          this.loginIncorrecto = true;
-        } else {
-          localStorage.setItem("id", result['us_id']);
-          localStorage.setItem("username", result['us_username']);
-          localStorage.setItem("cash", result['us_cash']);
-          localStorage.setItem("admin", result['us_admin']);
-          localStorage.setItem("res_pal", result['res_pal']);
-          localStorage.setItem("res_rod_pal", result['res_rod_pal']);
-          localStorage.setItem("info_rod", result['info_rod']);
-          localStorage.setItem("foto", result['us_foto']);
-          localStorage.setItem("jsonUsuario", JSON.stringify(result));
-          this.router.navigate(['/']);
-          location.reload();
-        }
+        this.guardarLocalStorage(result);
         this.spinnerService.hide();
-      });
+      }
+        , error => {
+          this.spinnerService.hide();
+          this.erro = true;
+        });
   }
 
   /**
@@ -93,6 +137,10 @@ export class LoginComponent implements OnInit {
   cadastrese() {
     this.mostrarRegistrarse = true;
     this.mostrarLogin = false;
+    this.loginIncorrecto = false;
+    this.erro = false;
+    this.login.controls['usuario'].setValue("");
+    this.login.controls['password'].setValue("");
   }
 
   /**
@@ -102,6 +150,12 @@ export class LoginComponent implements OnInit {
   backToLogin() {
     this.mostrarRegistrarse = false;
     this.mostrarLogin = true;
+    this.loginIncorrecto = false;
+    this.erro = false;
+    this.registro.controls['usuario'].setValue("");
+    this.registro.controls['password'].setValue("");
+    this.registro.controls['email'].setValue("");
+    this.registro.controls['grito'].setValue("");
   }
 
   /**
@@ -109,17 +163,32 @@ export class LoginComponent implements OnInit {
    * se loguea
    */
   onSubmitRegistro() {
-    this.spinnerService.show();
-    var form = this.registro.value;
+    if (this.registro.valid) {
+      this.spinnerService.show();
+      var form = this.registro.value;
 
-    this.http.post(this.backend.getBackEnd() + "cadastroweb",
-      { username: form.usuario, password: form.password, email: form.email, grito: form.grito }).
-      subscribe(result => {
-        this.spinnerService.hide();
-        this.loguearse(form.usuario, form.password);
-      })
+      this.http.post(this.backend.getBackEnd() + "cadastroweb",
+        { username: form.usuario, password: form.password, email: form.email, grito: form.grito }).
+        subscribe(result => {
+          this.spinnerService.hide();
+          this.loguearse(form.usuario, form.password);
+        },
+          error => {
+            this.spinnerService.hide();
+            this.erro = true;
+            console.log(error);
+          })
+    }
   }
 
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
+     .then((user) => {
+        console.log("promise", user);
+     });
+  }
 
-
+  signOut(): void {
+    this.authService.signOut();
+  }
 }
