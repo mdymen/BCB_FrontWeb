@@ -83,13 +83,17 @@ export class AdicionarPartidosComponent implements OnInit {
 
 export class Partido {
 
+  esHoy: boolean;
+  esManiana: boolean;
+  fecha:string;
+
   constructor(private ronda: number,
     private date: string,
     private hora: string,
     private team1: number,
     private team2: number,
     private champ: number) {
-
+      this.fecha = date;
   }
 
 }

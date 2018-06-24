@@ -44,7 +44,7 @@
                     <tbody>
                       <tr>
                         <td width="55%" style="text-align:left">
-                          <span id="376">
+                          <span>
                             <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm1_logo}}"> {{partido.t1nome}}
                           </span>
                         </td>
@@ -52,8 +52,8 @@
                           <span class="label {{partido.acerto}}">{{partido.mt_goal1}}</span>
                         </td>
                         <td width="35%">
-                          <div class="row">
-                            <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                          <div class="row">                            
+                            <div class="col-xs-10 col-sm-10 col-lg-10 numeros">                              
                               <input [disabled]="partido.disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res1"
                                 name="rs_res1{{partido.mt_id}}" type="text">
                             </div>
@@ -66,7 +66,7 @@
                     <tbody>
                       <tr>
                         <td width="55%" style="text-align:left">
-                          <span id="372">
+                          <span>
                             <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm2_logo}}"> {{partido.t2nome}}
                           </span>
                         </td>
@@ -84,8 +84,17 @@
                       </tr>
                     </tbody>
                   </table>
-                  <div id="466" style="margin: 15px 0 0 0; ">
-                    <a href="#login" class="btn btn-success">Palpitar</a>
+                  <div style="margin: 15px 0 0 0; ">
+                    <table>
+                      <tr>
+                        <td>
+                          <span *ngIf="partido.esHoy" class="label label-success">Hoje</span>
+                        </td>
+                        <td>
+                            <a href="#login" class="btn btn-success">Palpitar</a>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
                 </div>
               </div>

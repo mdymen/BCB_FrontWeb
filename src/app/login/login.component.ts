@@ -60,14 +60,14 @@ export class LoginComponent implements OnInit {
       this.loggedIn = (user != null);
       if (this.loggedIn) {
       
-        /*this.http.post(this.backend.getBackEndNormal() + "/usuariobyfacebookidoremail",
+        this.http.post(this.backend.getBackEndNormal() + "/usuariobyfacebookidoremail",
           { idFacebook: this.user.id, email: this.user.email, nome: this.user.name })
           .subscribe(result => {
             this.guardarLocalStorage(result);
           }, error => {
             this.spinnerService.hide();
             this.erro = true;
-          });*/
+          });
 
       }
       console.log("loggedIn1", this.loggedIn);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
 import { Partido } from '../../admin/adicionar-partidos/adicionar-partidos.component';
+import { FechaService } from '../../fecha.service';
 
 @Component({
   selector: 'app-proximos-partidos',
@@ -13,7 +14,9 @@ export class ProximosPartidosComponent implements OnInit {
   partidos = [];
   erro = false;
 
-  constructor(private http:HttpClient, private backend:BackendService) { }
+  constructor(private http:HttpClient, 
+    private backend:BackendService,
+    private fechaService:FechaService) { }
 
   ngOnInit() {
     this.proximosJogos();
@@ -24,12 +27,17 @@ export class ProximosPartidosComponent implements OnInit {
       .subscribe(res => {
         //carga los partidos
         for (let partido of res['body']) {
-          let partidoJson = <Partido>partido;      
+          let partidoJson = <Partido>partido;     
+          partidoJson.esHoy = this.esHoy(partido.mt_date) ? true : false;
           this.partidos.push(partidoJson);
         }
       }, error => {
         this.erro = true;
       });
+  }
+
+  esHoy(fecha:string):boolean {
+    return this.fechaService.esHoy(fecha);
   }
 
 

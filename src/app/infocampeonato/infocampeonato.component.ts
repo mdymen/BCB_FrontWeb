@@ -8,11 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class InfocampeonatoComponent implements OnInit {
 
   @Input() acumulado; 
+  @Input() acumulado_rodada;
 
   constructor() { }
 
   ngOnInit() {
-    console.log("acumulado", this.acumulado);
+
   }
 
 }

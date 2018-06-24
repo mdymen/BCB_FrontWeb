@@ -2,7 +2,7 @@
     <div class="box-header">
       <h2>
           <i class="fa fa-dollar"></i>
-        <span class="break"></span>Acumulado: R$ {{acumulado}}</h2>
+        <span class="break"></span>Campeonato: R$ {{acumulado}}</h2>
   
       <div class="box-icon">
         <span>
@@ -11,3 +11,17 @@
       </div>
     </div>
   </div>
+
+  <div class="box" *ngIf="acumulado_rodada">
+      <div class="box-header">
+        <h2>
+            <i class="fa fa-dollar"></i>
+          <span class="break"></span>Rodada: R$ {{acumulado_rodada}}</h2>
+    
+        <div class="box-icon">
+          <span>
+            <h2 style="margin-right: 30px !important"></h2>
+          </span>
+        </div>
+      </div>
+    </div>

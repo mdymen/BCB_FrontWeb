@@ -59,7 +59,7 @@ const routes: Routes = [
   },
   { path: "inicio", component: InicioComponent },
   { path: "noticias", component: NoticiasComponent },
-  { path: "pagamento/:id_pagoseguro", component: PagamentoComponent }
+  { path: "pagamento/:id_pagoseguro", component: PagamentoComponent },
   { path: "logout", component: PagamentoComponent }
 
 ];
