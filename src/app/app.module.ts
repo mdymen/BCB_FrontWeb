@@ -35,6 +35,7 @@ import { NoticiasComponent } from './noticias/noticias.component';
 import { PagamentoComponent } from './pagamento/pagamento.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
+import { LogoutComponent } from './logout/logout.component';
 
 const routes: Routes = [
   { path: "caixa", component: CaixaComponent, canActivate: [AuthGuard] },
@@ -60,7 +61,7 @@ const routes: Routes = [
   { path: "inicio", component: InicioComponent },
   { path: "noticias", component: NoticiasComponent },
   { path: "pagamento/:id_pagoseguro", component: PagamentoComponent },
-  { path: "logout", component: PagamentoComponent }
+  { path: "logout", component: LogoutComponent }
 
 ];
 
@@ -107,7 +108,8 @@ export function provideConfig() {
     FormEditarPartidoComponent,
     NoticiasComponent,
     PagamentoComponent,
-    ProximosPartidosComponent
+    ProximosPartidosComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

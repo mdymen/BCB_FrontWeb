@@ -184,7 +184,15 @@ export class LoginComponent implements OnInit {
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
      .then((user) => {
-        console.log("promise", user);
+      this.spinnerService.show();
+       this.http.post(this.backend.getBackEndNormal() + "usuario/usuariobyfacebookidoremail",
+        {email:user.email, idFacebook:user.id, nome: user.name})
+          .subscribe(result => {            
+            this.spinnerService.hide();
+            this.guardarLocalStorage(result);
+
+          }) 
+       
      });
   }
 

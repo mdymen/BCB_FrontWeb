@@ -41,7 +41,7 @@ export class AppComponent {
       this.menu.push(new Opciones("Setear Rodada", "fa fa-user", "/setrodada"));
 
     }
-    this.menu.push(new Opciones("Caixa", "fa fa-power-off", "/logout"));
+    this.menu.push(new Opciones("Logout", "fa fa-power-off", "/logout"));
   }
 
   logout() {
