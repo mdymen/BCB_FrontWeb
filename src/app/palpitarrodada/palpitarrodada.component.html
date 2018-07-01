@@ -5,6 +5,11 @@
 <div class="row">
   <div *ngFor="let campeonato of campeonatos" class="col-lg-3 col-sm-6">
     <div class="smallchart {{campeonato.active}} box">
+      <div style="height:250px">
+        <a href="/palpitarrodada/{{campeonato.ch_id}}">
+          <img height="250px" width="200px" src="{{campeonato.ch_logocampeonato}}" style="padding: 10px 10px 10px 10px">
+        </a>
+      </div>
       <div *ngIf="campeonato.active" class="title">
         <a href="/palpitarrodada/{{campeonato.ch_id}}">
           {{campeonato.ch_nome}}</a>
@@ -167,7 +172,7 @@
           </div>
         </div>
 
-        <div style="width:100%;margin-bottom:10px" >
+        <div style="width:100%;margin-bottom:10px">
           <div style="display:table; margin: 0 auto;">
             <button class="btn btn-lg btn-success" style="text-align: center;">Palpitar</button>
           </div>
@@ -179,8 +184,7 @@
 
     <!-- TABLA DE POSICIONES -->
     <div class="col-lg-4">
-      <app-infocampeonato [acumulado]="campeonatoActualObjeto.ch_acumulado" 
-        [acumulado_rodada]="rodadaActualObjeto.rd_acumulado"></app-infocampeonato>
+      <app-infocampeonato [acumulado]="campeonatoActualObjeto.ch_acumulado" [acumulado_rodada]="rodadaActualObjeto.rd_acumulado"></app-infocampeonato>
       <app-posiciones></app-posiciones>
       <app-ranking></app-ranking>
     </div>
@@ -199,8 +203,8 @@
     </div>
   </div>
   <div class="row" style="padding-top:10px">
-      <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12">
-        <app-noticias></app-noticias>
-      </div>
-    </div>  
+    <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12">
+      <app-noticias></app-noticias>
+    </div>
+  </div>
 </div>
