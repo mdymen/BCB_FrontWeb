@@ -2,53 +2,47 @@
   <div class="col-lg-12">
     <div class="box">
       <div class="box-content">
-        <form #form="ngForm" (submit)="grabarEquipos(equipos)">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <div class="controls">
+              <select [ngModel]="paises" class="form-control" (ngModelChange)="change($event)" name="seleccion">
+                <option [value]="pais.ps_id" *ngFor="let pais of paises">{{pais.ps_nome}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <div *ngFor="let equipo of equipos">
+<div class="row">
+  <div class="col-lg-6">
+    <div class="box">
+      <div class="box-content">
+        <form #form="ngForm" (submit)="save(equipos)">
 
-            <!-- CARGAR CAMPEONATOS -->
+          <div *ngFor="let equipo of equipos" class="form">
 
             <ng4-loading-spinner> </ng4-loading-spinner>
 
             <div class="form-group">
               <div class="controls">
-                <select [(ngModel)]="equipo.tm_idchampionship" [ngModel]="campeonatos" class="form-control" name="seleccion" name="ch_idchampionship">
-                  <option [value]="campeonato.ch_id" *ngFor="let campeonato of campeonatos">{{campeonato.ch_nome}}</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- FIN DE CARGAR CAMPEONATOS -->
-
-
-
-            <div class="form-group">
-              <div class="controls">
-                <div class="input-group col-sm-4">
+                <div class="input-group col-sm-8">
                   <span class="input-group-addon">
-                    <i class="fa fa-asterisk"></i>
+                    <i class="fa fa-male"></i>
                   </span>
-                  <input type="text" name="tm_name" [(ngModel)]="equipo.tm_name" class="form-control" placeholder="Time">
+                  <input type="text" name="tm_name" [(ngModel)]="equipo.nome" class="form-control" placeholder="Time">
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div class="controls">
-                <div class="input-group col-sm-4">
+                <div class="input-group col-sm-8">
                   <span class="input-group-addon">
-                    <i class="fa fa-globe"></i>
+                    <i class="fa fa-picture-o"></i>
                   </span>
-                  <input type="text" name="tm_grupo" [(ngModel)]="equipo.tm_grupo" class="form-control" placeholder="Grupo">
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="controls">
-                <div class="input-group col-sm-4">
-                  <span class="input-group-addon">
-                    <i class="fa fa-asterisk"></i>
-                  </span>
-                  <input type="text" name="tm_logo" [(ngModel)]="equipo.tm_logo" class="form-control" placeholder="Logo">
+                  <input type="text" name="tm_logo" [(ngModel)]="equipo.logo" class="form-control" placeholder="Logo">
                 </div>
               </div>
             </div>
@@ -56,10 +50,22 @@
           </div>
 
           <div class="form-actions">
-            <a (click)="adicionarequipo()">adicionar equipo</a>
             <button id="salvar_team" class="btn btn-primary">Salvar</button>
+            <a (click)="add()" class="btn btn-success">Add Equipo</a>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="box">
+      <div class="box-content">
+        <ul>
+          <li *ngFor="let equipoCadastrado of equiposCadastrados">
+            {{equipoCadastrado.eq_nome}}
+          </li>
+        </ul>
       </div>
     </div>
   </div>

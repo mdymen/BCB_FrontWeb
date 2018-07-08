@@ -4,6 +4,9 @@ import { BackendService } from '../../backend.service';
 import { CampeonatoService } from '../../entidades/campeonato.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Equipo } from '../../equipo';
+import { FormGroup, FormControl } from '@angular/forms';
+import { EquipoService } from '../services/equipos.service';
+import { PaisService } from '../services/pais.services';
 
 @Component({
   selector: 'app-adicionar-equipo',
@@ -12,33 +15,86 @@ import { Equipo } from '../../equipo';
 })
 export class AdicionarEquipoComponent implements OnInit {
 
-  campeonatos = [];
-  equipos = [];
 
-  constructor(private http: HttpClient, private backendAdmin:BackendService
-    , private campeonatoService:CampeonatoService,
-    private spinnerService: Ng4LoadingSpinnerService) { }
+  equipos = [];
+  paises = [];
+  equiposCadastrados = [] //representa los equipos cadastrados del pais seleccionado
+  idPais;
+
+  constructor(private http: HttpClient,
+    private backendAdmin: BackendService,
+    private spinnerService: Ng4LoadingSpinnerService,
+    private _equipoService: EquipoService,
+    private _paisService: PaisService) { }
 
   ngOnInit() {
-    this.spinnerService.show();
-    this.campeonatoService.getCampeonatos().subscribe(result => {
-      this.campeonatos = result as any;
-      this.spinnerService.hide();
-    })
-    this.equipos.push(new Equipo(null,null,null,null,null,null,null,null));
+
+    this.load();
+    this.add();
+
   }
 
-  adicionarequipo() {
-    this.equipos.push(new Equipo(null,null,null,null,null,null,null,null));
+  load() {
+    this._paisService.get()
+      .subscribe((result: any) => {
+        this.paises = result.body;
+      })
   }
 
-  grabarEquipos(equipos) {
+  change($event) {
+    this.idPais = $event;
+    this.updatePais(this.idPais);
+    this.loadEquiposCadastrados(this.idPais);
+  }
+
+  /**
+   * Se o pais é trocado no meio, então atualiza todos es equipos 
+   * @param pais 
+   */
+  updatePais(pais) {
+    this.equipos.map(equipo => equipo.idPais = this.idPais);
+  }
+
+  save(equipos) {
+    let toSave = {
+      equipos: equipos
+    }
+
     this.spinnerService.show();
-    this.http.post(this.backendAdmin.getBackEndAdmin() + "/time/salvartime", {equipos:equipos})
-      .subscribe(result => {
-        console.log(result);
+    this._equipoService.save(toSave)
+      .subscribe((res: any) => {
+        this.equiposCadastrados = res.body;
         this.spinnerService.hide();
+        this.reset();
       });
-    
+  }
+
+  reset() {
+    this.equipos = [];
+  }
+
+  add() {
+
+    let equipo = {
+      nome: "",
+      idPais: this.idPais,
+      logo: "",
+    }
+
+    this.equipos.push(equipo);
+  }
+
+  /**
+   * Retorna la lista de equipos ya cadastrados del pais seleccionado
+   * @param pais 
+   */
+  loadEquiposCadastrados(pais) {
+    this.spinnerService.show();
+    this._equipoService.loadByPais(pais)
+      .subscribe((res: any) => {
+        this.equiposCadastrados = res.body;
+        this.spinnerService.hide();
+        console.log(res);
+      });
   }
 }

@@ -36,6 +36,8 @@ import { PagamentoComponent } from './pagamento/pagamento.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
 import { LogoutComponent } from './logout/logout.component';
+import { EquipoService } from './admin/services/equipos.service';
+import { PaisService } from './admin/services/pais.services';
 
 const routes: Routes = [
   { path: "caixa", component: CaixaComponent, canActivate: [AuthGuard] },
@@ -124,7 +126,13 @@ export function provideConfig() {
   providers: [{
     provide: AuthServiceConfig,
     useFactory: provideConfig
-  }, AuthGuard, BackendService, AdminGuard, CampeonatoService, FechaService],
+  }, AuthGuard, 
+  BackendService, 
+  AdminGuard, 
+  CampeonatoService, 
+  FechaService, 
+  EquipoService,
+  PaisService],
   bootstrap: [AppComponent]
 })
 
