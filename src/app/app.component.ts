@@ -36,6 +36,7 @@ export class AppComponent {
       this.menu.push(new Opciones("Adicionar Campeonato", "fa fa-home", "/adicionarcampeonato"));
       this.menu.push(new Opciones("Adicionar Rodada", "fa fa-home", "/adicionarrodada"));
       this.menu.push(new Opciones("Add Equipos", "fa fa-male", "/adicionarequipos"));
+      this.menu.push(new Opciones("Equipo Campeonato", "fa fa-users", "/equipocampeonato"));
       this.menu.push(new Opciones("Adicionar Partidos", "fa fa-home", "/adicionarpartidos"));
       this.menu.push(new Opciones("Resultados", "fa fa-user", "/partidos"));
       this.menu.push(new Opciones("Setear Rodada", "fa fa-user", "/setrodada"));

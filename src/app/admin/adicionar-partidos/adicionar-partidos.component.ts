@@ -3,6 +3,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { CampeonatoService } from '../../entidades/campeonato.service';
+import { PartidosService } from '../services/partidos.services';
 
 @Component({
   selector: 'app-adicionar-partidos',
@@ -16,84 +18,104 @@ export class AdicionarPartidosComponent implements OnInit {
   equipos1 = [];
   equipos2 = [];
   rodadas = [];
-  cargoCampeonato = false;
   campeonato: any;
 
   constructor(private http: HttpClient, private backend: BackendService,
-    private spinnerService: Ng4LoadingSpinnerService) { }
+    private spinnerService: Ng4LoadingSpinnerService,
+    private _campeonatoService: CampeonatoService,
+    private _partidoService: PartidosService) { }
 
   ngOnInit() {
-    this.spinnerService.show();
-    //carga todos los campeonatos disponibles
-    this.http.post(this.backend.getBackEnd() + "cellgetcampeonatosabertos/?", {})
-      .subscribe(result => {
-        let aux = JSON.stringify(result);
-        let campeonatos = JSON.parse(aux);
 
-        for (let campeonato of campeonatos) {
-          this.campeonatos.push(campeonato);
-        }
-        this.spinnerService.hide();
-
-      });
-
+    this.load();
   }
 
-  seleccionarCampeonato(campeonato) {
+  /**
+   * Carga todos los campeonatos activos
+   */
+  load() {
+    this.spinnerService.show();
+
+    this._campeonatoService.load()
+      .subscribe((res:any) => {
+        this.campeonatos = res.body;
+        this.spinnerService.hide();
+      });
+  }
+
+  
+  /**
+   * Carga los equipos y rodadas disponibles
+   * del campeonato seleccionado
+   * @param campeonato 
+   */
+  changeCampeonato(campeonato) {
     this.spinnerService.show();
     this.campeonato = campeonato;
-    this.http.post(this.backend.getBackEndAdmin() + "index/adicionarpartido?", { champ: campeonato })
-      .subscribe(result => {
 
-        this.cargoCampeonato = true;
+    this._campeonatoService.loadByCampeonato(this.campeonato)
+      .subscribe((res:any) => {
 
-        let auxiliarRodadas = result['rondas'];
-        for (let rodada of auxiliarRodadas) {
-          this.rodadas.push(rodada);
-        }
+        this.collectEquipes(res.body);
+        this.add();
+        this.loadRodadas(this.campeonato);
 
-        result['teams'].map(team => {
-          this.equipos1.push(team);
-          this.equipos2.push(team);
-        })
-
-        this.adicionarjogo();
         this.spinnerService.hide();
-      })
+      });
   }
 
+  /**
+   * Carga todas las rodadas del campeonato especificado
+   * @param campeonato 
+   */
+  loadRodadas(campeonato) {
+    this._campeonatoService.loadRodadasByCampeonato(campeonato)
+      .subscribe((res:any) => {
+        this.rodadas = res.body;
+      });
+  }
 
-  onSubmitPartidos(partidos) {
+  /**
+   * Graba los partidos
+   * @param partidos 
+   */
+  onSubmit(partidos) {
     this.spinnerService.show();
-    this.http.post(this.backend.getBackEndAdmin() + "index/salvarpartidos", { partidos: this.partidos })
-      .subscribe(result => {
+    let toSave = {
+      partidos : this.partidos
+    }
+
+    this._partidoService.save(toSave)
+      .subscribe((res:any) => {
+        console.log(res);
         this.spinnerService.hide();
-        console.log(result);
-      })
+      });
   }
 
-  adicionarjogo() {
-    console.log("adicionar partido");
-    let nuevoPartido = new Partido(null, null, null, null, null, this.campeonato);
-    this.partidos.push(nuevoPartido);
+  /**
+   * Registra los equipos del campeonato seleccionado en la listas 
+   * para ser seleccionados para cadastrar un nuevo partido
+   * @param equipes 
+   */
+  collectEquipes(equipes) {
+    this.equipos1 = equipes;
+    this.equipos2 = equipes;
   }
 
-}
+  /**
+   * Adiciona un nuevo partido disponible para completar en el campeonato
+   * y la rodada seleccionada
+   */
+  add() {
+    let jogo = {
+      date: "",
+      hora: "",
+      team1: 0,
+      team2: 0,
+      champ: this.campeonato
+    }
 
-
-export class Partido {
-
-  esHoy: boolean;
-  esManiana: boolean;
-  fecha:string;
-
-  constructor(private ronda: number,
-    private date: string,
-    private hora: string,
-    private team1: number,
-    private team2: number,
-    private champ: number) {
-      this.fecha = date;
+    this.partidos.push(jogo);
   }
 
 }

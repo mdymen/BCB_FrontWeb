@@ -18,4 +18,8 @@ export class EquipoService {
         return this._http.get(this.url + "team/getbypais/idPais/" + pais);
     }
 
+    public load() {
+        return this._http.get(this.url + "team/get");
+    }
+
 }

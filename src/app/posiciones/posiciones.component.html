@@ -16,14 +16,14 @@
   </div>
   <div class="box-content">
 
-      <div *ngIf="!tablaCargada">
+      <div *ngIf="equipos.length == 0">
           <button class="btn btn-sm btn-info" (click)="cargarTabla()">Carregar Tabela</button>
       </div>
 
     <!-- TABLA CREADA PARA EL CAMPEONATO QUE NO ES POR GRUPOS -->
 
-    <div *ngIf="!isGrupos">
-      <table class="table" *ngIf="tablaCargada">
+    <div *ngIf="equipos.length > 0">
+      <table class="table">
         <thead></thead>
         <tbody>
 
@@ -32,10 +32,10 @@
               <span class="badge">{{i + 1}}</span>
             </td>
             <td>
-              <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{equipo.tm_logo}}"> {{equipo.tm_name}}
+              <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/assets/equipos/{{equipo.eq_logo}}"> {{equipo.eq_nome}}
             </td>
-            <td>{{equipo.tm_played}}</td>
-            <td>{{equipo.tm_points}}</td>
+            <td>{{equipo.ec_jugados}}</td>
+            <td>{{equipo.ec_pontos}}</td>
           </tr>
 
           <tr>
@@ -73,10 +73,10 @@
               <span class="badge">{{i + 1}}</span>
             </td>
             <td>
-              <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{equipo.tm_logo}}"> {{equipo.tm_name}}
+              <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{equipo.tm_logo}}"> {{equipo.eq_nome}}
             </td>
-            <td>{{equipo.tm_played}}</td>
-            <td>{{equipo.tm_points}}</td>
+            <td>{{equipo.ec_jugados}}</td>
+            <td>{{equipo.ec_pontos}}</td>
           </tr>
 
           <tr>

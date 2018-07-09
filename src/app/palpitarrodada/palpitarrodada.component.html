@@ -4,13 +4,13 @@
 
 <div class="row">
   <div *ngFor="let campeonato of campeonatos" class="col-lg-3 col-sm-6">
-    <div class="smallchart {{campeonato.active}} box">
+    <div [ngClass]="campeonato.ch_id === campeonatoActual ? 'smallchart blue box' : 'smallchart white box' ">
       <div style="height:250px">
         <a href="/palpitarrodada/{{campeonato.ch_id}}">
           <img height="250px" width="200px" src="{{campeonato.ch_logocampeonato}}" style="padding: 10px 10px 10px 10px">
         </a>
       </div>
-      <div *ngIf="campeonato.active" class="title">
+      <div class="title">
         <a href="/palpitarrodada/{{campeonato.ch_id}}">
           {{campeonato.ch_nome}}</a>
       </div>
@@ -119,16 +119,16 @@
                           <tr>
                             <td width="55%" style="text-align:left">
                               <span id="376">
-                                <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm1_logo}}"> {{partido.t1nome}}
+                                <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{assets}}{{partido.tm1_logo}}"> {{partido.t1nome}}
                               </span>
                             </td>
-                            <td [style]=partido.played width="10%" style="text-align:right">
-                              <span class="label {{partido.acerto}}">{{partido.mt_goal1}}</span>
+                            <td *ngIf="partido.mt_played == 1" width="10%" style="text-align:right">
+                              <span [ngClass]="partido.acerto ? 'label label-success' : 'label label-danger'">{{partido.mt_goal1}}</span>
                             </td>
                             <td width="35%">
                               <div class="row">
                                 <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                                  <input [disabled]="partido.disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res1"
+                                  <input [disabled]="!partido.disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res1"
                                     name="rs_res1{{partido.mt_id}}" type="text">
                                 </div>
                               </div>
@@ -141,16 +141,16 @@
                           <tr>
                             <td width="55%" style="text-align:left">
                               <span id="372">
-                                <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm2_logo}}"> {{partido.t2nome}}
+                                <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{assets}}{{partido.tm2_logo}}"> {{partido.t2nome}}
                               </span>
                             </td>
-                            <td [style]=partido.played width="10%" style="text-align:right">
-                              <span class="label {{partido.acerto}}">{{partido.mt_goal2}}</span>
+                            <td *ngIf="partido.mt_played == 1" width="10%" style="text-align:right">
+                                <span [ngClass]="partido.acerto ? 'label label-success' : 'label label-danger'">{{partido.mt_goal2}}</span>
                             </td>
                             <td width="35%">
                               <div class="row">
                                 <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                                  <input [disabled]="partido.disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res2"
+                                  <input [disabled]="!partido.disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res2"
                                     name="rs_res2{{partido.mt_id}}" type="text">
                                 </div>
                               </div>

@@ -7,6 +7,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FechaService } from '../fecha.service';
 import { BackendService } from '../backend.service';
 import { Location } from '@angular/common';
+import { CampeonatoService } from '../entidades/campeonato.service';
 
 @Component({
   selector: 'app-palpitarrodada',
@@ -43,11 +44,14 @@ export class PalpitarrodadaComponent implements OnInit {
 
   palpitando:boolean = false;
 
+  assets = "/assets/equipos/";
+
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
     private spinnerService: Ng4LoadingSpinnerService,
     private fechaService: FechaService,
     private backEndService: BackendService,
+    private _campeonatoService: CampeonatoService,
     private location: Location) {
 
   }
@@ -85,7 +89,6 @@ export class PalpitarrodadaComponent implements OnInit {
         for (let campeonato of campeonatos) {
           this.campeonatos.push(campeonato);
         }
-        this.setCampeonatoActivo();
         this.spinnerService.hide();
       });
   }
@@ -95,60 +98,24 @@ export class PalpitarrodadaComponent implements OnInit {
    */
   public onChange(): void {
 
-    this.http.post(this.url + "/public/mobile/cellbolao",
-      { id: localStorage.getItem("id"), champ: this.campeonatoActual, rodada: this.rodadaActual })
-      .subscribe(res => {
+    this._campeonatoService.loadRodadaPalpitada(localStorage.getItem("id"), this.campeonatoActual, this.rodadaActual)
+      .subscribe((res:any) => {
+        this.campeonatoActualObjeto = res.body.championship;
+        this.cargoCampeonato = true;
+        this.rodadaActual = res.body.n_rodada;
+        this.rodadas = res.body.rondas;
+        this.partidos = res.body.rodada;
+        this.setJogos(this.partidos);
 
-        console.log(res);
-
-        if (res['status'] === 200) {
-          console.log(res);
-          this.campeonatoActualObjeto = res['championship'];
-          console.log(this.campeonatoActualObjeto);
-          this.cargoCampeonato = true;
-
-          //carga la rodada actual
-          this.rodadaActual = res['n_rodada'];
-
-          //carga los numeros de las rodadas para ser seleccionadas
-          let rondas = [];
-          rondas.push(res['rondas']);
-          this.rodadas = rondas[0];
-
-          //para pintar la rodada activa
-          for (let rodada of this.rodadas) {
-            if (rodada.rd_id == this.rodadaActual) {
-              rodada.active = "active";
-              this.rodadaActualObjeto = rodada;
-            }
+        for (let rodada of this.rodadas) {
+          if (rodada.rd_id == this.rodadaActual) {
+            rodada.active = "active";
+            this.rodadaActualObjeto = rodada;
           }
-
-          this.setCampeonatoActivo();
-
-          //carga los partidos
-          for (let partido of res['rodada']) {
-            let partidoJson = <Partido>partido;
-            partidoJson.disabled = this.fechaService.puedePalpitar(partidoJson.mt_date) ? null : "disabled";
-            partidoJson.played = partido.mt_played == 1 ? "display: block" : "display: none";
-            partidoJson.acerto = this.verificarResultadoPalpitado(partidoJson) ? "label-success" : "label-danger";
-            this.partidos.push(partidoJson);
-          }
-
-          this.rodadaActualObjeto = res['rodadaAtual'][0];
-          this.rodadaPaga = true;
-          if (!res['rodadaAtual'][0].rd_custo) {
-            this.rodadaPaga = false;
-          }
-
-          if (res['rodadaAtual'][0].ru_pago === "1") {
-            this.rodadaPaga = false;
-          }
-
-        } else {
-          console.log(res);
         }
 
-      })
+        console.log("novo", res);
+      });
   }
 
   verificarResultadoPalpitado(partido: Partido) {
@@ -163,20 +130,16 @@ export class PalpitarrodadaComponent implements OnInit {
   /**
    * Crea o actualiza todos los palpites de la rodada this.rodadaActual 
    * y del campeonato this.campeonatoActual
-   * @param value todos los partidos con los palpites realizados
+   * @param partidos todos los partidos con los palpites realizados
    */
-  logForm(value: any) {
+  logForm(partidos: any) {
     this.palpitando = true;
     this.spinnerService.show();
-    let palpitados = [];
-    for (let partido of value) {
-      let pJson = <Partido>partido;
-      if (pJson.rs_res1 !== null && pJson.rs_res2 !== null) {
-        palpitados.push(partido);
+    let palpitados = partidos.filter(partido => {
+      if (partido.rs_res1 !== null && partido.rs_res2 !== null) {
+        return partido;
       }
-    }
-
-    console.log(palpitados);
+    })
 
     this.http.post(this.url + "/public/mobile/palpitarrodadatoda", { palpites: palpitados, usuario: localStorage.getItem("id") })
       .subscribe(resultado => {
@@ -188,19 +151,6 @@ export class PalpitarrodadaComponent implements OnInit {
         }
         this.palpitando = false;
       })
-  }
-
-  /**
-   * para pintar el campeonato activo
-   */
-  setCampeonatoActivo() {
-    for (let campeonato of this.campeonatos) {
-      if (campeonato.ch_id == this.campeonatoActual) {
-        campeonato.active = "blue";
-      } else {
-        campeonato.active = "white";
-      }
-    }
   }
 
   comprarRodada() {
@@ -217,5 +167,12 @@ export class PalpitarrodadaComponent implements OnInit {
         }
       });
 
+  }
+
+  setJogos(partidos) {
+    partidos.map(partido => {
+      partido.disabled = this.fechaService.puedePalpitar(partido.mt_date); 
+      partido.acerto = this.verificarResultadoPalpitado(partido);
+    });
   }
 }

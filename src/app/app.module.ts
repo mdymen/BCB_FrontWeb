@@ -38,6 +38,10 @@ import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider } fro
 import { LogoutComponent } from './logout/logout.component';
 import { EquipoService } from './admin/services/equipos.service';
 import { PaisService } from './admin/services/pais.services';
+import { EquipoCampeonatoComponent } from './admin/equipo-campeonato/equipo-campeonato.component';
+import { PartidosService } from './admin/services/partidos.services';
+import { EquiposService } from './services/equipos.service';
+import { EquipoComponent } from './equipo/equipo.component';
 
 const routes: Routes = [
   { path: "caixa", component: CaixaComponent, canActivate: [AuthGuard] },
@@ -63,7 +67,9 @@ const routes: Routes = [
   { path: "inicio", component: InicioComponent },
   { path: "noticias", component: NoticiasComponent },
   { path: "pagamento/:id_pagoseguro", component: PagamentoComponent },
-  { path: "logout", component: LogoutComponent }
+  { path: "logout", component: LogoutComponent },
+  { path: "equipocampeonato", component: EquipoCampeonatoComponent },
+  { path: "equipo/:equipo", component: EquipoComponent }
 
 ];
 
@@ -111,7 +117,9 @@ export function provideConfig() {
     NoticiasComponent,
     PagamentoComponent,
     ProximosPartidosComponent,
-    LogoutComponent
+    LogoutComponent,
+    EquipoCampeonatoComponent,
+    EquipoComponent
   ],
   imports: [
     BrowserModule,
@@ -132,6 +140,9 @@ export function provideConfig() {
   CampeonatoService, 
   FechaService, 
   EquipoService,
+  CampeonatoService,
+  PartidosService,
+  EquiposService,
   PaisService],
   bootstrap: [AppComponent]
 })

@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Grupo } from '../grupo';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Equipo } from '../equipo';
+import { EquiposService } from '../services/equipos.service';
 
 @Component({
   selector: 'app-posiciones',
@@ -25,7 +26,8 @@ export class PosicionesComponent implements OnInit {
   constructor(private http: HttpClient,
     private backend: BackendService,
     private route: ActivatedRoute,
-    private spinnerService: Ng4LoadingSpinnerService) { }
+    private spinnerService: Ng4LoadingSpinnerService,
+    private _equiposService:EquiposService) { }
 
   ngOnInit() {
 
@@ -33,12 +35,21 @@ export class PosicionesComponent implements OnInit {
   }
 
   cargarTabla() {
-    if (this.vertabla == "display:none") {
+ 
       this.route.params.subscribe(params => {
 
 
         this.campeonato = params['campeonato'];
         this.spinnerService.show();
+        this._equiposService.loadTabla(this.campeonato) 
+          .subscribe((res:any) => {
+            this.equipos = res.body.teams;
+            console.log(this.equipos);
+            this.spinnerService.hide();
+          });
+
+
+   /*     this.spinnerService.show();
         this.http.post(this.backend.getBackEnd() + "/equipos", { champ: this.campeonato })
           .subscribe(result => {
             this.tablaCargada = true;
@@ -63,7 +74,9 @@ export class PosicionesComponent implements OnInit {
       });
     } else {
       this.vertabla = "display:none";
-    }
-  }
+    }*/
+      })
+
+}
 
 }
