@@ -6,6 +6,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Partido } from '../partido';
 import { ActivatedRoute } from '@angular/router';
+import { UsuarioService } from '../services/usuario.service';
 //import { LocalStorageService } from '../services/local-storage.service';
 
 
@@ -39,7 +40,7 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
 
   foto:string;
 
-  partidos = [];
+  partidos = false;
 
   limit:Number = 9;
   proximo:Number = 9;
@@ -54,8 +55,8 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
   constructor(private backend: BackendService, private http: HttpClient,
     private sanitazer: DomSanitizer,
     private route:ActivatedRoute, 
-    private spinnerService:Ng4LoadingSpinnerService
-    /*private localStorageService:LocalStorageService*/) {
+    private spinnerService:Ng4LoadingSpinnerService,
+    private _usuarioService:UsuarioService) {
 
       this.route.params.subscribe(params => {
         if (params['limit']) {
@@ -74,18 +75,11 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
           this.cash = localStorage.getItem("cash");            
         }
       })
-    
-    console.log("id usuario", this.idUsuario);
 
-    this.spinnerService.show();
-    this.http.post(this.backend.getBackEndNormal() + "/usuario/palpitesusuario", {id:this.idUsuario, limit:this.limit})
-    .subscribe(result => {
-      for (let partido of result['partidos']) {
-        this.partidos.push(partido);
-        this.tabPalpitesCargado = true;
-        this.spinnerService.hide();
-      }
-    });
+      this._usuarioService.getPalpites(this.idUsuario, this.limit)
+        .subscribe((res:any) => {
+          this.partidos = res.body;
+        });
 
     this.http.post(this.backend.getBackEndNormal() + "/usuario/usuario", {usuario:this.idUsuario})
     .subscribe(result => {
@@ -109,38 +103,9 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
 
       console.log(result);
     });
-
-    console.log("xxxxxxxxxxxxxxxxx");
   }
 
   ngOnInit() {
-  }
-
-  /**
- * Guarda la informacion del usuario correspondiente al recibimiento de emails
- * @param params tiene @param res_pal, @param res_rod_pal, @param info_rod_pal
- * @param iduser
- */
-  salvarConfiguracionEmail() {
-
-    this.http.post(this.backend.getBackEndNormal() + "usuario/emailconfiguracion",
-      {
-        res_pal: this.resPalpite,
-        res_rod_pal: this.resRodadaPalpite,
-        info_rod: this.infoRodadaGeral,
-        iduser: localStorage.getItem("id")
-      })
-      .subscribe(result => {
-        localStorage.setItem("res_rod_pal", Number(this.resRodadaPalpite).toString());
-        localStorage.setItem("res_pal", Number(this.resRodadaPalpite).toString());
-        localStorage.setItem("info_rod", Number(this.resRodadaPalpite).toString());
-
-        console.log(result);
-      },
-        error => { })
-
-
-
   }
 
   /**
@@ -149,26 +114,6 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
    */
   verificarSuceso(partido: Partido) {
     return partido.mt_goal1 === partido.rs_res1 && partido.mt_goal2 === partido.rs_res2;
-  }
-
-  /**
-   * Informacion estadisticamente de los palpites de un usuario
-   */
-  palpites() {
-    if (!this.cargoInfoPalpites) {
-      this.spinnerService.show();
-      this.http.post(this.backend.getBackEndNormal() + "usuario/infopalpitesusuario",
-        { usuario: localStorage.getItem("id") })
-        .subscribe(res => {
-          console.log(res);
-          this.spinnerService.hide();
-          this.erros = res['erros'],
-            this.acertos = res['acertos'],
-            this.palpitados = res['palpitados'],
-            this.pontos = res['pontos']
-          this.cargoInfoPalpites = true;
-        })
-    }
   }
 
   /**
@@ -212,4 +157,54 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
   notExistImage($event) {
     this.foto = "http://dymenstein.com/public/assets/img/perfil/user.png";
   }
+
+
+
+    /**
+ * Guarda la informacion del usuario correspondiente al recibimiento de emails
+ * @param params tiene @param res_pal, @param res_rod_pal, @param info_rod_pal
+ * @param iduser
+ */
+/*  salvarConfiguracionEmail() {
+
+    this.http.post(this.backend.getBackEndNormal() + "usuario/emailconfiguracion",
+      {
+        res_pal: this.resPalpite,
+        res_rod_pal: this.resRodadaPalpite,
+        info_rod: this.infoRodadaGeral,
+        iduser: localStorage.getItem("id")
+      })
+      .subscribe(result => {
+        localStorage.setItem("res_rod_pal", Number(this.resRodadaPalpite).toString());
+        localStorage.setItem("res_pal", Number(this.resRodadaPalpite).toString());
+        localStorage.setItem("info_rod", Number(this.resRodadaPalpite).toString());
+
+        console.log(result);
+      },
+        error => { })
+
+
+
+  }*/
+
+
+    /**
+   * Informacion estadisticamente de los palpites de un usuario
+   */
+ /* palpites() {
+   if (!this.cargoInfoPalpites) {
+      this.spinnerService.show();
+      this.http.post(this.backend.getBackEndNormal() + "usuario/infopalpitesusuario",
+        { usuario: localStorage.getItem("id") })
+        .subscribe(res => {
+          console.log(res);
+          this.spinnerService.hide();
+          this.erros = res['erros'],
+            this.acertos = res['acertos'],
+            this.palpitados = res['palpitados'],
+            this.pontos = res['pontos']
+          this.cargoInfoPalpites = true;
+        })
+    }
+  }*/
 }

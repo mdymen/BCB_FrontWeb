@@ -21,7 +21,6 @@ import { CaixaComponent } from './caixa/caixa.component';
 import { BackendService } from './backend.service';
 import { CargarcampeonatoComponent } from './admin/cargarcampeonato/cargarcampeonato.component';
 import { AdminGuard } from './admin.guard';
-import { CampeonatoService } from './entidades/campeonato.service';
 import { FechaService } from './fecha.service';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { SetrodadaComponent } from './admin/setrodada/setrodada.component';
@@ -42,6 +41,9 @@ import { EquipoCampeonatoComponent } from './admin/equipo-campeonato/equipo-camp
 import { PartidosService } from './admin/services/partidos.services';
 import { EquiposService } from './services/equipos.service';
 import { EquipoComponent } from './equipo/equipo.component';
+import { UsuarioService } from './services/usuario.service';
+import { CampeonatoService } from './services/campeonato.service';
+import { Global } from './config/global.service';
 
 const routes: Routes = [
   { path: "caixa", component: CaixaComponent, canActivate: [AuthGuard] },
@@ -140,9 +142,10 @@ export function provideConfig() {
   CampeonatoService, 
   FechaService, 
   EquipoService,
-  CampeonatoService,
   PartidosService,
   EquiposService,
+  UsuarioService,
+  Global,
   PaisService],
   bootstrap: [AppComponent]
 })

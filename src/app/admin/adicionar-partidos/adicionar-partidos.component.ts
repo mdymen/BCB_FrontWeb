@@ -3,8 +3,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { CampeonatoService } from '../../entidades/campeonato.service';
 import { PartidosService } from '../services/partidos.services';
+import { CampeonatoService } from '../../services/campeonato.service';
 
 @Component({
   selector: 'app-adicionar-partidos',

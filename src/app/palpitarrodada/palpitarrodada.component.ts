@@ -7,7 +7,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FechaService } from '../fecha.service';
 import { BackendService } from '../backend.service';
 import { Location } from '@angular/common';
-import { CampeonatoService } from '../entidades/campeonato.service';
+import { CampeonatoService } from '../services/campeonato.service';
 
 @Component({
   selector: 'app-palpitarrodada',
@@ -36,7 +36,6 @@ export class PalpitarrodadaComponent implements OnInit {
 
   //toda la informacion de la rodada marcada
   rodadaActualObjeto: any;
-  rodadaPaga: boolean;
 
   //si intenta comprar una rodada y no tiene guita suficiente
   //esta variable es usada para mostrar el mensaje de error.
@@ -81,6 +80,9 @@ export class PalpitarrodadaComponent implements OnInit {
 
     });
     this.spinnerService.show();
+
+
+
     //carga todos los campeonatos disponibles
     this.http.post(this.url + "/public/mobile/cellgetcampeonatosabertos/?", {})
       .subscribe(result => {
@@ -105,12 +107,13 @@ export class PalpitarrodadaComponent implements OnInit {
         this.rodadaActual = res.body.n_rodada;
         this.rodadas = res.body.rondas;
         this.partidos = res.body.rodada;
+        this.rodadaActualObjeto = res.body.rodadaAtual[0];
+        this.rodadaActualObjeto.active = "active";
         this.setJogos(this.partidos);
 
         for (let rodada of this.rodadas) {
           if (rodada.rd_id == this.rodadaActual) {
             rodada.active = "active";
-            this.rodadaActualObjeto = rodada;
           }
         }
 
@@ -153,7 +156,7 @@ export class PalpitarrodadaComponent implements OnInit {
       })
   }
 
-  comprarRodada() {
+  comprar() {
     this.spinnerService.show();
     this.http.post(this.backEndService.getBackEnd() + "comprarrodada",
       { usuario: localStorage.getItem("id"), rodada: this.rodadaActual })
@@ -174,5 +177,21 @@ export class PalpitarrodadaComponent implements OnInit {
       partido.disabled = this.fechaService.puedePalpitar(partido.mt_date); 
       partido.acerto = this.verificarResultadoPalpitado(partido);
     });
+  }
+
+  /**
+   * retorna true si la rodada tiene algun costo 
+   */ 
+  rodadaPay() : boolean {
+    console.log("rodada actual", this.rodadaActualObjeto);
+    return this.rodadaActualObjeto.rd_custo && this.rodadaActualObjeto.rd_custo > 0;
+  }
+
+  /**
+   * retorna true si la rodada fue paga
+   */
+  paid() : boolean {
+    console.log("paga",this.rodadaActualObjeto.ru_pago);
+    return this.rodadaActualObjeto.ru_pago === "1";
   }
 }

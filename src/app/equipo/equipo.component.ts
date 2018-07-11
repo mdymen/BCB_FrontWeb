@@ -12,6 +12,10 @@ export class EquipoComponent implements OnInit {
 
   idEquipo;
   equipo;
+  partidos;
+  campeonatos;
+
+  assets = "/assets/equipos/";
 
   constructor(private spinnerService:Ng4LoadingSpinnerService,
     private _equiposService:EquiposService,
@@ -25,7 +29,26 @@ export class EquipoComponent implements OnInit {
   ngOnInit() {
     this._equiposService.get(this.idEquipo)
       .subscribe((res:any) => {
+        this.equipo = res.body.equipo;
+        this.partidos = res.body.jogos;
+        this.campeonatos = res.body.campeonatos;
+
         console.log(res);
+      })
+  }
+
+    /**
+   * Devuelve true si el resultado palpitado fue acertado
+   * @param partido 
+   */
+  verificarSuceso(partido) {
+    return partido.mt_goal1 === partido.rs_res1 && partido.mt_goal2 === partido.rs_res2;
+  }
+
+  more() {
+    this._equiposService.getPartidos(this.idEquipo, 3)
+      .subscribe((res:any) => {
+        this.partidos = res.body.jogos;
       })
   }
 

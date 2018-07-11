@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
-import { CampeonatoService } from '../../entidades/campeonato.service';
+import { CampeonatoService } from '../../services/campeonato.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Equipo } from '../../equipo';
 import { FormGroup, FormControl } from '@angular/forms';

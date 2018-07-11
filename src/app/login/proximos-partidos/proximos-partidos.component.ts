@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
-import { Partido } from '../../admin/adicionar-partidos/adicionar-partidos.component';
 import { FechaService } from '../../fecha.service';
 
 @Component({
@@ -27,7 +26,9 @@ export class ProximosPartidosComponent implements OnInit {
       .subscribe(res => {
         //carga los partidos
         for (let partido of res['body']) {
-          let partidoJson = <Partido>partido;     
+          let partidoJson = {
+            esHoy : false
+          }; 
           partidoJson.esHoy = this.esHoy(partido.mt_date) ? true : false;
           this.partidos.push(partidoJson);
         }

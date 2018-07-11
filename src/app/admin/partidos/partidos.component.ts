@@ -2,11 +2,11 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { CargarcampeonatoComponent } from '../cargarcampeonato/cargarcampeonato.component';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
-import { CampeonatoService } from '../../entidades/campeonato.service';
 import { Observable } from 'rxjs/Observable';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import 'rxjs/add/operator/map';
 import { FormEditarPartidoComponent } from '../componentes/form-editar-partido/form-editar-partido.component';
+import { CampeonatoService } from '../../services/campeonato.service';
 
 @Component({
   selector: 'app-partidos',

@@ -16,5 +16,9 @@ export class EquiposService {
         return this._http.get(`${this.url}/equipos/get/idEquipo/${idEquipo}`);
     }
 
+    getPartidos(idEquipo, limite) {
+        return this._http.get(`${this.url}/equipos/getpartidos/idEquipo/${idEquipo}/limite/${limite}`);
+    }
+
 
 }

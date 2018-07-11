@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EquipoService } from '../services/equipos.service';
-import { CampeonatoService } from '../../entidades/campeonato.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { CampeonatoService } from '../../services/campeonato.service';
 
 @Component({
   selector: 'app-equipo-campeonato',

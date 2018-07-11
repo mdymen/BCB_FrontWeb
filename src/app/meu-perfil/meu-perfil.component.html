@@ -61,25 +61,25 @@
       <li class="active">
         <a href="page-profile.html#palpites" (click)="palpites()">Palpites</a>
       </li>
-      <li class="" *ngIf="isUsuarioLogado()">
+    <!--  <li class="" *ngIf="isUsuarioLogado()">
         <a href="page-profile.html#skills">Emails</a>
       </li>
       <li class="" *ngIf="isUsuarioLogado()">
         <a href="page-profile.html#friends" (click)="palpites()">Estatisticas</a>
-      </li>
+      </li> -->
 
     </ul>
 
 
 
-    <div class="tab-content">
+    <div class="tab-content" style="height: 450px; overflow-y:auto;overflow-x: hidden">
         <div class="tab-pane active" id="palpites">
 
-          <div class="row" style="margin:auto" *ngIf="!tabPalpitesCargado">
+          <div class="row" style="margin:auto" *ngIf="!partidos">
             Carregando...
           </div>
 
-            <div class="row" *ngIf="tabPalpitesCargado">
+            <div class="row" *ngIf="partidos">
     
 
                 <div *ngFor='let partido of partidos'>
@@ -162,7 +162,7 @@
 
             </div>
 
-            <div class="row" style="margin:auto" *ngIf="tabPalpitesCargado">
+            <div class="row" style="margin:auto" *ngIf="partidos && partidos.length > 0">
                 <a href="/perfil/{{proximo}}/usuario/{{idUsuario}}" class="btn btn-sm btn-primary">Mais</a>
             </div>
             <!--/row-->
