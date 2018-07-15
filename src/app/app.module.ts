@@ -44,6 +44,7 @@ import { EquipoComponent } from './equipo/equipo.component';
 import { UsuarioService } from './services/usuario.service';
 import { CampeonatoService } from './services/campeonato.service';
 import { Global } from './config/global.service';
+import { EquipoCoracaoComponent } from './equipo-coracao/equipo-coracao.component';
 
 const routes: Routes = [
   { path: "caixa", component: CaixaComponent, canActivate: [AuthGuard] },
@@ -71,7 +72,9 @@ const routes: Routes = [
   { path: "pagamento/:id_pagoseguro", component: PagamentoComponent },
   { path: "logout", component: LogoutComponent },
   { path: "equipocampeonato", component: EquipoCampeonatoComponent },
-  { path: "equipo/:equipo", component: EquipoComponent }
+  { path: "equipo/:equipo", component: EquipoComponent },
+  { path: "equipocoracao", component:EquipoCoracaoComponent},
+  { path: "equipocoracao/:equipo", component:EquipoCoracaoComponent}
 
 ];
 
@@ -121,7 +124,8 @@ export function provideConfig() {
     ProximosPartidosComponent,
     LogoutComponent,
     EquipoCampeonatoComponent,
-    EquipoComponent
+    EquipoComponent,
+    EquipoCoracaoComponent
   ],
   imports: [
     BrowserModule,

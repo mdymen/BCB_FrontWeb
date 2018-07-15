@@ -13,6 +13,7 @@ export class AppComponent {
   menu = [];
   usuario;
   cash;
+  foto;
 
   constructor(private route: Router,
     private authService: AuthService) {
@@ -22,10 +23,11 @@ export class AppComponent {
       this.usuario = usuario;
       this.cash = localStorage.getItem("cash");
     }
-    console.log("logado " + this.logado);
   }
 
   ngOnInit(): void {
+    this.foto = "http://dymenstein.com/public/assets/img/perfil/" + localStorage.getItem("foto");
+
     this.menu.push(new Opciones("Inicio", "fa fa-home", "/palpitarrodada"));
     this.menu.push(new Opciones("Perfil", "fa fa-user", "/meuperfil"));
     this.menu.push(new Opciones("Caixa", "fa fa-dollar", "/caixa"));
@@ -49,6 +51,10 @@ export class AppComponent {
     localStorage.clear();
     location.reload();
     this.authService.signOut();
+  }
+
+  notExistImage($event) {
+    this.foto = "http://dymenstein.com/public/assets/img/perfil/user.png";
   }
 
 }

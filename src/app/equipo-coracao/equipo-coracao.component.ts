@@ -1,0 +1,67 @@
+import { Component, OnInit } from '@angular/core';
+import { PaisService } from '../admin/services/pais.services';
+import { EquiposService } from '../services/equipos.service';
+
+@Component({
+  selector: 'app-equipo-coracao',
+  templateUrl: './equipo-coracao.component.html',
+  styleUrls: ['./equipo-coracao.component.css']
+})
+export class EquipoCoracaoComponent implements OnInit {
+
+  paises = [];
+  equipos = [];
+
+  equiposFiltrados = [];
+
+  constructor(private _paisesService: PaisService,
+    private _equipoService: EquiposService) {
+
+    this.load();
+
+  }
+
+  ngOnInit() {
+  }
+
+  /**
+   * Cuando se selecciona un pais, carga todos los equipos disponibles de ese pais
+   * @param pais 
+   */
+  change(pais) {
+    this._equipoService.getTimes(pais)
+      .subscribe((res: any) => {
+        this.equipos = res.body;
+        this.equiposFiltrados = res.body;
+        console.log(res);
+      })
+  }
+
+  /**
+   * Carga todos los paises disponibles para luego ver sus equipos
+   */
+  load() {
+    this._paisesService.get()
+      .subscribe((res: any) => {
+        this.paises = res.body;
+        console.log(res);
+      })
+  }
+
+    /**
+   * Filtra por el texto escrito en el campo de busca de equipos
+   * @param text 
+   */
+  filter(text) {
+    if (!text) {
+      this.equiposFiltrados = this.equipos
+    } else {
+      this.equiposFiltrados = this.equipos.
+        filter(equipo => {
+          return equipo.eq_nome.toLowerCase().includes(text);
+        })
+    }
+
+  }
+
+}

@@ -5,7 +5,7 @@
 <div class="row">
   <div *ngFor="let campeonato of campeonatos" class="col-lg-3 col-sm-6">
     <div [ngClass]="campeonato.ch_id === campeonatoActual ? 'smallchart blue box' : 'smallchart white box' ">
-      <div style="height:250px">
+      <div style="height:250px" *ngIf="isSelected()">
         <a href="/palpitarrodada/{{campeonato.ch_id}}">
           <img height="250px" width="200px" src="{{campeonato.ch_logocampeonato}}" style="padding: 10px 10px 10px 10px">
         </a>
@@ -142,7 +142,8 @@
                           <tr>
                             <td width="55%" style="text-align:left">
                               <span id="372">
-                                <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{assets}}{{partido.tm2_logo}}"> {{partido.t2nome}}
+                                <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{assets}}{{partido.tm2_logo}}">
+                                <a href="/equipo/{{partido.tm2_id}}"> {{partido.t2nome}}</a>
                               </span>
                             </td>
                             <td *ngIf="partido.mt_played == 1" width="10%" style="text-align:right">

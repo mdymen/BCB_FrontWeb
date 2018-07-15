@@ -21,8 +21,7 @@
           <li>
             <a style="padding-right: 20px !important" class="btn account dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
               <div class="user">
-                <span class="hello">R$</span>
-                <span class="name" id="cash_usuario">{{cash}}</span>
+                <span class="name" id="cash_usuario">{{cash | currency:'BRL':2}}</span>
               </div>
 
             </a>
@@ -38,10 +37,9 @@
 
 
           <li>
-            <a class="btn" [routerLink]="" (click)="logout()">
-              <i class="fa fa-power-off"></i>
-            </a>
-
+            <div class="avatar" style="padding-left:20px">
+              <img [src]="foto" height="40px" width="40px" (error)="notExistImage($event)">            
+            </div>
           </li>
 
         </ul>

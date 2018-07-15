@@ -23,7 +23,7 @@ export class PalpitarrodadaComponent implements OnInit {
   campeonatoActualObjeto: any;
   url = "http://www.dymenstein.com";
   rodadas = [];
-  campeonatoActual = 0;
+  campeonatoActual = null;
   palpitesRealizados = false;
 
   //para almazenar el id de la rodada actual para setear
@@ -81,10 +81,14 @@ export class PalpitarrodadaComponent implements OnInit {
     });
     this.spinnerService.show();
 
-
+    this._campeonatoService.getBasico()
+      .subscribe((res:any) => {
+        this.campeonatos = res.body;
+        this.spinnerService.hide();
+      });
 
     //carga todos los campeonatos disponibles
-    this.http.post(this.url + "/public/mobile/cellgetcampeonatosabertos/?", {})
+ /*   this.http.post(this.url + "/public/mobile/cellgetcampeonatosabertos/?", {})
       .subscribe(result => {
         let aux = JSON.stringify(result);
         let campeonatos = JSON.parse(aux);
@@ -92,7 +96,7 @@ export class PalpitarrodadaComponent implements OnInit {
           this.campeonatos.push(campeonato);
         }
         this.spinnerService.hide();
-      });
+      });*/
   }
 
   /**
@@ -193,5 +197,10 @@ export class PalpitarrodadaComponent implements OnInit {
   paid() : boolean {
     console.log("paga",this.rodadaActualObjeto.ru_pago);
     return this.rodadaActualObjeto.ru_pago === "1";
+  }
+
+  isSelected() {
+    console.log(this.campeonatoActual === null);
+    return this.campeonatoActual === null;
   }
 }

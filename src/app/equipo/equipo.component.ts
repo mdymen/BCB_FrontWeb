@@ -15,7 +15,8 @@ export class EquipoComponent implements OnInit {
   partidos;
   campeonatos;
 
-  assets = "/assets/equipos/";
+  assets = "/assets/equipos/grande/";
+  limit = 3;
 
   constructor(private spinnerService:Ng4LoadingSpinnerService,
     private _equiposService:EquiposService,
@@ -46,8 +47,11 @@ export class EquipoComponent implements OnInit {
   }
 
   more() {
-    this._equiposService.getPartidos(this.idEquipo, 3)
+    this.spinnerService.show();
+    this.limit = this.limit + 6;
+    this._equiposService.getPartidos(this.idEquipo, this.limit)
       .subscribe((res:any) => {
+        this.spinnerService.hide();
         this.partidos = res.body.jogos;
       })
   }

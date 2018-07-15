@@ -12,11 +12,15 @@ export class CampeonatoService {
         this.url = Global.BACKEND;
     }
 
-    getReducido() {
-        return this._http.get(`${this.url}/campeonato/getreducido`);
+    /**
+     * Retorna todos los campeonatos con lo minimo necesario de datos
+     * "ch_id","ch_acumulado","ch_nome","ch_logocampeonato","ch_id"
+     */
+    getBasico() {
+        return this._http.get(`${this.url}/campeonatos/getbasic`);
     }
 
-      /**
+   /**
    * retorna uma promesa con los campeonatos abiertos
    */
   public getCampeonatos() {
