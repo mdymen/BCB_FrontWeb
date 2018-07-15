@@ -13,6 +13,9 @@ export class EquipoCoracaoComponent implements OnInit {
   equipos = [];
 
   equiposFiltrados = [];
+  equipo = null;
+
+  assets = "/assets/equipos/grande/";
 
   constructor(private _paisesService: PaisService,
     private _equipoService: EquiposService) {
@@ -62,6 +65,16 @@ export class EquipoCoracaoComponent implements OnInit {
         })
     }
 
+  }
+
+  /**
+   * Muestra en la pantalla el equipo que puede ser seleccionado
+   * como equipo del corazon
+   * @param equipo 
+   */
+  select(equipo) {
+    this.equipo = equipo;
+    console.log(this.equipo);
   }
 
 }
