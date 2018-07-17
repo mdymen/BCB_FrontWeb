@@ -69,8 +69,9 @@ export class CampeonatoService {
     return this._http.get(this.url + `/campeonatos/getpartidos/idUsuario/${idUsuario}/idCampeonato/${idCampeonato}/idRodada/${idRodada}`);
   }
 
-  public loadGlobo(globo) {
-    return this._http.post(`${this.url}/campeonatos/globo`, {dir:globo});
+  public loadGlobo(globo, idCampeonato, idRodada) {
+    return this._http.post(`${this.url}/campeonatos/globo`, {dir:globo, idCampeonato:idCampeonato, idRodada:idRodada});
   }
+
 
 }

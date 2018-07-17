@@ -46,6 +46,7 @@ import { CampeonatoService } from './services/campeonato.service';
 import { Global } from './config/global.service';
 import { EquipoCoracaoComponent } from './equipo-coracao/equipo-coracao.component';
 import { ResultadosComponent } from './admin/resultados/resultados.component';
+import { PartidoService } from './services/partido.service';
 
 const routes: Routes = [
   { path: "caixa", component: CaixaComponent, canActivate: [AuthGuard] },
@@ -152,6 +153,7 @@ export function provideConfig() {
   PartidosService,
   EquiposService,
   UsuarioService,
+  PartidoService,
   Global,
   PaisService],
   bootstrap: [AppComponent]
