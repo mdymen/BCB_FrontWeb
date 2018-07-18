@@ -1,89 +1,129 @@
-<div class="col-lg-6">
+<!-- CARGAR CAMPEONATOS -->
+
+<ng4-loading-spinner> </ng4-loading-spinner>
+
+<div class="row">
   <div class="box">
     <div class="box-content">
-
-
-      <div class="form-group">
-        <div class="controls">
-          <div class="input-group col-sm-8">
-            <span class="input-group-addon">
-              <i class="fa fa-male"></i>
-            </span>
-            <input type="text" (input)="change($event.target.value)" class="form-control" placeholder="Digite nombre del equipo....">
-          </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="controls">
+                <select [ngModel]="campeonatos" class="form-control" (ngModelChange)="loadRodadas($event)" name="seleccion">
+                  <option [value]="campeonato.ch_id" *ngFor="let campeonato of campeonatos">{{campeonato.ch_nome}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
         </div>
-      </div>
 
+        <div class="col-lg-3">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="controls">
+                <select [ngModel]="rodadas" class="form-control" (ngModelChange)="setRodada($event)" name="seleccionRodada">
+                  <option [value]="rodada.rd_id" *ngFor="let rodada of rodadas">{{rodada.rd_round}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-lg-2">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="controls">
+                <input style="text-align:center" class="form-control numeros_input" [(ngModel)]="cambio" name="cambio" type="text">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-lg-2">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <div class="controls">
+                  <a href="javascript:void(0)" class="btn btn-success" style="text-align: center;" (click)="search()">Buscar</a>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+
+      </div>
     </div>
   </div>
 </div>
 
-<button class="btn btn-success" (click)="search()">Buscar</button>
+
+<!-- FIN DE CARGAR CAMPEONATOS -->
 
 <div class="col-lg-12">
   <div class="box">
     <div class="box-content">
+      <div class="row">
+        <div *ngFor='let partido of partidos'>
 
-      <div *ngFor='let partido of partidos'>
 
-
-        <div class="col-lg-3 col-sm-6 col-xs-12 col-xxs-12 col-xxs-6" style="margin-top: 10px">
-          <div class="smallstat box" style="border:1px solid #dbdee0; padding:7px">
-            <table width="100%">
-              <tbody>
-                <tr>
-                  <td style="text-align:center">
-                    <b>{{partido.mt_date}}</b>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table>
-              <tbody>
-                <tr>
-                  <td width="55%" style="text-align:left">
-                    <span id="376">
-                      <img width="25px;" height="21px;" src="{{fotos}}/{{partido.t1logo}}"> {{partido.t1nome}}
-                    </span>
-                  </td>
-                  <td width="35%">
-                    <div class="row">
-                      <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                        <input style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal1" name="rs_res1{{partido.mt_id}}"
-                          type="text">
+          <div class="col-lg-3 col-sm-6 col-xs-12 col-xxs-12 col-xxs-6" style="margin-top: 10px">
+            <div class="smallstat box" style="border:1px solid #dbdee0; padding:7px">
+              <table width="100%">
+                <tbody>
+                  <tr>
+                    <td style="text-align:center">
+                      <b>{{partido.mt_date}}</b>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table>
+                <tbody>
+                  <tr>
+                    <td width="55%" style="text-align:left">
+                      <span id="376">
+                        <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm1_logo}}"> {{partido.t1nome}}
+                      </span>
+                    </td>
+                    <td width="35%">
+                      <div class="row">
+                        <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                          <input style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal1" name="rs_res1{{partido.mt_id}}"
+                            type="text">
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <table>
-              <tbody>
-                <tr>
-                  <td width="55%" style="text-align:left">
-                    <span id="372">
-                      <img width="25px;" height="21px;" src="{{fotos}}/{{partido.t2logo}}"> {{partido.t2nome}}
-                    </span>
-                  </td>
-                  <td width="35%">
-                    <div class="row">
-                      <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                        <input style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal2" name="rs_res2{{partido.mt_id}}"
-                          type="text">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table>
+                <tbody>
+                  <tr>
+                    <td width="55%" style="text-align:left">
+                      <span id="372">
+                        <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm2_logo}}"> {{partido.t2nome}}
+                      </span>
+                    </td>
+                    <td width="35%">
+                      <div class="row">
+                        <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                          <input style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.mt_goal2" name="rs_res2{{partido.mt_id}}"
+                            type="text">
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-            <div id="466" style="margin: 15px 0 0 0; ">
-              <div id="dvInfo_1114" style="display:none"></div>
+              <div id="466" style="margin: 15px 0 0 0; ">
+                <div id="dvInfo_1114" style="display:none"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
