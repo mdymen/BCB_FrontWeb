@@ -74,4 +74,14 @@ export class ResultadosComponent implements OnInit {
     this.rodada = idRodada;
   }
 
+  save() {
+    this.spinner.show();
+    console.log(this.partidos);
+    this._partidoService.save(this.partidos) 
+      .subscribe((res:any) => {
+        console.log(res);
+        this.spinner.hide();
+      })
+  }
+
 }

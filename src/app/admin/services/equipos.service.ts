@@ -10,6 +10,10 @@ export class EquipoService {
 
     }
 
+    /**
+     * Salva los equipos
+     * @param equipos 
+     */
     public save(equipos) {
         return this._http.post(this.url + "/team/post", equipos);
     }

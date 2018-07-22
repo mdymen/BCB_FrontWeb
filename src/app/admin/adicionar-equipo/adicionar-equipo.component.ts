@@ -79,6 +79,7 @@ export class AdicionarEquipoComponent implements OnInit {
       nome: "",
       idPais: this.idPais,
       logo: "",
+      sigla: "",
     }
 
     this.equipos.push(equipo);

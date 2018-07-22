@@ -13,7 +13,21 @@ export class PartidoService {
     }
 
 
+    /**
+     * Retorna los partidos de la rodada especificada
+     * @param idCampeonato
+     * @param idRodada
+     */
     public getPartidos(idCampeonato, idRodada) {
         return this._http.get(`${this.url}/partidos/get/idCampeonato/${idCampeonato}/idRodada/${idRodada}`);
+    }
+
+    /**
+     * Actualiza la lista de partidos. Si el partido no existe entonces lo crea y si existe 
+     * coloca el resultado y actualiza la puntuacion del usuario
+     * @param partidos lista de partidos para grabar
+     */
+    public save(partidos) {
+        return this._http.post(`${this.url}/partidos/put`, {partidos:partidos});
     }
 }
