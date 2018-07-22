@@ -41,14 +41,14 @@
         </div>
 
         <div class="col-lg-2">
-            <form class="form-horizontal">
-              <div class="form-group">
-                <div class="controls">
-                  <a href="javascript:void(0)" class="btn btn-success" style="text-align: center;" (click)="search()">Buscar</a>
-                </div>
+          <form class="form-horizontal">
+            <div class="form-group">
+              <div class="controls">
+                <a href="javascript:void(0)" class="btn btn-success" style="text-align: center;" (click)="search()">Buscar</a>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
+        </div>
 
 
 
@@ -116,6 +116,21 @@
                   </tr>
                 </tbody>
               </table>
+              <table>
+                  <tbody>
+                    <tr>
+                      <td width="55%" style="text-align:left">
+                          <span *ngIf="partido.played == 1" class="label label-important">Finalizado</span>
+                      </td>
+                      <td width="35%" *ngIf="partido.mt_id">
+                        ID: {{partido.mt_id}}
+                      </td>
+                      <td width="35%" *ngIf="!partido.mt_id">
+                        <span *ngIf="partido.played == 1" class="label label-success">Novo</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>              
 
               <div id="466" style="margin: 15px 0 0 0; ">
                 <div id="dvInfo_1114" style="display:none"></div>

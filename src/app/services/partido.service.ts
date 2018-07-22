@@ -26,6 +26,19 @@ export class PartidoService {
      * Actualiza la lista de partidos. Si el partido no existe entonces lo crea y si existe 
      * coloca el resultado y actualiza la puntuacion del usuario
      * @param partidos lista de partidos para grabar
+     * 
+     * -------
+     * PARTIDO
+     * -------
+     * @param mt_id 
+     * @param mt_goal1
+     * @param mt_goal2
+     * @param mt_idteam1
+     * @param mt_idteam2
+     * @param mt_idchampionship
+     * @param mt_played
+     * @param mt_date
+     * @param mt_idround
      */
     public save(partidos) {
         return this._http.post(`${this.url}/partidos/put`, {partidos:partidos});

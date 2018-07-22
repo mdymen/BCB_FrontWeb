@@ -24,10 +24,10 @@ export class ResultadosComponent implements OnInit {
   url_img;
 
   constructor(private _campeonatoService: CampeonatoService,
-    private _partidoService:PartidoService,
-    private spinner:Ng4LoadingSpinnerService) {
+    private _partidoService: PartidoService,
+    private spinner: Ng4LoadingSpinnerService) {
 
-      this.url_img = Global.URL_BOLAO + Global.ASSETS_EQUIPOS;
+    this.url_img = Global.URL_BOLAO + Global.ASSETS_EQUIPOS;
   }
 
   ngOnInit() {
@@ -51,10 +51,10 @@ export class ResultadosComponent implements OnInit {
   loadRodadas(idCampeonato) {
     this.spinner.show();
     this._campeonatoService.loadRodadasByCampeonato(idCampeonato)
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
         this.campeonato = idCampeonato;
         this.rodadas = res.body;
-        this.spinner.hide();        
+        this.spinner.hide();
       })
   }
 
@@ -64,7 +64,7 @@ export class ResultadosComponent implements OnInit {
   loadCampeonatos() {
     this.spinner.show();
     this._campeonatoService.getCampeonatos()
-      .subscribe((res:any) => {        
+      .subscribe((res: any) => {
         this.campeonatos = res;
         this.spinner.hide();
       })
@@ -75,13 +75,37 @@ export class ResultadosComponent implements OnInit {
   }
 
   save() {
+    let partidos = this.setPartidos();
+    console.log(partidos);
+
     this.spinner.show();
-    console.log(this.partidos);
-    this._partidoService.save(this.partidos) 
-      .subscribe((res:any) => {
+    this._partidoService.save(partidos)
+      .subscribe((res: any) => {
         console.log(res);
         this.spinner.hide();
       })
+  }
+
+  setPartidos() {
+    let partidos = this.partidos.map(
+      partido => {
+        return {
+          mt_id: partido.mt_id ? partido.mt_id : null,
+          mt_goal1: partido.mt_goal1,
+          mt_goal2: partido.mt_goal2,
+          mt_idteam1: partido.mt_idteam1,
+          mt_idteam2: partido.mt_idteam2,
+          mt_idchampionship: partido.mt_idchampionship,
+          mt_played: partido.mt_played,
+          mt_date: partido.mt_date,
+          mt_idround: partido.mt_idround,
+          played:partido.played,
+        }
+      }
+    )
+
+    return partidos;
+
   }
 
 }

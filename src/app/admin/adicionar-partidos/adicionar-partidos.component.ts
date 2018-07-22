@@ -20,8 +20,11 @@ export class AdicionarPartidosComponent implements OnInit {
   rodadas = [];
   campeonato: any;
 
+  rodada;
+  cambio;
+
   constructor(private http: HttpClient, private backend: BackendService,
-    private spinnerService: Ng4LoadingSpinnerService,
+    private spinner: Ng4LoadingSpinnerService,
     private _campeonatoService: CampeonatoService,
     private _partidoService: PartidosService) { }
 
@@ -34,12 +37,12 @@ export class AdicionarPartidosComponent implements OnInit {
    * Carga todos los campeonatos activos
    */
   load() {
-    this.spinnerService.show();
+    this.spinner.show();
 
     this._campeonatoService.load()
       .subscribe((res:any) => {
         this.campeonatos = res.body;
-        this.spinnerService.hide();
+        this.spinner.hide();
       });
   }
 
@@ -50,7 +53,7 @@ export class AdicionarPartidosComponent implements OnInit {
    * @param campeonato 
    */
   changeCampeonato(campeonato) {
-    this.spinnerService.show();
+    this.spinner.show();
     this.campeonato = campeonato;
 
     this._campeonatoService.loadByCampeonato(this.campeonato)
@@ -60,7 +63,7 @@ export class AdicionarPartidosComponent implements OnInit {
         this.add();
         this.loadRodadas(this.campeonato);
 
-        this.spinnerService.hide();
+        this.spinner.hide();
       });
   }
 
@@ -69,6 +72,7 @@ export class AdicionarPartidosComponent implements OnInit {
    * @param campeonato 
    */
   loadRodadas(campeonato) {
+    this.campeonato = campeonato;
     this._campeonatoService.loadRodadasByCampeonato(campeonato)
       .subscribe((res:any) => {
         this.rodadas = res.body;
@@ -80,7 +84,7 @@ export class AdicionarPartidosComponent implements OnInit {
    * @param partidos 
    */
   onSubmit(partidos) {
-    this.spinnerService.show();
+    this.spinner.show();
     let toSave = {
       partidos : this.partidos
     }
@@ -88,7 +92,7 @@ export class AdicionarPartidosComponent implements OnInit {
     this._partidoService.save(toSave)
       .subscribe((res:any) => {
         console.log(res);
-        this.spinnerService.hide();
+        this.spinner.hide();
       });
   }
 
@@ -118,4 +122,28 @@ export class AdicionarPartidosComponent implements OnInit {
     this.partidos.push(jogo);
   }
 
+  search() {
+    this.spinner.show();
+    console.log("campeonato", this.campeonato);
+    this._campeonatoService.loadGlobo(this.cambio, this.campeonato, this.rodada, true)
+      .subscribe((res: any) => {
+        this.partidos = res.body;
+        this.spinner.hide();
+        console.log(res);
+      })
+  }
+
+  setRodada(idRodada) {
+    this.rodada = idRodada;
+  }
+
+  save() {
+    this.spinner.show();
+    console.log(this.partidos);
+    this._partidoService.save(this.partidos) 
+      .subscribe((res:any) => {
+        console.log(res);
+        this.spinner.hide();
+      })
+  }
 }
