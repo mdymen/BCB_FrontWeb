@@ -9,6 +9,8 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Partido } from '../partido';
 import { AuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
+import { DatePipe } from '@angular/common';
+import { CampeonatoService } from '../services/campeonato.service';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +33,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private backend: BackendService,
     private spinnerService: Ng4LoadingSpinnerService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private _campeonatoService:CampeonatoService) {
 
   }
 
@@ -75,6 +78,35 @@ export class LoginComponent implements OnInit {
 
     console.log("loggedIn", this.loggedIn);
     console.log("usuario", this.user);
+
+
+    if (this.needUpdate()) {
+      this.updatePartidos();
+    }
+  }
+
+  /**
+   * verifica la fecha almacenada en el sistema del usuario
+   * y si es diferente a la de hoy, verifica si hay partidos 
+   * para actualizar.
+   */
+  needUpdate() {
+    return localStorage.getItem("fecha") === null || localStorage.getItem("fecha") !== this.getToday();
+  }
+
+  updatePartidos() {
+    this._campeonatoService.updatePartidos()
+      .subscribe((res:any) => {
+        localStorage.setItem("fecha", this.getToday());
+        console.log("fecha local", localStorage.getItem("fecha"));
+      });
+  }
+
+  getToday() {
+    let pipe = new DatePipe("pt-BR");
+    const now = Date.now();
+    const myFormattedDate = pipe.transform(now, 'shortDate');
+    return myFormattedDate;
   }
 
   /**

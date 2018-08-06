@@ -43,4 +43,5 @@ export class PartidoService {
     public save(partidos) {
         return this._http.post(`${this.url}/partidos/put`, {partidos:partidos});
     }
+
 }

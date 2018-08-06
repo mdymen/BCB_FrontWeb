@@ -1,6 +1,6 @@
 <ng4-loading-spinner> </ng4-loading-spinner>
 
-<form #form="ngForm" (submit)="crearRodada(rd_idchampionship, rd_round)">
+<form #form="ngForm" (submit)="crearRodada(rd_idchampionship, rd_round, rd_suma)">
 
     <div class="row">
 
@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <div class="controls">
                             <select [(ngModel)]="rd_idchampionship" name="rd_idchampionship" class="form-control">
-                                <option [value]="campeonato.ch_id"  *ngFor="let campeonato of campeonatos">{{campeonato.ch_nome}}</option>
+                                <option [value]="campeonato.ch_id" *ngFor="let campeonato of campeonatos">{{campeonato.ch_nome}}</option>
                             </select>
                         </div>
                     </div>
@@ -31,6 +31,14 @@
                                     </span>
                                     <input type="text" [(ngModel)]="rd_round" name="rd_round" class="form-control" placeholder="Nome da rodada">
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="controls">
+                                <label class="checkbox">
+                                    <input type="checkbox" [(ngModel)]="rd_suma" name="rd_suma" value="rd_suma"> Suma puntos?
+                                </label>
                             </div>
                         </div>
 
@@ -51,3 +59,4 @@
 
 <pre>{{rd_idchampionship | json}}</pre>
 <pre>{{rd_round | json}}</pre>
+<pre>{{rd_suma | json}}</pre>

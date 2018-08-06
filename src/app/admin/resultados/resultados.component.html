@@ -34,23 +34,19 @@
           <form class="form-horizontal">
             <div class="form-group">
               <div class="controls">
-                <input style="text-align:center" class="form-control numeros_input" [(ngModel)]="cambio" name="cambio" type="text">
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div class="col-lg-2">
-          <form class="form-horizontal">
-            <div class="form-group">
-              <div class="controls">
                 <a href="javascript:void(0)" class="btn btn-success" style="text-align: center;" (click)="search()">Buscar</a>
               </div>
             </div>
           </form>
         </div>
 
-
+        <div>
+          <div *ngIf="rodadas">
+            <span *ngFor="let rodada of rodadas">
+              {{rodada.rd_round}},
+            </span>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -82,8 +78,10 @@
                 <tbody>
                   <tr>
                     <td width="55%" style="text-align:left">
-                      <span id="376">
-                        <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm1_logo}}"> {{partido.t1nome}}
+                      <span *ngFor="let equipo of partido.equipo1">
+                        <input type="checkbox" [(ngModel)]="equipo.selected" name="equipo.mt_idteam1" (click)="ver()">
+                        <img width="25px;" height="21px;" src="{{url_img}}/{{equipo.tm1_logo}}">{{equipo.t1nome}}
+                        <br>
                       </span>
                     </td>
                     <td width="35%">
@@ -100,9 +98,11 @@
               <table>
                 <tbody>
                   <tr>
-                    <td width="55%" style="text-align:left">
-                      <span id="372">
-                        <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm2_logo}}"> {{partido.t2nome}}
+                    <td width="55%" style="text-align:left;">
+                      <span *ngFor="let equipo of partido.equipo2">
+                        <input type="checkbox" [(ngModel)]="equipo.selected" name="equipo.mt_idteam2" (click)="ver()">
+                        <img width="25px;" height="21px;" src="{{url_img}}/{{equipo.tm2_logo}}">{{equipo.t2nome}}
+                        <br>
                       </span>
                     </td>
                     <td width="35%">
@@ -117,20 +117,20 @@
                 </tbody>
               </table>
               <table>
-                  <tbody>
-                    <tr>
-                      <td width="55%" style="text-align:left">
-                          <span *ngIf="partido.played == 1" class="label label-important">Finalizado</span>
-                      </td>
-                      <td width="35%" *ngIf="partido.mt_id">
-                        ID: {{partido.mt_id}}
-                      </td>
-                      <td width="35%" *ngIf="!partido.mt_id">
-                        <span *ngIf="partido.played == 1" class="label label-success">Novo</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>              
+                <tbody>
+                  <tr>
+                    <td width="55%" style="text-align:left">
+                      <span *ngIf="partido.played == 1" class="label label-important">Finalizado</span>
+                    </td>
+                    <td width="35%" *ngIf="partido.mt_id">
+                      ID: {{partido.mt_id}}
+                    </td>
+                    <td width="35%" *ngIf="!partido.mt_id">
+                      <span *ngIf="partido.played == 1" class="label label-success">Novo</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
               <div id="466" style="margin: 15px 0 0 0; ">
                 <div id="dvInfo_1114" style="display:none"></div>
@@ -145,3 +145,65 @@
     </div>
   </div>
 </div>
+
+
+<form #form="ngForm" (submit)="crearRodada(rd_idchampionship, rd_round, rd_suma)">
+
+  <div class="row">
+
+    <div class="col-lg-12">
+      <div class="box">
+        <div class="box-content">
+
+          <!-- CARGAR CAMPEONATOS -->
+
+
+          <div class="form-group">
+            <div class="controls">
+              <select [(ngModel)]="rd_idchampionship" name="rd_idchampionship" class="form-control">
+                <option [value]="campeonato.ch_id" *ngFor="let campeonato of campeonatos">{{campeonato.ch_nome}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- FIN DE CARGAR CAMPEONATOS -->
+
+
+          <div class="form-group">
+            <div class="form-group">
+              <div class="controls">
+                <div class="input-group col-sm-4">
+                  <span class="input-group-addon">
+                    <i class="fa fa-globe"></i>
+                  </span>
+                  <input type="text" [(ngModel)]="rd_round" name="rd_round" class="form-control" placeholder="Nome da rodada">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="controls">
+                <label class="checkbox">
+                  <input type="checkbox" [(ngModel)]="rd_suma" name="rd_suma" value="rd_suma"> Suma puntos?
+                </label>
+              </div>
+            </div>
+
+
+            <div class="form-actions">
+              <button id="salvar_rodada" class="btn btn-primary">Salvar</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--/col-->
+
+    </div>
+
+  </div>
+</form>
+
+<pre>{{rd_idchampionship | json}}</pre>
+<pre>{{rd_round | json}}</pre>
+<pre>{{rd_suma | json}}</pre>

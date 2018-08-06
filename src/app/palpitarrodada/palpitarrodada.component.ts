@@ -8,6 +8,7 @@ import { FechaService } from '../fecha.service';
 import { BackendService } from '../backend.service';
 import { Location } from '@angular/common';
 import { CampeonatoService } from '../services/campeonato.service';
+import { Global } from '../config/global.service';
 
 @Component({
   selector: 'app-palpitarrodada',
@@ -43,7 +44,7 @@ export class PalpitarrodadaComponent implements OnInit {
 
   palpitando:boolean = false;
 
-  assets = "/assets/equipos/";
+  assets;
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
@@ -52,7 +53,7 @@ export class PalpitarrodadaComponent implements OnInit {
     private backEndService: BackendService,
     private _campeonatoService: CampeonatoService,
     private location: Location) {
-
+      this.assets = Global.ASSETS_EQUIPOS;
   }
 
   ngOnInit() {

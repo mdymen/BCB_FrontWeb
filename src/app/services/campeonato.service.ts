@@ -6,26 +6,26 @@ import { Global } from "../config/global.service";
 @Injectable()
 export class CampeonatoService {
 
-    url;// = "http://www.dymenstein.com/public"
+  url;// = "http://www.dymenstein.com/public"
 
-    constructor(private _http:HttpClient, private backend:BackendService) {
-        this.url = Global.BACKEND;
-    }
+  constructor(private _http: HttpClient, private backend: BackendService) {
+    this.url = Global.BACKEND;
+  }
 
-    /**
-     * Retorna todos los campeonatos con lo minimo necesario de datos
-     * "ch_id","ch_acumulado","ch_nome","ch_logocampeonato","ch_id"
-     */
-    getBasico() {
-        return this._http.get(`${this.url}/campeonatos/getbasic`);
-    }
-
-   /**
-   * retorna uma promesa con los campeonatos abiertos
+  /**
+   * Retorna todos los campeonatos con lo minimo necesario de datos
+   * "ch_id","ch_acumulado","ch_nome","ch_logocampeonato","ch_id"
    */
+  getBasico() {
+    return this._http.get(`${this.url}/campeonatos/getbasic`);
+  }
+
+  /**
+  * retorna uma promesa con los campeonatos abiertos
+  */
   public getCampeonatos() {
-    return this._http.post(this.backend.getBackEnd() + "/cellgetcampeonatosabertos/?",{})
-    .map(campeonato => { return campeonato; } );        
+    return this._http.post(this.backend.getBackEnd() + "/cellgetcampeonatosabertos/?", {})
+      .map(campeonato => { return campeonato; });
   }
 
   /**
@@ -69,9 +69,14 @@ export class CampeonatoService {
     return this._http.get(this.url + `/campeonatos/getpartidos/idUsuario/${idUsuario}/idCampeonato/${idCampeonato}/idRodada/${idRodada}`);
   }
 
-  public loadGlobo(cambio, idCampeonato, idRodada, novo = null) {
-    return this._http.post(`${this.url}/campeonatos/globo`, {rodada:cambio, idCampeonato:idCampeonato, idRodada:idRodada, novo:novo});
+  public loadGlobo(idRodada, idCampeonato) {
+    return this._http.post(`${this.url}/campeonatos/globo`, { idRodada: idRodada, idCampeonato: idCampeonato });
   }
 
-
+  /**
+   * Verifica si hay partidos que precisan ser actualizados
+   */
+  public updatePartidos() {
+    return this._http.get(`${this.url}/campeonatos/update`);
+  }
 }

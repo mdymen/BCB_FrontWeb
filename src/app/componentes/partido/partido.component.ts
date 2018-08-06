@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 
 @Component ({
     selector: 'partido',
@@ -7,4 +7,9 @@ import { Component } from "@angular/core";
 })
 export class PartidoComponent {
 
+    @Input("equipo1") equipo1;
+
+    constructor() {
+        console.log(this.equipo1);
+    }
 }

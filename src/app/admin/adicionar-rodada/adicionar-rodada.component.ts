@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BackendService } from '../../backend.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CampeonatoService } from '../../services/campeonato.service';
+import { RodadaService } from '../../services/rodada.service';
 
 @Component({
   selector: 'app-adicionar-rodada',
@@ -14,34 +14,39 @@ export class AdicionarRodadaComponent implements OnInit {
 
   campeonatos = [];
   rodada: FormGroup;
-  
 
-  constructor(private http: HttpClient, 
-    private backendService:BackendService,
-    private campeonatoService:CampeonatoService,
+
+  constructor(private http: HttpClient,
+    private _rodadaService: RodadaService,
+    private campeonatoService: CampeonatoService,
     private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
     this.rodada = new FormGroup({
       rd_idchampionship: new FormControl(),
-      rd_round: new FormControl()
+      rd_round: new FormControl(),
+      rd_suma: new FormControl(),
     });
 
-      //carga todos los campeonatos disponibles
-      this.spinnerService.show();
-      this.campeonatoService.getCampeonatos().subscribe(result => {
-        this.campeonatos = result as any[];
-        this.spinnerService.hide();
-      });  
-  }
-
-  crearRodada(rd_idchampionship, rd_round) {
+    //carga todos los campeonatos disponibles
     this.spinnerService.show();
-    this.http.post(this.backendService.getBackEndAdmin() + "/rodada/salvarrodada", 
-    {champ: rd_idchampionship, rodada:rd_round}).subscribe(result => {
-      console.log(result);
+    this.campeonatoService.getCampeonatos().subscribe(result => {
+      this.campeonatos = result as any[];
       this.spinnerService.hide();
     });
+  }
+
+  crearRodada(rd_idchampionship, rd_round, rd_suma) {
+    this.spinnerService.show();
+    this._rodadaService.post(rd_idchampionship, rd_round, rd_suma)
+      .subscribe(result => {
+        console.log(result);
+        this.spinnerService.hide();
+      }, erro => {
+        alert("error");
+        this.spinnerService.hide();
+        console.log(erro);
+      });
   }
 
 }

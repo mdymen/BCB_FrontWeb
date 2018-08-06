@@ -47,6 +47,12 @@ import { Global } from './config/global.service';
 import { EquipoCoracaoComponent } from './equipo-coracao/equipo-coracao.component';
 import { ResultadosComponent } from './admin/resultados/resultados.component';
 import { PartidoService } from './services/partido.service';
+import { LOCALE_ID } from '@angular/core';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { RodadaService } from './services/rodada.service';
+
+registerLocaleData(localePt, 'pt-BR');
 
 const routes: Routes = [
   { path: "caixa", component: CaixaComponent, canActivate: [AuthGuard] },
@@ -141,9 +147,11 @@ export function provideConfig() {
     Ng4LoadingSpinnerModule.forRoot(),
     SocialLoginModule
   ],
-  providers: [{
+  providers: [
+  { provide: LOCALE_ID, useValue: 'pt-BR' } ,   
+  {
     provide: AuthServiceConfig,
-    useFactory: provideConfig
+    useFactory: provideConfig,
   }, AuthGuard, 
   BackendService, 
   AdminGuard, 
@@ -154,6 +162,7 @@ export function provideConfig() {
   EquiposService,
   UsuarioService,
   PartidoService,
+  RodadaService,
   Global,
   PaisService],
   bootstrap: [AppComponent]
