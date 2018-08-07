@@ -125,7 +125,7 @@ export class AdicionarPartidosComponent implements OnInit {
   search() {
     this.spinner.show();
     console.log("campeonato", this.campeonato);
-    this._campeonatoService.loadGlobo(this.cambio, this.campeonato, this.rodada, true)
+    this._campeonatoService.loadGlobo( this.rodada, this.campeonato)
       .subscribe((res: any) => {
         this.partidos = res.body;
         this.spinner.hide();

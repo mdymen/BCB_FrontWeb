@@ -39,6 +39,7 @@ export class ResultadosComponent implements OnInit {
       rd_idchampionship: new FormControl(),
       rd_round: new FormControl(),
       rd_suma: new FormControl(),
+      rd_cambio: new FormControl(),
     });
 
     this.loadCampeonatos();
@@ -49,6 +50,7 @@ export class ResultadosComponent implements OnInit {
     this._campeonatoService.loadGlobo(this.rodada, this.campeonato)
       .subscribe((res: any) => {
         this.partidos = res.body;
+        console.log(res);
         this.partidos.map(
           partido => {
             partido.equipo1[0].selected = true;
@@ -142,9 +144,9 @@ export class ResultadosComponent implements OnInit {
   }
 
 
-  crearRodada(rd_idchampionship, rd_round, rd_suma) {
+  crearRodada(rd_idchampionship, rd_round, rd_suma, rd_cambio) {
     this.spinner.show();
-    this._rodadaService.post(rd_idchampionship, rd_round, rd_suma)
+    this._rodadaService.post(rd_idchampionship, rd_round, rd_suma, rd_cambio)
       .subscribe(result => {
         console.log(result);
         this.spinner.hide();

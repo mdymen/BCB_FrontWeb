@@ -19,8 +19,8 @@ export class RodadaService {
      * @param rodada
      * @param suma
      */
-    public post(champ, rodada, suma) {
-        return this._http.post(`${this.url}/rodada/post`, {champ:champ, rodada:rodada, suma:suma});
+    public post(champ, rodada, suma, cambio) {
+        return this._http.post(`${this.url}/rodada/post`, {champ:champ, rodada:rodada, suma:suma, cambio:cambio});
     }
 
 }

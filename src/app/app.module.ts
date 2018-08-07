@@ -13,7 +13,6 @@ import { MainComponent } from './main/main.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { AdicionarEquipoComponent } from './admin/adicionar-equipo/adicionar-equipo.component';
 import { AdicionarCampeonatoComponent } from './admin/adicionar-campeonato/adicionar-campeonato.component';
-import { AdicionarRodadaComponent } from './admin/adicionar-rodada/adicionar-rodada.component';
 import { PartidosComponent } from './admin/partidos/partidos.component';
 import { AdicionarPartidosComponent } from './admin/adicionar-partidos/adicionar-partidos.component';
 import { MeuPerfilComponent } from './meu-perfil/meu-perfil.component';
@@ -57,7 +56,6 @@ registerLocaleData(localePt, 'pt-BR');
 const routes: Routes = [
   { path: "caixa", component: CaixaComponent, canActivate: [AuthGuard] },
   { path: "setrodada", component: SetrodadaComponent, canActivate: [AdminGuard] },
-  { path: "adicionarrodada", component: AdicionarRodadaComponent, canActivate: [AdminGuard] },
   { path: "adicionarequipos", component: AdicionarEquipoComponent, canActivate: [AdminGuard] },
   { path: "adicionarcampeonato", component: AdicionarCampeonatoComponent, canActivate: [AdminGuard] },
   { path: "partidos", component: PartidosComponent, canActivate: [AdminGuard] },
@@ -115,7 +113,6 @@ export function provideConfig() {
     RegistrarseComponent,
     AdicionarEquipoComponent,
     AdicionarCampeonatoComponent,
-    AdicionarRodadaComponent,
     PartidosComponent,
     AdicionarPartidosComponent,
     CargarcampeonatoComponent,
