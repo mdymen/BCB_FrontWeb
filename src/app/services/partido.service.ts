@@ -44,4 +44,8 @@ export class PartidoService {
         return this._http.post(`${this.url}/partidos/put`, {partidos:partidos});
     }
 
+    public games() {
+        return this._http.get(`${this.url}/index/games`);
+    }
+
 }
