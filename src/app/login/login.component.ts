@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
 
+  campeonatos = [];
+
   constructor(private http: HttpClient,
     private router: Router,
     private backend: BackendService,
@@ -83,6 +85,8 @@ export class LoginComponent implements OnInit {
     if (this.needUpdate()) {
       this.updatePartidos();
     }
+
+    this.getCampeonatos();
   }
 
   /**
@@ -230,5 +234,13 @@ export class LoginComponent implements OnInit {
 
   signOut(): void {
     this.authService.signOut();
+  }
+
+  getCampeonatos() {
+    this._campeonatoService.getBasico()
+      .subscribe((res:any) => {
+        this.campeonatos = res.body;
+        console.log(this.campeonatos);
+      })
   }
 }

@@ -48,4 +48,8 @@ export class PartidoService {
         return this._http.get(`${this.url}/index/games`);
     }
 
+    public ultimosJugados() {
+        return this._http.get(`${this.url}/partidos/ultimosjugados`)
+    }
+
 }

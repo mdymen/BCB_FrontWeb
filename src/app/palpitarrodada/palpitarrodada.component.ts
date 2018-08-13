@@ -88,16 +88,7 @@ export class PalpitarrodadaComponent implements OnInit {
         this.spinnerService.hide();
       });
 
-    //carga todos los campeonatos disponibles
- /*   this.http.post(this.url + "/public/mobile/cellgetcampeonatosabertos/?", {})
-      .subscribe(result => {
-        let aux = JSON.stringify(result);
-        let campeonatos = JSON.parse(aux);
-        for (let campeonato of campeonatos) {
-          this.campeonatos.push(campeonato);
-        }
-        this.spinnerService.hide();
-      });*/
+
   }
 
   /**
@@ -107,6 +98,7 @@ export class PalpitarrodadaComponent implements OnInit {
 
     this._campeonatoService.loadRodadaPalpitada(localStorage.getItem("id"), this.campeonatoActual, this.rodadaActual)
       .subscribe((res:any) => {
+        console.log("novo", res);
         this.campeonatoActualObjeto = res.body.championship;
         this.cargoCampeonato = true;
         this.rodadaActual = res.body.n_rodada;
@@ -122,7 +114,6 @@ export class PalpitarrodadaComponent implements OnInit {
           }
         }
 
-        console.log("novo", res);
       });
   }
 

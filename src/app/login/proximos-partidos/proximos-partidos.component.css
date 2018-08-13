@@ -1,0 +1,42 @@
+.box-header1 {
+    background:none;
+}
+
+@media only screen and (max-width: 800px) {
+    .sin-padding {
+        padding: 15px 30px 10px 30px !important;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .sin-padding {
+        padding: 0px 0px 0px 0px !important;
+    }
+}
+
+@media only screen and (max-width: 336px) {
+    .poco-padding {
+        padding: 15px 30px 10px 30px !important;
+    }
+}
+
+@media only screen and (max-width: 298px) {
+    .casi-nada-padding {
+        padding: 15px 35px 10px 35px !important;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .siglas {
+        display:block !important;
+    }
+    .nombres {
+        display:none;
+    }
+}
+
+@media (min-width: 1200px) {
+    .contenedor {
+        max-width: 1140;
+    }
+}

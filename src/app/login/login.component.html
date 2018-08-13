@@ -38,8 +38,7 @@
 
             <div style="text-align:center; padding-top: 10px">
               <a href="javascript:void(0)">
-                <img src="http://www.domadigital.com/facebook/login/login-botao.png" height="50px" (click)="signInWithFB()"
-                />
+                <img src="http://www.domadigital.com/facebook/login/login-botao.png" height="50px" (click)="signInWithFB()" />
               </a>
             </div>
 
@@ -152,44 +151,64 @@
 
       <!-- PARTIDOS PARA PALPITAR -->
 
-      <app-proximos-partidos></app-proximos-partidos>
+      <div class="row">
+        <app-proximos-partidos></app-proximos-partidos>
+        <div class="clearfix" style="background:white"></div>
+      </div>
+
+      <div class="row">
+        <div *ngFor="let campeonato of campeonatos" class="col-lg-3 col-sm-6">
+          <div>
+            <div style="height:250px">
+              <a href="/palpitarrodada/{{campeonato.ch_id}}">
+                <img height="250px" width="200px" src="{{campeonato.ch_logocampeonato}}" style="padding: 10px 10px 10px 10px">
+              </a>
+            </div>
+            <div class="title">
+              <a href="/palpitarrodada/{{campeonato.ch_id}}">
+                {{campeonato.ch_nome}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- TERCERO DIVIDER -->
-
-      <div class="box-content" style="background-color: #8080801c">
-        <div class="col-lg-4">
-          <h1 style="text-align:center; font-size:150px">
-            <i class="fa fa-usd"></i>
-            <h1 style="text-align:center">
-              <small style="color:black;text-shadow: 2px 2px white">O Brasileirão paga R$ 150 ao ganhador da rodada e R$ 1.000 ao ganhador do campeonato.</small>
+      <div class="row">
+        <div class="box-content" style="background-color: #8080801c">
+          <div class="col-lg-4">
+            <h1 style="text-align:center; font-size:150px">
+              <i class="fa fa-usd"></i>
+              <h1 style="text-align:center">
+                <small style="color:black;text-shadow: 2px 2px white">Ganhe R$ a cada rodada.</small>
+              </h1>
             </h1>
-          </h1>
-        </div>
-        <div class="col-lg-4">
-          <h1 style="text-align:center; font-size:150px">
-            <i class="fa fa-trophy"></i>
-            <h1 style="text-align:center">
-              <small style="color:black;text-shadow: 2px 2px white">Concorre para ganhar premios variados dependendo do campeonato.</small>
+          </div>
+          <div class="col-lg-4">
+            <h1 style="text-align:center; font-size:150px">
+              <i class="fa fa-trophy"></i>
+              <h1 style="text-align:center">
+                <small style="color:black;text-shadow: 2px 2px white">Concorre para ganhar premios variados.</small>
+              </h1>
             </h1>
-          </h1>
-        </div>
-        <div class="col-lg-4">
-          <h1 style="text-align:center; font-size:150px">
-            <i class="fa fa-globe"></i>
-            <h1 style="text-align:center">
-              <small style="color:black;text-shadow: 2px 2px white">Premiação por Rodada e por Campeonato. 5 pontos por palpite acertado</small>
+          </div>
+          <div class="col-lg-4">
+            <h1 style="text-align:center; font-size:150px">
+              <i class="fa fa-globe"></i>
+              <h1 style="text-align:center">
+                <small style="color:black;text-shadow: 2px 2px white">5 pontos por palpite acertado.</small>
+              </h1>
             </h1>
-          </h1>
+          </div>
+
+
+
+          <div class="clearfix"></div>
         </div>
-
-
-
-        <div class="clearfix"></div>
       </div>
 
       <!-- TERCEIRO DIVIDER -->
 
-      <div id="brasileirao1000reais" class="row" style="padding: 30px 30px 30px 30px">
+      <!--   <div id="brasileirao1000reais" class="row" style="padding: 30px 30px 30px 30px">
 
         <span style="text-align: center">
           <h1 style="padding-bottom:15px">Brasileirão 2018 (Premiação R$ 1.000)</h1>
@@ -224,25 +243,25 @@
             PagSeguro. Nenhuma informação é armazenada no site Bolão Craque de Bola.
           </p>
         </div>
-      </div>
+      </div>-->
 
-      <div class="row" style="padding: 30px 30px 30px 30px">
+      <!--  <div class="row" style="padding: 30px 30px 30px 30px">
         <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12" style="text-align:center">
           <a href="/palpitarrodada/25">
             <img src="http://www.dymenstein.com/public/assets/img/ganhe100.jpg" style="width:30%">
           </a>
         </div>
-      </div>
-      <div id="noticias" class="row" style="padding-top:10px">
+      </div> -->
+      <!--  <div id="noticias" class="row" style="padding-top:10px">
         <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12" style="background-color: #ffffff;">
           <app-noticias></app-noticias>
         </div>
       </div>
+    -->
 
       <div class="row" style="padding-top:10px">
 
       </div>
-
 
       <!-- FIN TERCEIRO DIVIDER -->
 
@@ -250,9 +269,9 @@
 
       <div id="contacto" style="padding: 30px 30px 30px 30px">
 
-          <span style="text-align: center">
-              <h1 style="padding-bottom:15px">Contacto</h1>
-            </span>
+        <span style="text-align: center">
+          <h1 style="padding-bottom:15px">Contacto</h1>
+        </span>
 
         <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fbolaocraquedebolaoficial%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=327481340963843"
           width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"

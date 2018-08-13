@@ -7,6 +7,7 @@ import { Grupo } from '../grupo';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Equipo } from '../equipo';
 import { EquiposService } from '../services/equipos.service';
+import { Global } from '../config/global.service';
 
 @Component({
   selector: 'app-posiciones',
@@ -22,12 +23,17 @@ export class PosicionesComponent implements OnInit {
   equipos = [];
   isGrupos:boolean;
   tablaCargada:boolean = false;
+  assets;
 
   constructor(private http: HttpClient,
     private backend: BackendService,
     private route: ActivatedRoute,
     private spinnerService: Ng4LoadingSpinnerService,
-    private _equiposService:EquiposService) { }
+    private _equiposService:EquiposService) {
+      
+      this.assets = Global.ASSETS_EQUIPOS;
+
+    }
 
   ngOnInit() {
 
