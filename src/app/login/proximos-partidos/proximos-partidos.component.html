@@ -6,6 +6,9 @@
         <h2 style=" margin: 0px 0px 0px 30px !important"><b>Resultados</b></h2>
       </div>
     </div>
+    <div *ngIf="partidosUltimosJugados.length < 1" style="text-align:center;padding-top:50px">
+      <img src="/assets/gif/loading.gif" width="100px">
+    </div>
     <div class="box" style="border-left-width: 0px; border-top-width: 0px;border-bottom-width:0px">
       <div *ngFor='let partidos of partidosUltimosJugados' style="padding: 20px 60px 30px 60px" class="poco-padding casi-nada-padding">
         <div class="box-header" style="background:white !important; font-weight:bold">
@@ -84,6 +87,9 @@
     <div class="box" style="border-right-width: 0px !important; border-bottom-width:0px">
       <div class="box-header" style="background:white !important; font-weight:bold">
         <h2 style=" margin: 0px 0px 0px 30px !important">Próximos jogos</h2>
+      </div>
+      <div *ngIf="partidos < 1" style="text-align:center;padding-top:50px">
+        <img src="/assets/gif/loading.gif" width="100px">
       </div>
       <div class="box-content no-padding">
         <div *ngFor='let partido of partidos' style="padding: 20px 60px 30px 60px" class="poco-padding casi-nada-padding">
