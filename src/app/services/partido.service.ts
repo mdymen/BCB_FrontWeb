@@ -44,12 +44,25 @@ export class PartidoService {
         return this._http.post(`${this.url}/partidos/put`, {partidos:partidos});
     }
 
+    /**
+     * Lista de los proximos partidos
+     */
     public games() {
         return this._http.get(`${this.url}/index/games`);
     }
 
+    /**
+     * Lista de los ultimos partidos jugados
+     */
     public ultimosJugados() {
         return this._http.get(`${this.url}/partidos/ultimosjugados`)
+    }
+
+    /**
+     * Devuelve una lista de los partidos de ayer, de hoy y de maniana.
+     */
+    public getPartidosRecientes() {
+        return this._http.get(`${this.url}/partidos/getproximos`)
     }
 
 }

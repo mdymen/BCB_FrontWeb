@@ -1,24 +1,21 @@
 
 <ng4-loading-spinner> </ng4-loading-spinner>
-<h1>Adicionar saldo</h1>
-
-<h2>Para adicionar saldo a sua conta e realizar palpites, clique em algum plano abaixo para realizar o pagamento, toda transação será realizada pelo sistema do 
-    PagSeguro, o site Craque de Bola não ira solicitar nenhuma informação contendo dados de cartões, confira nossos planos:</h2>
+<div style="text-align: center">
+    <h1>Adicionar saldo</h1>
+</div>
 
 <div class="row">
     <div class="col-sm-4 col-lg-3 col-xs-12">
 
         <div class="smallchart blue box">
 
-                <div class="title" style="background-color:gray !important">Plano Básico</div>
+                <div class="title" style="background-color:white !important;color:black"><h2 style="font-size:30px;font-weight: bold;">Plano Básico</h2></div>
 
-
-
-                <div class="title" style="background-color:gray !important">Custo: R$ 10.80</div>
-                <div class="title" style="background-color:gray !important">Credito: R$ 10.00</div>                
+                <div class="title" style="background-color:white !important;color:black"><span>R$</span> <span style="font-size:40px;color:green">10</span><span>.80</span></div>
+                <div class="title" style="background-color:white !important;color:black">Credito: R$ 10.00</div>                
 
                 
-                <div class="title" style="background-color:gray !important"><a href="javascript:void(0)" (click)="testar(1)" class="btn btn-success">Selecionar</a></div>                
+                <div class="title" style="background-color:white !important"><a href="javascript:void(0)" (click)="plano(1)" class="btn btn-info">Selecionar</a></div>                
         </div>
 
     </div>
@@ -27,33 +24,12 @@
 
         <div class="smallchart blue box">
 
-                <div class="title" style="background-color:gray !important">Plano Standard</div>
+                <div class="title" style="background-color:white !important;color:black"><h2 style="font-size:30px;font-weight: bold;">Plano Standard</h2></div>
 
-
-
-                <div class="title" style="background-color:gray !important">Custo: R$ 21.20</div>
-                <div class="title" style="background-color:gray !important">Credito: R$ 20.00</div>                
-
+                <div class="title" style="background-color:white !important;color:black"><span>R$</span> <span style="font-size:40px;color:green">21</span><span>.20</span></div>
+                <div class="title" style="background-color:white !important;color:black">Credito: R$ 20.00</div>                
                 
-                <div class="title" style="background-color:gray !important"><a href="javascript:void(0)" (click)="plano(2)" class="btn btn-success">Selecionar</a></div>                
-
-        </div>
-
-    </div>
-    
-    <div class="col-sm-4 col-lg-3 col-xs-12">
-
-        <div class="smallchart blue box">
-
-<div class="title" style="background-color:gray !important">Plano Premium</div>
-
-
-
-                <div class="title" style="background-color:gray !important">Custo: R$ 52.40</div>
-                <div class="title" style="background-color:gray !important">Credito: R$ 50.00</div>        
-
-                
-                <div class="title" style="background-color:gray !important"><a href="javascript:void(0)" (click)="plano(3)" class="btn btn-success">Selecionar</a></div>                
+                <div class="title" style="background-color:white !important"><a href="javascript:void(0)" (click)="plano(2)" class="btn btn-info">Selecionar</a></div>                
 
         </div>
 
@@ -63,14 +39,28 @@
 
         <div class="smallchart blue box">
 
-<div class="title" style="background-color:gray !important">Plano Pro</div>
+                <div class="title" style="background-color:white !important;color:black"><h2 style="font-size:30px;font-weight: bold;">Plano Premium</h2></div>
 
+                <div class="title" style="background-color:white !important;color:black"><span>R$</span> <span style="font-size:40px;color:green">52</span><span>.40</span></div>
+                <div class="title" style="background-color:white !important;color:black">Credito: R$ 50.00</div>        
 
-
-                <div class="title" style="background-color:gray !important">Custo: R$ 104.40</div>
-                <div class="title" style="background-color:gray !important">Credito: R$ 100.00</div>     
                 
-                <div class="title" style="background-color:gray !important"><a href="javascript:void(0)" (click)="plano(4)" class="btn btn-success">Selecionar</a></div>                
+                <div class="title" style="background-color:white !important"><a href="javascript:void(0)" (click)="plano(3)" class="btn btn-info">Selecionar</a></div>                
+
+        </div>
+
+    </div>
+    
+    <div class="col-sm-4 col-lg-3 col-xs-12">
+
+        <div class="smallchart blue box">
+
+                <div class="title" style="background-color:white !important;color:black"><h2 style="font-size:30px;font-weight: bold;">Plano Pro</h2></div>
+
+                <div class="title" style="background-color:white !important;color:black"><span>R$</span> <span style="font-size:40px;color:green">104</span><span>.40</span></div>
+                <div class="title" style="background-color:white !important;color:black">Credito: R$ 100.00</div>     
+                
+                <div class="title" style="background-color:white !important"><a href="javascript:void(0)" (click)="plano(4)" class="btn btn-info">Selecionar</a></div>                
 
         </div>
 

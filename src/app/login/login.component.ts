@@ -11,6 +11,7 @@ import { AuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } from "angularx-social-login";
 import { DatePipe } from '@angular/common';
 import { CampeonatoService } from '../services/campeonato.service';
+import { Campeonatos } from '../config/campeonatos';
 
 @Component({
   selector: 'app-login',
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
     private spinnerService: Ng4LoadingSpinnerService,
     private authService: AuthService,
     private _campeonatoService:CampeonatoService) {
+      this.campeonatos = Campeonatos.Campeonatos;
 
   }
 
@@ -86,7 +88,7 @@ export class LoginComponent implements OnInit {
       this.updatePartidos();
     }
 
-    this.getCampeonatos();
+   // this.getCampeonatos();
   }
 
   /**

@@ -156,17 +156,20 @@
         <div class="clearfix" style="background:white"></div>
       </div>
 
-      <div *ngIf="campeonatos.length < 1" style="text-align:center;padding-top:50px">
-        <img src="/assets/gif/loading.gif" width="100px">
-      </div>
       <div class="row" style="padding-top:30px; padding-bottom:30px">
+        <div style="text-align:center">
+          <h1>Campeonatos</h1>
+        </div>
+        <div *ngIf="campeonatos.length < 1" style="text-align:center;padding-top:50px">
+          <img src="/assets/gif/loading.gif" width="100px">
+        </div>
         <div *ngFor="let campeonato of campeonatos" class="col-lg-3 col-sm-6" style="text-align:center">
           <div>
             <div style="height:250px">
-                <img height="250px" width="200px" src="{{campeonato.ch_logocampeonato}}" style="padding: 10px 10px 10px 10px">
+              <img height="250px" width="200px" src="{{campeonato.ch_logocampeonato}}" style="padding: 10px 10px 10px 10px">
             </div>
             <div class="title">
-                {{campeonato.ch_nome}}
+              {{campeonato.ch_nome}}
             </div>
           </div>
         </div>

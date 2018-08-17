@@ -9,6 +9,8 @@ import { BackendService } from '../backend.service';
 import { Location } from '@angular/common';
 import { CampeonatoService } from '../services/campeonato.service';
 import { Global } from '../config/global.service';
+import { PartidoService } from '../services/partido.service';
+import { Campeonatos } from '../config/campeonatos';
 
 @Component({
   selector: 'app-palpitarrodada',
@@ -44,7 +46,10 @@ export class PalpitarrodadaComponent implements OnInit {
 
   palpitando:boolean = false;
 
-  assets;
+  url_img;
+
+  proximosPartidos = [];
+  proximosPartidosTitulos = [];
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
@@ -52,8 +57,10 @@ export class PalpitarrodadaComponent implements OnInit {
     private fechaService: FechaService,
     private backEndService: BackendService,
     private _campeonatoService: CampeonatoService,
+    private _partidoService:PartidoService,
     private location: Location) {
-      this.assets = Global.ASSETS_EQUIPOS;
+      this.url_img = Global.URL_BOLAO + Global.ASSETS_EQUIPOS;
+
   }
 
   ngOnInit() {
@@ -82,13 +89,24 @@ export class PalpitarrodadaComponent implements OnInit {
     });
     this.spinnerService.show();
 
-    this._campeonatoService.getBasico()
+   /* this._campeonatoService.getBasico()
       .subscribe((res:any) => {
         this.campeonatos = res.body;
         this.spinnerService.hide();
       });
+*/
 
+this.campeonatos = Campeonatos.Campeonatos;
 
+      console.log("selected", this.isSelected());
+      if (this.isSelected()) {
+        this.getPartidosRecientes();
+
+        this._partidoService.ultimosJugados()
+          .subscribe((res:any) => {
+            console.log(res);
+          })
+      }
   }
 
   /**
@@ -194,5 +212,25 @@ export class PalpitarrodadaComponent implements OnInit {
   isSelected() {
     console.log(this.campeonatoActual === null);
     return this.campeonatoActual === null;
+  }
+
+  /**
+   * Retorna una lista de partidos de hoy, maniana y ayer.
+   */
+  getPartidosRecientes() {
+    this._partidoService.getPartidosRecientes()
+      .subscribe((res:any)=> {
+        console.log(res);
+        this.proximosPartidos.push(res.body.ayer);
+        this.proximosPartidos.push(res.body.hoy);
+        this.proximosPartidos.push(res.body.maniana);
+
+        this.proximosPartidosTitulos[0] = "Ontem";
+        this.proximosPartidosTitulos[1] = "Hoje";
+        this.proximosPartidosTitulos[2] = "Amanha";
+
+        console.log(this.proximosPartidos);
+
+      })
   }
 }
