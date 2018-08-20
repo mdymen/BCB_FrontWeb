@@ -12,6 +12,7 @@ import { FacebookLoginProvider, GoogleLoginProvider, LinkedInLoginProvider } fro
 import { DatePipe } from '@angular/common';
 import { CampeonatoService } from '../services/campeonato.service';
 import { Campeonatos } from '../config/campeonatos';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,11 @@ export class LoginComponent implements OnInit {
   erro = false;
   private user: SocialUser;
   private loggedIn: boolean;
+  
+  contacto:FormGroup;
+  contactoIncorrecto=false;
+  enviando = false;
+  envioCorrecto = false;
 
   campeonatos = [];
 
@@ -37,7 +43,8 @@ export class LoginComponent implements OnInit {
     private backend: BackendService,
     private spinnerService: Ng4LoadingSpinnerService,
     private authService: AuthService,
-    private _campeonatoService:CampeonatoService) {
+    private _campeonatoService:CampeonatoService,
+    private _usuarioService:UsuarioService) {
       this.campeonatos = Campeonatos.Campeonatos;
 
   }
@@ -58,10 +65,18 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', Validators.required),
       grito: new FormControl()
     });
+
+    this.contacto = new FormGroup({
+      nome : new FormControl('', Validators.required),
+      assunto : new FormControl('', Validators.required),
+      email : new FormControl('', Validators.required),
+      corpo : new FormControl('', Validators.required)
+    });
+    
     this.mostrarRegistrarse = false;
     this.mostrarLogin = true;
 
-    this.authService.authState.subscribe((user) => {
+  this.authService.authState.subscribe((user) => {
       this.user = user;
       console.log("usuario1", this.user);
       this.loggedIn = (user != null);
@@ -244,5 +259,28 @@ export class LoginComponent implements OnInit {
         this.campeonatos = res.body;
         console.log(this.campeonatos);
       })
+  }
+
+  submitContacto() {    
+    if (this.contacto.invalid) {
+      this.contactoIncorrecto = true;
+    } else {
+      this.contactoIncorrecto = false;
+      this.enviando = true;
+      this.envioCorrecto = false;
+      this._usuarioService.contacto(
+        this.contacto.controls['nome'].value, 
+        this.contacto.controls['email'].value, 
+        this.contacto.controls['assunto'].value, 
+        this.contacto.controls['corpo'].value)
+        .subscribe((res:any) => {
+          console.log(res);
+          this.enviando = false;
+          this.envioCorrecto = true;
+
+          
+
+        })
+    }
   }
 }

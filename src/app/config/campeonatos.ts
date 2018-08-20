@@ -21,7 +21,7 @@ export class Campeonatos {
         } ,
  {
             ch_id: 29,
-            ch_nome: "Brasileirão 2018",
+            ch_nome: "Copa Sul-Americana",
             ch_logocampeonato: "https://upload.wikimedia.org/wikipedia/pt/thumb/e/e4/Conmebol_Sudamericana_logo.png/235px-Conmebol_Sudamericana_logo.png"
         } ,
 

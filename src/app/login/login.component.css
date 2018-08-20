@@ -20,3 +20,10 @@
     padding: 15px;
     text-transform: uppercase;
 }
+
+@media only screen and (max-width: 369px) {
+    .sin-padding {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}

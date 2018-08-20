@@ -4,3 +4,9 @@
     text-overflow:ellipsis;
     white-space:nowrap
 }
+
+@media only screen and (max-width: 800px) {
+    .sin-padding {
+        padding: 15px 30px 10px 30px !important;
+    }
+}

@@ -12,23 +12,44 @@
     .sin-padding {
         padding: 0px 0px 0px 0px !important;
     }
+    td {
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .sin-padding {
+        padding: 0px 0px 0px 0px !important;
+    }
+    td {
+        width: auto;
+    }
 }
 
 @media only screen and (max-width: 336px) {
     .poco-padding {
-        padding: 15px 30px 10px 30px !important;
+        padding: 15px 15px 10px 15px !important;
+    }
+    td {
+        width: auto;
     }
 }
 
 @media only screen and (max-width: 298px) {
     .casi-nada-padding {
-        padding: 15px 35px 10px 35px !important;
+        padding: 15px 5px 10px 5px !important;
+    }
+    td {
+        width: auto;
     }
 }
 
 @media screen and (max-width: 670px) {
     .siglas {
-        display:block !important;
+        display:table !important;
+    }
+    td {
+        width: auto;
     }
     .nombres {
         display:none;
@@ -39,4 +60,24 @@
     .contenedor {
         max-width: 1140;
     }
+    .sin-width-central {
+        width: 20%;
+    }
+    .alineamento {
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    .grande {
+        padding: 30px 20px 30px 20px;
+    }
+}
+
+tbody {
+    width: 100%;
+}
+
+tr {
+    width: 100%;
 }

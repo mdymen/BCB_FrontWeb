@@ -16,27 +16,25 @@
         </div>
         <div class="box-content no-padding">
 
-          <div *ngFor='let partido of partidos' style="padding: 30px 20px 30px 20px" class="poco-padding casi-nada-padding">
+          <div *ngFor='let partido of partidos' class="grande poco-padding casi-nada-padding sin-padding">
             <table width="100%">
-              <tbody>
                 <tr>
                   <td style="text-align:center">
                     {{partido.mt_date | date: 'dd/MM HH:mm'}}hs
                   </td>
                 </tr>
-              </tbody>
             </table>
             <table width="100%" class="nombres">
               <tr>
-                <td width="45%" style="text-align:left;font-size:20px" title="{{partido.t1nome}}">
+                <td class="alineamento" width="45%" style="text-align:left;font-size:20px" title="{{partido.t1nome}}">
                   <span>
                     <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm1_logo}}"> {{partido.t1nome}}
                   </span>
                 </td>
-                <td width="10%" style="text-align:center">
+                <td class="sin-width-central" width="10%" style="text-align:center">
                   <span style="font-size:24px">{{partido.mt_goal1}}</span> X <span style="font-size:24px">{{partido.mt_goal2}}</span>
                 </td>
-                <td width="45%" style="text-align:right;font-size:20px" title="{{partido.t2nome}}">
+                <td class="alineamento" width="45%" style="text-align:right;font-size:20px" title="{{partido.t2nome}}">
                   <span>
                     {{partido.t2nome}}
                     <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm2_logo}}">
@@ -94,7 +92,6 @@
       <div class="box-content no-padding">
         <div *ngFor='let partido of partidos' style="padding: 20px 60px 30px 60px" class="poco-padding casi-nada-padding">
           <table width="100%">
-            <tbody>
               <tr>
                 <td style="text-align:center">
                   {{partido.mt_date | date: 'dd/MM HH:mm'}} hs
@@ -105,7 +102,6 @@
                   {{partido.ch_nome}}
                 </td>
               </tr>
-            </tbody>
           </table>
           <table width="100%">
             <tr>

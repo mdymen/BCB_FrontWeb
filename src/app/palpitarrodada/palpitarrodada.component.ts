@@ -68,6 +68,8 @@ export class PalpitarrodadaComponent implements OnInit {
     //carga los dados del campeonato en funcion de los parametros de la url
     this.route.params.subscribe(params => {
 
+      console.log("params", params);
+
       //si no hay valor en la variable rodada, significa que el parametro
       //de la url rodada viene vacio, entonces tiene que cargar la 
       //rodada actual activa del campeonato
@@ -79,15 +81,16 @@ export class PalpitarrodadaComponent implements OnInit {
 
       //si no hay valor en la variable campeonato, significa que el parametro
       //de la url campeonato viene vacio
+      console.log(params['campeonato']);
       if (params['campeonato']) {
         this.campeonatoActual = params['campeonato'];
+        console.log("if", params['campeonato']);
         this.onChange();
       } else {
         this.campeonatoActual = null;
       }
 
     });
-    this.spinnerService.show();
 
    /* this._campeonatoService.getBasico()
       .subscribe((res:any) => {

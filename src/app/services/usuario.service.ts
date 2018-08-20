@@ -18,4 +18,15 @@ export class UsuarioService {
         return this._http.post(`${this.url}/usuario/posttimecoracao/`, {idUsuario : idUsuario, idEquipo : idEquipo} );
     }
 
+    /**
+     * Envia un email desde el formulario de contacto de la pagina inicial
+     * @param nome 
+     * @param email 
+     * @param assunto 
+     * @param corpo 
+     */
+    public contacto(nome, email, assunto, corpo) {
+        return this._http.post(`${this.url}/index/contacto`, {nome:nome, email:email, assunto:assunto, corpo: corpo});
+    }
+
 }

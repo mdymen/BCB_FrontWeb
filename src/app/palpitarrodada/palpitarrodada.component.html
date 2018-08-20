@@ -4,7 +4,7 @@
 
 <div class="row">
   <div *ngFor="let campeonato of campeonatos" class="col-lg-3 col-sm-6">
-    <div [ngClass]="campeonato.ch_id === campeonatoActual ? 'smallchart blue box' : 'smallchart white box' ">
+    <div [ngClass]="(campeonato.ch_id == campeonatoActual) ? 'smallchart blue box' : 'smallchart white box' ">
       <div style="height:250px" *ngIf="isSelected()">
         <a href="/palpitarrodada/{{campeonato.ch_id}}">
           <img height="250px" width="200px" src="{{campeonato.ch_logocampeonato}}" style="padding: 10px 10px 10px 10px">
@@ -17,6 +17,10 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="!cargoCampeonato && campeonatoActual" style="text-align:center;padding-top:50px">
+    <img src="/assets/gif/loading.gif" width="100px">
+  </div>
 
 <!-- FINAL DE LISTA PARA ELEGIR EL CAMPEONATO -->
 
@@ -109,7 +113,7 @@
                         <tbody>
                           <tr>
                             <td style="text-align:center">
-                              <b>{{partido.mt_date | date: 'dd/MM/yyyy HH:mm'}}</b>
+                              <b>{{partido.mt_date | date: 'dd/MM HH:mm'}}</b>
                             </td>
                           </tr>
                         </tbody>
@@ -122,7 +126,7 @@
 
                                 <a href="/equipo/{{partido.tm1_id}}" title="{{partido.t1nome}}">
                                   <p class="truncate">
-                                    <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{assets}}/{{partido.tm1_logo}}"> {{partido.t1nome}}</p>
+                                    <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm1_logo}}"> {{partido.t1nome}}</p>
                                 </a>
                               </span>
                             </td>
@@ -147,7 +151,7 @@
                               <span id="372">
                                 <a href="/equipo/{{partido.tm2_id}}" title="{{partido.t2nome}}">
                                   <p class="truncate">
-                                    <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{assets}}/{{partido.tm2_logo}}"> {{partido.t2nome}}
+                                    <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm2_logo}}"> {{partido.t2nome}}
                                   </p>
                                 </a>
                               </span>
@@ -205,10 +209,9 @@
 </div>
 
 <div *ngIf="!campeonatoActual">
-  <div class="row">
-    <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12">
-      <app-caixa></app-caixa>
-    </div>
+
+  <div style="text-align: center">
+    <h1>Jogos</h1>
   </div>
 
   <div *ngIf="proximosPartidos.length < 1" style="text-align:center;padding-top:50px">
@@ -221,7 +224,7 @@
           <h2 style=" margin: 0px 0px 0px 30px !important">{{proximosPartidosTitulos[i]}}</h2>
         </div>
         <div class="box-content no-padding">
-          <div *ngFor="let partido of dia" class="poco-padding casi-nada-padding" style="padding: 20px 60px 30px 60px">
+          <div *ngFor="let partido of dia" class="sin-padding poco-padding casi-nada-padding" style="padding: 20px 60px 30px 60px">
             <table width="100%">
               <tbody>
                 <tr>
@@ -238,15 +241,15 @@
             </table>
             <table width="100%">
               <tr>
-                <td width="45%" style="text-align:left;font-size:20px" title="{{partido.t1nome}}">
+                <td width="40%" style="text-align:left;font-size:20px" title="{{partido.t1nome}}">
                   <span>
                     <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm1_logo}}"> {{partido.tm1_sigla}}
                   </span>
                 </td>
-                <td width="10%" style="text-align:center">
-                  X
+                <td width="20%" style="text-align:center">
+                  {{partido.mt_goal1}} X {{partido.mt_goal2}}
                 </td>
-                <td width="45%" style="text-align:right;font-size:20px" title="{{partido.t2nome}}">
+                <td width="40%" style="text-align:right;font-size:20px" title="{{partido.t2nome}}">
                   <span>
                     {{partido.tm2_sigla}}
                     <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm2_logo}}">
@@ -259,5 +262,12 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12 col-xxs-12">
+      <app-caixa></app-caixa>
+    </div>
+  </div>
+
 
 </div>
