@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService, SocialUser } from "angularx-social-login";
+import { PartidoService } from './services/partido.service';
+import { Meta } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-root',
@@ -14,18 +17,47 @@ export class AppComponent {
   usuario;
   cash;
   foto;
+  privacidade = false;
+  partidos = [];
+  paraTirarFotoPropaganda = false;
+  tipoFotoParaTirar = "";
+
+
+  url;
+  type;
+  description;
+  image;
+
+  propaganda = false;
 
   constructor(private route: Router,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private routes:ActivatedRoute,
+    private _partidoService:PartidoService){
+
     var usuario = localStorage.getItem("username");
     if (usuario) {
       this.logado = true;
       this.usuario = usuario;
       this.cash = localStorage.getItem("cash");
     }
+
+    if (window.location.pathname.toString() == "/privacidade/1") {
+      this.privacidade = true;
+    }
+
+    if (window.location.href.indexOf("propaganda") > -1) {
+      this.paraTirarFotoPropaganda = true;
+      let pathname = window.location.pathname.split("/");
+      this.tipoFotoParaTirar = pathname[pathname.length - 1];
+    }
+
+
+
   }
 
   ngOnInit(): void {
+
     this.foto = "http://dymenstein.com/public/assets/img/perfil/" + localStorage.getItem("foto");
 
     this.menu.push(new Opciones("Inicio", "fa fa-home", "/palpitarrodada"));

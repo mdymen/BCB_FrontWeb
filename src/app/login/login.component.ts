@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { BackendService } from '../backend.service';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Partido } from '../partido';
@@ -38,21 +38,28 @@ export class LoginComponent implements OnInit {
 
   campeonatos = [];
 
+  privacidade = false;
+
   constructor(private http: HttpClient,
     private router: Router,
     private backend: BackendService,
     private spinnerService: Ng4LoadingSpinnerService,
     private authService: AuthService,
     private _campeonatoService:CampeonatoService,
-    private _usuarioService:UsuarioService) {
+    private _usuarioService:UsuarioService,
+    private route: ActivatedRoute) {
       this.campeonatos = Campeonatos.Campeonatos;
+  }
 
+  setPrivacidade() {
+    this.privacidade = true;
   }
 
   /**
    * Crea el formulario de login
    */
   ngOnInit() {
+
     this.login = new FormGroup({
       usuario: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)

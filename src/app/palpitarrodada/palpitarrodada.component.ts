@@ -65,6 +65,12 @@ export class PalpitarrodadaComponent implements OnInit {
 
   ngOnInit() {
 
+    this._partidoService.getByCampeonatoAndDate(24)
+      .subscribe((res:any) => {
+        console.log("partidos hoy",res);
+      })
+
+
     //carga los dados del campeonato en funcion de los parametros de la url
     this.route.params.subscribe(params => {
 

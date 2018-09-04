@@ -8,336 +8,337 @@
         <span _ngcontent-c0="" class="icon-bar"></span>
         <span _ngcontent-c0="" class="icon-bar"></span>
       </button>
-      <div class ="box-header sidebar-nav nav-collapse navbar-collapse collapse" style="border-bottom: 0px !important; background-color:black">
+      <div class="box-header sidebar-nav nav-collapse navbar-collapse collapse" style="border-bottom: 0px !important; background-color:black">
         <h2>
-            <span class="break"></span>
-            <a href="#login" style="color:white; padding-right:20px">Login</a>
-            <span class="break"></span>
-            <a href="#proximosjogos" style="color:white; padding-right:20px">Próximos Jogos</a>            
           <span class="break"></span>
-          <a href="#campeonatos" style="color:white; padding-right:20px">Campeonatos</a>            
-          <span class="break"></span>          
+          <a href="#login" style="color:white; padding-right:20px">Login</a>
+          <span class="break"></span>
+          <a href="#proximosjogos" style="color:white; padding-right:20px">Próximos Jogos</a>
+          <span class="break"></span>
+          <a href="#campeonatos" style="color:white; padding-right:20px">Campeonatos</a>
+          <span class="break"></span>
           <a href="#contacto" style="color:white; padding-right:20px">Contato</a>
+          <span class="break"></span>
+          <a href="/privacidade/1" style="color:white; padding-right:20px">Privacidade</a>
         </h2>
       </div>
 
       <!-- PRIMER DIVIDER -->
 
-      <div class="box-content" style="background: url('https://image.winudf.com/v2/image/Y29tLnNnbS5zb2NjZXJ3YWxscGFwZXJfc2NyZWVuc2hvdHNfMV8xNzgyZGQ5Mg/screen-1.jpg?h=800&fakeurl=1&type=.jpg'); height:500px">
+        <div class="box-content" style="background: url('https://image.winudf.com/v2/image/Y29tLnNnbS5zb2NjZXJ3YWxscGFwZXJfc2NyZWVuc2hvdHNfMV8xNzgyZGQ5Mg/screen-1.jpg?h=800&fakeurl=1&type=.jpg'); height:500px">
 
-        <div id="login" class="col-lg-4" style="padding-top: 20px">
+          <div id="login" class="col-lg-4" style="padding-top: 20px">
 
 
-          <form *ngIf="mostrarLogin" [formGroup]="login" class="form-horizontal" (ngSubmit)="onSubmit()">
-            <div class="titulo">
-              Login Bolão Craque de Bola
-            </div>
+            <form *ngIf="mostrarLogin" [formGroup]="login" class="form-horizontal" (ngSubmit)="onSubmit()">
+              <div class="titulo">
+                Login Bolão Craque de Bola
+              </div>
 
-            <div *ngIf="loginIncorrecto" class="alert alert-danger">
-              Erro: Usuario e/ou senha incorretos
-            </div>
-            <div *ngIf="erro" class="alert alert-danger">
-              Ops! Erro inesperado, tente novamente ou envie uma mensagem pelo Whatsapp (19) 98-264-2861
-            </div>
+              <div *ngIf="loginIncorrecto" class="alert alert-danger">
+                Erro: Usuario e/ou senha incorretos
+              </div>
+              <div *ngIf="erro" class="alert alert-danger">
+                Ops! Erro inesperado, tente novamente ou envie uma mensagem pelo Whatsapp (19) 98-264-2861
+              </div>
 
-            <div style="text-align:center; padding-top: 10px">
-              <a href="javascript:void(0)">
-                <img src="http://www.domadigital.com/facebook/login/login-botao.png" height="50px" (click)="signInWithFB()" />
-              </a>
-            </div>
+              <div style="text-align:center; padding-top: 10px">
+                <a href="javascript:void(0)">
+                  <img src="http://www.domadigital.com/facebook/login/login-botao.png" height="50px" (click)="signInWithFB()" />
+                </a>
+              </div>
 
-            <div class="form-group">
-              <div class="controls">
-                <div class="input-prepend input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-user"></i>
-                  </span>
-                  <input formControlName="usuario" placeholder="Usuario" class="form-control" size="16" type="text">
+              <div class="form-group">
+                <div class="controls">
+                  <div class="input-prepend input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </span>
+                    <input formControlName="usuario" placeholder="Usuario" class="form-control" size="16" type="text">
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <div class="controls">
-                <div class="input-prepend input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-key"></i>
-                  </span>
-                  <input type="password" formControlName="password" placeholder="Senha" class="form-control" size="16">
+              <div class="form-group">
+                <div class="controls">
+                  <div class="input-prepend input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-key"></i>
+                    </span>
+                    <input type="password" formControlName="password" placeholder="Senha" class="form-control" size="16">
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">LogIn</button>
-              <a href="javascript:void(0)" (click)="cadastrese()" class="btn">Cadastre-se</a>
-              <img src="https://cdn.icon-icons.com/icons2/373/PNG/256/Whatsapp_37229.png" width="5%" /> (19) 98264-2861
-            </div>
-          </form>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">LogIn</button>
+                <a href="javascript:void(0)" (click)="cadastrese()" class="btn">Cadastre-se</a>
+                <img src="https://cdn.icon-icons.com/icons2/373/PNG/256/Whatsapp_37229.png" width="5%" /> (19) 98264-2861
+              </div>
+            </form>
 
-          <form *ngIf="!mostrarLogin" [formGroup]="registro" class="form-horizontal" (ngSubmit)="onSubmitRegistro()">
+            <form *ngIf="!mostrarLogin" [formGroup]="registro" class="form-horizontal" (ngSubmit)="onSubmitRegistro()">
 
-            <div class="titulo">
-              Cadastre-se no Bolão Craque de Bola
-            </div>
+              <div class="titulo">
+                Cadastre-se no Bolão Craque de Bola
+              </div>
 
-            <div *ngIf="loginIncorrecto" class="alert alert-danger">
-              Erro: Usuario e/ou senha incorretos
-            </div>
+              <div *ngIf="loginIncorrecto" class="alert alert-danger">
+                Erro: Usuario e/ou senha incorretos
+              </div>
 
-            <div *ngIf="erro" class="alert alert-danger">
-              Ops! Erro inesperado, tente novamente ou envie uma mensagem pelo Whatsapp (19) 98-264-2861
-            </div>
+              <div *ngIf="erro" class="alert alert-danger">
+                Ops! Erro inesperado, tente novamente ou envie uma mensagem pelo Whatsapp (19) 98-264-2861
+              </div>
 
-            <div [ngClass]="{'form-group':true,'has-error':!usuario.value }">
-              <div class="controls">
-                <div class="input-prepend input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-user"></i>
-                  </span>
-                  <input #usuario formControlName="usuario" placeholder="Usuario" class="form-control" size="16" type="text">
+              <div [ngClass]="{'form-group':true,'has-error':!usuario.value }">
+                <div class="controls">
+                  <div class="input-prepend input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-user"></i>
+                    </span>
+                    <input #usuario formControlName="usuario" placeholder="Usuario" class="form-control" size="16" type="text">
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div [ngClass]="{'form-group':true,'has-error':!password.value }">
-              <div class="controls">
-                <div class="input-prepend input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-key"></i>
-                  </span>
-                  <input #password type="password" formControlName="password" placeholder="Senha" class="form-control" size="16">
+              <div [ngClass]="{'form-group':true,'has-error':!password.value }">
+                <div class="controls">
+                  <div class="input-prepend input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-key"></i>
+                    </span>
+                    <input #password type="password" formControlName="password" placeholder="Senha" class="form-control" size="16">
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div [ngClass]="{'form-group':true,'has-error':!email.value }">
-              <div class="controls">
-                <div class="input-prepend input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-envelope-o"></i>
-                  </span>
-                  <input #email type="email" formControlName="email" placeholder="Email" class="form-control" size="16" type="email">
+              <div [ngClass]="{'form-group':true,'has-error':!email.value }">
+                <div class="controls">
+                  <div class="input-prepend input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-envelope-o"></i>
+                    </span>
+                    <input #email type="email" formControlName="email" placeholder="Email" class="form-control" size="16" type="email">
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <div class="controls">
-                <div class="input-prepend input-group">
-                  <span class="input-group-addon">
-                    <i class="fa fa-volume-up"></i>
-                  </span>
-                  <input type="text" id="prependedInput" formControlName="grito" placeholder="Grito de Guerra" class="form-control" size="16"
-                    type="text">
+              <div class="form-group">
+                <div class="controls">
+                  <div class="input-prepend input-group">
+                    <span class="input-group-addon">
+                      <i class="fa fa-volume-up"></i>
+                    </span>
+                    <input type="text" id="prependedInput" formControlName="grito" placeholder="Grito de Guerra" class="form-control" size="16"
+                      type="text">
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Aceitar</button>
-              <a href="javascript:void(0)" (click)="backToLogin()" class="btn">LogIn</a>
-              <img src="https://cdn.icon-icons.com/icons2/373/PNG/256/Whatsapp_37229.png" width="5%" /> (19) 98264-2861
-            </div>
-          </form>
-        </div>
-
-        <div class="col-lg-2"></div>
-
-        <div class="col-lg-4">
-
-        </div>
-
-        <div class="clearfix"></div>
-      </div>
-
-      <!-- SEGUNDO DIVIDER -->
-
-      <!-- PARTIDOS PARA PALPITAR -->
-
-      <div class="row" id="proximosjogos">
-        <app-proximos-partidos></app-proximos-partidos>
-        <div class="clearfix" style="background:white"></div>
-      </div>
-
-      <div class="row" style="padding-top:30px; padding-bottom:30px" id="campeonatos">
-        <div style="text-align:center">
-          <h1>Campeonatos</h1>
-        </div>
-        <div *ngIf="campeonatos.length < 1" style="text-align:center;padding-top:50px">
-          <img src="/assets/gif/loading.gif" width="100px">
-        </div>
-        <div *ngFor="let campeonato of campeonatos" class="col-lg-3 col-sm-6" style="text-align:center">
-          <div>
-            <div style="height:250px">
-              <img height="250px" width="200px" src="{{campeonato.ch_logocampeonato}}" style="padding: 10px 10px 10px 10px">
-            </div>
-            <div class="title">
-              {{campeonato.ch_nome}}
-            </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Aceitar</button>
+                <a href="javascript:void(0)" (click)="backToLogin()" class="btn">LogIn</a>
+                <img src="https://cdn.icon-icons.com/icons2/373/PNG/256/Whatsapp_37229.png" width="5%" /> (19) 98264-2861
+              </div>
+            </form>
           </div>
-        </div>
-      </div>
 
-      <!-- TERCERO DIVIDER -->
-      <div class="row">
-        <div class="box-content" style="background-color: #8080801c">
+          <div class="col-lg-2"></div>
+
           <div class="col-lg-4">
-            <h1 style="text-align:center; font-size:150px">
-              <i class="fa fa-usd"></i>
-              <h1 style="text-align:center">
-                <small style="color:black;text-shadow: 2px 2px white">Ganhe R$ a cada rodada.</small>
-              </h1>
-            </h1>
-          </div>
-          <div class="col-lg-4">
-            <h1 style="text-align:center; font-size:150px">
-              <i class="fa fa-trophy"></i>
-              <h1 style="text-align:center">
-                <small style="color:black;text-shadow: 2px 2px white">Concorre para ganhar premios variados.</small>
-              </h1>
-            </h1>
-          </div>
-          <div class="col-lg-4">
-            <h1 style="text-align:center; font-size:150px">
-              <i class="fa fa-globe"></i>
-              <h1 style="text-align:center">
-                <small style="color:black;text-shadow: 2px 2px white">5 pontos por palpite acertado.</small>
-              </h1>
-            </h1>
+
           </div>
 
           <div class="clearfix"></div>
         </div>
-      </div>
 
-      <div class="row" style="padding-top:10px">
+        <!-- SEGUNDO DIVIDER -->
 
-      </div>
+        <!-- PARTIDOS PARA PALPITAR -->
 
-      <!-- FIN TERCEIRO DIVIDER -->
+        <div class="row" id="proximosjogos">
+          <app-proximos-partidos></app-proximos-partidos>
+          <div class="clearfix" style="background:white"></div>
+        </div>
 
-      <!-- INICIO DE CONTACTO -->
+        <div class="row" style="padding-top:30px; padding-bottom:30px" id="campeonatos">
+          <div style="text-align:center">
+            <h1>Campeonatos</h1>
+          </div>
+          <div *ngIf="campeonatos.length < 1" style="text-align:center;padding-top:50px">
+            <img src="/assets/gif/loading.gif" width="100px">
+          </div>
+          <div *ngFor="let campeonato of campeonatos" class="col-lg-3 col-sm-6" style="text-align:center">
+            <div>
+              <div style="height:250px">
+                <img height="250px" width="200px" src="{{campeonato.ch_logocampeonato}}" style="padding: 10px 10px 10px 10px">
+              </div>
+              <div class="title">
+                {{campeonato.ch_nome}}
+              </div>
+            </div>
+          </div>
+        </div>
 
-      <div id="contacto" style="padding: 30px 30px 30px 30px">
-
-        <span style="text-align: center">
-          <h1 style="padding-bottom:15px">Contato</h1>
-        </span>
-
+        <!-- TERCERO DIVIDER -->
         <div class="row">
-          <div class="col-lg-4 col-sm-6 col-xs-12 col-xss-12 sin-padding">
-            <div class="row">
-              <div class="box-content" style="text-align: center">
-
-                <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fbolaocraquedebolaoficial%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=327481340963843"
-                  width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"
-                  allow="encrypted-media"></iframe>
-              </div>
+          <div class="box-content" style="background-color: #8080801c">
+            <div class="col-lg-4">
+              <h1 style="text-align:center; font-size:150px">
+                <i class="fa fa-usd"></i>
+                <h1 style="text-align:center">
+                  <small style="color:black;text-shadow: 2px 2px white">Ganhe R$ a cada rodada.</small>
+                </h1>
+              </h1>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-sm-6 col-xs-12 col-xss-12 sin-padding">
-
-            <form [formGroup]="contacto" (ngSubmit)="submitContacto(nome, email, assunto, corpo)">
-
-              <div class="row">
-
-                <div class="col-lg-12 sin-padding">
-                  <div class="box">
-                    <div class="box-content" style="min-height: 453px">
-
-                      <div *ngIf="contactoIncorrecto" class="alert alert-danger">
-                        Todos os campos devem estar preenchidos
-                      </div>
-                      <div *ngIf="envioCorrecto" class="alert alert-success">
-                        Contato enviado com éxito
-                      </div>
-
-                      <div *ngIf="!enviando">
-
-                        <div class="form-group">
-                          <div class="form-group">
-                            <div class="controls">
-                              <div class="input-group col-sm-12">
-                                <span class="input-group-addon">
-                                  <i class="fa fa-user"></i>
-                                </span>
-                                <input type="text" formControlName="nome" name="nome" class="form-control" placeholder="Nome">
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <div class="controls">
-                              <div class="input-group col-sm-12">
-                                <span class="input-group-addon">
-                                  <i class="fa fa-envelope-o"></i>
-                                </span>
-                                <input type="email" formControlName="email" name="email" class="form-control" placeholder="Email">
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <div class="controls">
-                              <div class="input-group col-sm-12">
-                                <span class="input-group-addon">
-                                  <i class="fa fa-bullhorn"></i>
-                                </span>
-                                <input type="text" formControlName="assunto" name="assunto" class="form-control" placeholder="Assunto">
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <div class="controls">
-                              <textarea id="limit" formControlName="corpo" name="corpo" rows="6" style="width: 100%; overflow: hidden; word-wrap: break-word; height: 126px;"></textarea>
-                            </div>
-                          </div>
-
-
-
-                          <div class="form-actions">
-                            <button class="btn btn-primary">Enviar</button>
-                          </div>
-
-                        </div>
-                      </div>
-                      <div *ngIf="enviando" style="text-align:center">
-                        <img src="/assets/gif/loading.gif" width="100px">
-                      </div>
-                    </div>
-                  </div>
-                  <!--/col-->
-
-                </div>
-
-              </div>
-            </form>
-
-          </div>
-
-          <div class="col-lg-4 col-sm-6 col-xs-12 col-xss-12 sin-padding" style="text-align:center">
-            <div class="row">
-              <div class="box-content" style="min-height: 453px;">
-                <h1>Grupo Whatsapp</h1>
-                <img src="https://cdn.icon-icons.com/icons2/373/PNG/256/Whatsapp_37229.png">
-                <div style="padding-top:30px">
-                  <a href="https://chat.whatsapp.com/34YZ7LAPUdl27GLPUJc8FY" class="btn btn-success" target="_BLANK">Entrar</a>
-                </div>
-              </div>
+            <div class="col-lg-4">
+              <h1 style="text-align:center; font-size:150px">
+                <i class="fa fa-trophy"></i>
+                <h1 style="text-align:center">
+                  <small style="color:black;text-shadow: 2px 2px white">Concorre para ganhar premios variados.</small>
+                </h1>
+              </h1>
             </div>
+            <div class="col-lg-4">
+              <h1 style="text-align:center; font-size:150px">
+                <i class="fa fa-globe"></i>
+                <h1 style="text-align:center">
+                  <small style="color:black;text-shadow: 2px 2px white">5 pontos por palpite acertado.</small>
+                </h1>
+              </h1>
+            </div>
+
+            <div class="clearfix"></div>
           </div>
+        </div>
+
+        <div class="row" style="padding-top:10px">
 
         </div>
+
+        <!-- FIN TERCEIRO DIVIDER -->
+
+        <!-- INICIO DE CONTACTO -->
+
+        <div id="contacto" style="padding: 30px 30px 30px 30px">
+
+          <span style="text-align: center">
+            <h1 style="padding-bottom:15px">Contato</h1>
+          </span>
+
+          <div class="row">
+            <div class="col-lg-4 col-sm-6 col-xs-12 col-xss-12 sin-padding">
+              <div class="row">
+                <div class="box-content" style="text-align: center">
+
+                  <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fbolaocraquedebolaoficial%2F&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=327481340963843"
+                    width="340" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"
+                    allow="encrypted-media"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6 col-xs-12 col-xss-12 sin-padding">
+
+              <form [formGroup]="contacto" (ngSubmit)="submitContacto(nome, email, assunto, corpo)">
+
+                <div class="row">
+
+                  <div class="col-lg-12 sin-padding">
+                    <div class="box">
+                      <div class="box-content" style="min-height: 453px">
+
+                        <div *ngIf="contactoIncorrecto" class="alert alert-danger">
+                          Todos os campos devem estar preenchidos
+                        </div>
+                        <div *ngIf="envioCorrecto" class="alert alert-success">
+                          Contato enviado com éxito
+                        </div>
+
+                        <div *ngIf="!enviando">
+
+                          <div class="form-group">
+                            <div class="form-group">
+                              <div class="controls">
+                                <div class="input-group col-sm-12">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-user"></i>
+                                  </span>
+                                  <input type="text" formControlName="nome" name="nome" class="form-control" placeholder="Nome">
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="controls">
+                                <div class="input-group col-sm-12">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-envelope-o"></i>
+                                  </span>
+                                  <input type="email" formControlName="email" name="email" class="form-control" placeholder="Email">
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="controls">
+                                <div class="input-group col-sm-12">
+                                  <span class="input-group-addon">
+                                    <i class="fa fa-bullhorn"></i>
+                                  </span>
+                                  <input type="text" formControlName="assunto" name="assunto" class="form-control" placeholder="Assunto">
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="controls">
+                                <textarea id="limit" formControlName="corpo" name="corpo" rows="6" style="width: 100%; overflow: hidden; word-wrap: break-word; height: 126px;"></textarea>
+                              </div>
+                            </div>
+
+
+
+                            <div class="form-actions">
+                              <button class="btn btn-primary">Enviar</button>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div *ngIf="enviando" style="text-align:center">
+                          <img src="/assets/gif/loading.gif" width="100px">
+                        </div>
+                      </div>
+                    </div>
+                    <!--/col-->
+
+                  </div>
+
+                </div>
+              </form>
+
+            </div>
+
+            <div class="col-lg-4 col-sm-6 col-xs-12 col-xss-12 sin-padding" style="text-align:center">
+              <div class="row">
+                <div class="box-content" style="min-height: 453px;">
+                  <h1>Grupo Whatsapp</h1>
+                  <img src="https://cdn.icon-icons.com/icons2/373/PNG/256/Whatsapp_37229.png">
+                  <div style="padding-top:30px">
+                    <a href="https://chat.whatsapp.com/34YZ7LAPUdl27GLPUJc8FY" class="btn btn-success" target="_BLANK">Entrar</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- FIN DE CONTACTO DIVIDER  -->
+
       </div>
 
-      <!-- FIN DE CONTACTO DIVIDER  -->
-
-
-
-    </div>
   </div>
   <!--/col-->
 

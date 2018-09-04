@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+
+    <!-- start: Main Menu -->
+
+    <!-- end: Main Menu -->
+
+        <!-- start: Content -->
+  <div id="content" class="col-lg-10 col-sm-11 " style="padding: 0px 355px 0px 355px !important; width:100% !important">            
+
+      <div class="">
+        <div class="box" style="border-right-width: 0px !important; border-bottom-width:0px">
+          <div class="box-header" style="background:white !important; font-weight:bold">
+            <h2 style=" margin: 0px 0px 0px 30px !important">Brasileirão Serie B</h2>
+          </div>
+          <div class="box-content no-padding">
+            <div *ngFor="let partido of partidos" class="sin-padding poco-padding casi-nada-padding" style="padding: 20px 60px 30px 60px">
+              <table width="100%">
+                <tr>
+                  <td width="40%" style="text-align:left;font-size:20px" title="{{partido.t1nome}}">
+                    <span>
+                      <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm1_logo}}"> {{partido.t1nome}}
+                    </span>
+                  </td>
+                  <td width="20%" style="text-align:center;font-size:30px">
+                    {{partido.mt_goal1}} X {{partido.mt_goal2}}
+                  </td>
+                  <td width="40%" style="text-align:right;font-size:20px" title="{{partido.t2nome}}">
+                    <span>
+                      {{partido.t2nome}}
+                      <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm2_logo}}">
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+            
+    </div>
+
+    <!-- end: Content -->
+  </div>
+
+
+
+</div>

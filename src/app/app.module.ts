@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpModule, Headers } from '@angular/http';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -50,6 +50,8 @@ import { LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { RodadaService } from './services/rodada.service';
+import { TermosComponent } from './termos/termos.component';
+import { PropagandaComponent } from './propaganda/propaganda.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -81,7 +83,10 @@ const routes: Routes = [
   { path: "equipo/:equipo", component: EquipoComponent },
   { path: "equipocoracao", component:EquipoCoracaoComponent},
   { path: "equipocoracao/:equipo", component:EquipoCoracaoComponent},
-  { path: "resultados", component:ResultadosComponent}
+  { path: "resultados", component:ResultadosComponent},
+  { path: "privacidade/:id", component:TermosComponent},
+  { path: "partidos/:id", component:AppComponent},
+  { path: "propaganda/:foto", component:PropagandaComponent }
 
 ];
 
@@ -103,6 +108,8 @@ let config = new AuthServiceConfig([
 export function provideConfig() {
   return config;
 }
+
+export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 
 @NgModule({
   declarations: [
@@ -132,7 +139,9 @@ export function provideConfig() {
     EquipoCampeonatoComponent,
     EquipoComponent,
     EquipoCoracaoComponent,
-    ResultadosComponent
+    ResultadosComponent,
+    TermosComponent,
+    PropagandaComponent
   ],
   imports: [
     BrowserModule,

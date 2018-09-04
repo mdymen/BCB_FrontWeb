@@ -65,4 +65,12 @@ export class PartidoService {
         return this._http.get(`${this.url}/partidos/getproximos`)
     }
 
+    public getByCampeonatoAndDate(idCampeonato) {
+        return this._http.get(`${this.url}/partidos/getjogosbycampeonatoanddate/idCampeonato/${idCampeonato}`)
+    }
+
+    public getAyer(limit) {
+        return this._http.get(`${this.url}/partidos/ayer/${limit}`)
+    }
+
 }

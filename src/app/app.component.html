@@ -1,69 +1,127 @@
-<!-- start: Header -->
-<div [hidden]="!logado">
-  <header class="navbar">
-    <div class="container">
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".sidebar-nav.nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a id="main-menu-toggle" class="hidden-xs open">
-        <i class="fa fa-bars"></i>
-      </a>
-      <a class="navbar-brand col-md-6 col-sm-6 col-xs-6" href="/public">
-        <span>Craque de Bola</span>
-      </a>
-      <!-- start: Header Menu -->
-      <div class="nav-no-collapse header-nav">
-        <ul class="nav navbar-nav pull-right">
-          <li>
-          </li>
-          <li>
-            <a style="padding-right: 20px !important" class="btn account dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
-              <div class="user">
-                <span class="name" id="cash_usuario">{{cash | currency:'BRL':2}}</span>
-              </div>
 
-            </a>
-          </li>
-          <li class="dropdown">
-            <a style="padding-right: 20px !important" class="btn account dropdown-toggle" data-toggle="dropdown" href="2nd-level.html#">
-              <div class="user">
-                <span class="hello">Bem-vindo!</span>
-                <span class="name">{{usuario}}</span>
-              </div>
-            </a>
-          </li>
+<div *ngIf="propaganda">
 
+  <router-outlet></router-outlet>
 
-          <li>
-            <div class="avatar" style="padding-left:20px">
-              <img [src]="foto" height="40px" width="40px" (error)="notExistImage($event)">            
-            </div>
-          </li>
-
-        </ul>
-      </div>
-      <!-- end: Header Menu -->
-
-    </div>
-  </header>
 </div>
-<!-- end: Header -->
+<!-- start: Header -->
 
-<div [hidden]="logado">
+<div *ngIf="!propaganda">
 
-    <div class="container">
+  <div *ngIf="!paraTirarFotoPropaganda">
+
+    <div [hidden]="!logado">
+      <header class="navbar">
+        <div class="container">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".sidebar-nav.nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a id="main-menu-toggle" class="hidden-xs open">
+            <i class="fa fa-bars"></i>
+          </a>
+          <a class="navbar-brand col-md-6 col-sm-6 col-xs-6" href="/public">
+            <span>Craque de Bola</span>
+          </a>
+          <!-- start: Header Menu -->
+          <div class="nav-no-collapse header-nav">
+            <ul class="nav navbar-nav pull-right">
+              <li>
+              </li>
+              <li>
+                <a style="padding-right: 20px !important" class="btn account dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                  <div class="user">
+                    <span class="name" id="cash_usuario">{{cash | currency:'BRL':2}}</span>
+                  </div>
+    
+                </a>
+              </li>
+              <li class="dropdown">
+                <a style="padding-right: 20px !important" class="btn account dropdown-toggle" data-toggle="dropdown" href="2nd-level.html#">
+                  <div class="user">
+                    <span class="hello">Bem-vindo!</span>
+                    <span class="name">{{usuario}}</span>
+                  </div>
+                </a>
+              </li>
+    
+    
+              <li>
+                <div class="avatar" style="padding-left:20px">
+                  <img [src]="foto" height="40px" width="40px" (error)="notExistImage($event)">            
+                </div>
+              </li>
+    
+            </ul>
+          </div>
+          <!-- end: Header Menu -->
+    
+        </div>
+      </header>
+    </div>
+    <!-- end: Header -->
+    
+    <div [hidden]="logado">
+    
+        <div class="container">
+            <div class="row">
+        
+              <!-- start: Main Menu -->
+    
+              <!-- end: Main Menu -->
+        
+                  <!-- start: Content -->
+            <div id="content" class="col-lg-10 col-sm-11 " style="padding: 0px !important; width:100% !important" *ngIf="!privacidade">            
+    
+                <app-login></app-login>            
+              </div>
+    
+              <div id="content" class="col-lg-10 col-sm-11 " style="padding: 0px !important; width:100% !important">
+                <app-termos></app-termos>
+    
+                </div>
+              <!-- end: Content -->
+            </div>
+        
+        
+        
+          </div>
+          <!--/row-->
+    
+      
+      </div>
+    
+    <div [hidden]="!logado">
+    
+      <div class="container">
         <div class="row">
     
           <!-- start: Main Menu -->
-
+          <div id="sidebar-left" class="col-lg-2 col-sm-1 ">
+    
+            <div class="sidebar-nav nav-collapse collapse navbar-collapse">
+              <ul class="nav main-menu">
+    
+                <li *ngFor="let opcion of menu">
+                  <a href="{{opcion.link}}">
+                    <i class="{{opcion.icono}}"></i>
+                    <span class="hidden-sm text">{{opcion.nombre}}</span>
+                  </a>
+                </li>
+    
+              </ul>
+            </div>
+            <a href="javascript:void(0)" id="main-menu-min" class="full visible-md visible-lg">
+              <i class="fa fa-angle-double-left"></i>
+            </a>
+          </div>
           <!-- end: Main Menu -->
     
               <!-- start: Content -->
-        <div id="content" class="col-lg-10 col-sm-11 " style="padding: 0px !important; width:100% !important">            
-
-            <app-login></app-login>
+        <div id="content" class="col-lg-10 col-sm-11 ">
+    
+            <router-outlet></router-outlet>
       
           </div>
           <!-- end: Content -->
@@ -73,99 +131,68 @@
     
       </div>
       <!--/row-->
-
-  
-  </div>
-
-<div [hidden]="!logado">
-
-  <div class="container">
-    <div class="row">
-
-      <!-- start: Main Menu -->
-      <div id="sidebar-left" class="col-lg-2 col-sm-1 ">
-
-        <div class="sidebar-nav nav-collapse collapse navbar-collapse">
-          <ul class="nav main-menu">
-
-            <li *ngFor="let opcion of menu">
-              <a href="{{opcion.link}}">
-                <i class="{{opcion.icono}}"></i>
-                <span class="hidden-sm text">{{opcion.nombre}}</span>
-              </a>
-            </li>
-
-          </ul>
+    
+    </div>
+    <!--/container-->
+    
+    
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Modal title</h4>
+          </div>
+          <div class="modal-body">
+            <p>Here settings can be configured...</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
         </div>
-        <a href="javascript:void(0)" id="main-menu-min" class="full visible-md visible-lg">
-          <i class="fa fa-angle-double-left"></i>
-        </a>
+        <!-- /.modal-content -->
       </div>
-      <!-- end: Main Menu -->
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    
+    <div class="clearfix"></div>
+    
+    <div [hidden]="!logado">
+      <footer>
+    
+        <div class="row">
+    
+          <div class="col-sm-5">
+            
+            
+          </div>
+          <!--/.col-->
+    
+          <div class="col-sm-7 text-right">
+    
+          </div>
+          <!--/.col-->
+    
+        </div>
+        <!--/.row-->
+    
+      </footer>
+    </div>
+    
+    <!-- inline scripts related to this page -->
+    
+    <!-- end: JavaScript-->
+    
+    </div>
+    
+    <div *ngIf="paraTirarFotoPropaganda">
+    
+  <app-propaganda [tipo]="tipoFotoParaTirar"></app-propaganda>
 
-          <!-- start: Content -->
-    <div id="content" class="col-lg-10 col-sm-11 ">
 
-        <router-outlet></router-outlet>
-  
-      </div>
-      <!-- end: Content -->
+    
     </div>
 
-
-
-  </div>
-  <!--/row-->
-
 </div>
-<!--/container-->
-
-
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p>Here settings can be configured...</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<div class="clearfix"></div>
-
-<div [hidden]="!logado">
-  <footer>
-
-    <div class="row">
-
-      <div class="col-sm-5">
-        
-        
-      </div>
-      <!--/.col-->
-
-      <div class="col-sm-7 text-right">
-
-      </div>
-      <!--/.col-->
-
-    </div>
-    <!--/.row-->
-
-  </footer>
-</div>
-
-<!-- inline scripts related to this page -->
-
-<!-- end: JavaScript-->
