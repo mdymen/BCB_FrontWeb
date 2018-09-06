@@ -69,8 +69,27 @@ export class PartidoService {
         return this._http.get(`${this.url}/partidos/getjogosbycampeonatoanddate/idCampeonato/${idCampeonato}`)
     }
 
-    public getAyer(limit) {
-        return this._http.get(`${this.url}/partidos/ayer/${limit}`)
+    /**
+     * Retorna todos los partidos que se jugaron del campeonato ayer
+     * @param idCampeonato 
+     */
+    public getAyer(idCampeonato) {
+        return this._http.get(`${this.url}/partidos/ayer/idCampeonato/${idCampeonato}`)
+    }
+
+    /**
+     * Retorna todos los partidos del campeonato que se jugaran hoy
+     * @param idCampeonato 
+     */
+    public getHoy(idCampeonato) {
+        return this._http.get(`${this.url}/partidos/hoy/idCampeonato/${idCampeonato}`)
+    }
+
+    /**
+     * Retorna todos los partidos que se jugarán maniana
+     */
+    public getHoyTodos() {
+        return this._http.get(`${this.url}/partidos/hoytodos`)
     }
 
 }

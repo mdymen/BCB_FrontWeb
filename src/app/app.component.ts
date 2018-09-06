@@ -21,6 +21,7 @@ export class AppComponent {
   partidos = [];
   paraTirarFotoPropaganda = false;
   tipoFotoParaTirar = "";
+  campeonatoDoTipo;
 
 
   url;
@@ -49,7 +50,8 @@ export class AppComponent {
     if (window.location.href.indexOf("propaganda") > -1) {
       this.paraTirarFotoPropaganda = true;
       let pathname = window.location.pathname.split("/");
-      this.tipoFotoParaTirar = pathname[pathname.length - 1];
+      this.campeonatoDoTipo = pathname[pathname.length - 2];
+      this.tipoFotoParaTirar = pathname[pathname.length - 3];
     }
 
 

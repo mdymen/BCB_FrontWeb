@@ -11,7 +11,10 @@ import { Global } from '../config/global.service';
 export class PropagandaComponent implements OnInit {
 
   @Input() tipo;
+  @Input() campeonato;
+
   partidos = [];
+  post;
   url_img;
 
   constructor(private route:ActivatedRoute,
@@ -22,11 +25,29 @@ export class PropagandaComponent implements OnInit {
   ngOnInit() {
   
     if (this.tipo == "resultados_ayer") {
-      this._partidoService.getAyer(20)
+      this._partidoService.getAyer(this.campeonato)
         .subscribe((res:any) => {
           console.log(res);
-          this.partidos = res.body;
+          this.partidos = res.body.partidos;
         })
+    }
+
+    if (this.tipo == "hoje") {
+      this._partidoService.getHoy(this.campeonato)
+        .subscribe((res:any) => {
+          console.log(res);
+          this.partidos = res.body.partidos;
+          this.post = res.body.post;
+        })
+    }    
+
+    if(this.tipo == "hoy_todos") {
+      this._partidoService.getHoyTodos()
+        .subscribe((res:any) => {
+          console.log(res);
+          this.partidos = res.body.partidos;
+          this.post = res.body.post;
+        })      
     }
 
   }

@@ -86,7 +86,7 @@ const routes: Routes = [
   { path: "resultados", component:ResultadosComponent},
   { path: "privacidade/:id", component:TermosComponent},
   { path: "partidos/:id", component:AppComponent},
-  { path: "propaganda/:foto", component:PropagandaComponent }
+  { path: "propaganda/:foto/:idCampeonato/:uuid", component:PropagandaComponent }
 
 ];
 
