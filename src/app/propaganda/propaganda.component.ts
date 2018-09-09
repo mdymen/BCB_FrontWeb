@@ -24,31 +24,15 @@ export class PropagandaComponent implements OnInit {
 
   ngOnInit() {
   
-    if (this.tipo == "resultados_ayer") {
-      this._partidoService.getAyer(this.campeonato)
-        .subscribe((res:any) => {
-          console.log(res);
-          this.partidos = res.body.partidos;
-        })
-    }
+    console.log("Tipo", this.tipo);
+    console.log("Campeonato", this.campeonato);
 
-    if (this.tipo == "hoje") {
-      this._partidoService.getHoy(this.campeonato)
-        .subscribe((res:any) => {
-          console.log(res);
-          this.partidos = res.body.partidos;
-          this.post = res.body.post;
-        })
-    }    
-
-    if(this.tipo == "hoy_todos") {
-      this._partidoService.getHoyTodos()
-        .subscribe((res:any) => {
-          console.log(res);
-          this.partidos = res.body.partidos;
-          this.post = res.body.post;
-        })      
-    }
+    this._partidoService.getPost(this.tipo, this.campeonato)
+    .subscribe((res:any) => {
+      console.log(res);
+      this.partidos = res.body.partidos;
+      this.post = res.body.post;
+    })
 
   }
 

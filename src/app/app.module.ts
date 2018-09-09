@@ -52,6 +52,7 @@ import { registerLocaleData } from '@angular/common';
 import { RodadaService } from './services/rodada.service';
 import { TermosComponent } from './termos/termos.component';
 import { PropagandaComponent } from './propaganda/propaganda.component';
+import { PostfacebookComponent } from './postfacebook/postfacebook.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -86,7 +87,8 @@ const routes: Routes = [
   { path: "resultados", component:ResultadosComponent},
   { path: "privacidade/:id", component:TermosComponent},
   { path: "partidos/:id", component:AppComponent},
-  { path: "propaganda/:foto/:idCampeonato/:uuid", component:PropagandaComponent }
+  { path: "propaganda/:foto/:idCampeonato/:uuid", component:PropagandaComponent },
+  { path: "postfacebook", component:PostfacebookComponent }
 
 ];
 
@@ -141,7 +143,8 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
     EquipoCoracaoComponent,
     ResultadosComponent,
     TermosComponent,
-    PropagandaComponent
+    PropagandaComponent,
+    PostfacebookComponent
   ],
   imports: [
     BrowserModule,

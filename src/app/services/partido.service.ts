@@ -70,26 +70,22 @@ export class PartidoService {
     }
 
     /**
-     * Retorna todos los partidos que se jugaron del campeonato ayer
-     * @param idCampeonato 
-     */
-    public getAyer(idCampeonato) {
-        return this._http.get(`${this.url}/partidos/ayer/idCampeonato/${idCampeonato}`)
-    }
-
-    /**
-     * Retorna todos los partidos del campeonato que se jugaran hoy
-     * @param idCampeonato 
-     */
-    public getHoy(idCampeonato) {
-        return this._http.get(`${this.url}/partidos/hoy/idCampeonato/${idCampeonato}`)
-    }
-
-    /**
      * Retorna todos los partidos que se jugarán maniana
      */
-    public getHoyTodos() {
-        return this._http.get(`${this.url}/partidos/hoytodos`)
+    public getPost(tipo, idCampeonato?) {
+        let campeonato = idCampeonato ? idCampeonato : "00";
+        return this._http.get(`${this.url}/partidos/getpost/tag/${tipo}/idCampeonato/${campeonato}`)
+    }
+
+    public manualPost(tipo, idCampeonato?) {
+        let campeonato = idCampeonato ? idCampeonato : "00";
+
+        let post = {
+            tag:tipo,
+            idCampeonato:idCampeonato
+        }
+
+        return this._http.post(`${this.url}/facebook/manualpost/`,post);
     }
 
 }

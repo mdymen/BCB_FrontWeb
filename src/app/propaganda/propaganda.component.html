@@ -1,20 +1,34 @@
 <div class="container">
-  <div class="row">
+  <div class="row" *ngIf="partidos.length > 0">
 
     <!-- start: Main Menu -->
 
     <!-- end: Main Menu -->
 
-        <!-- start: Content -->
-  <div id="content" class="col-lg-10 col-sm-11 " style="padding: 0px 355px 0px 355px !important; width:100% !important">            
+    <!-- start: Content -->
+    <div id="content" class="col-lg-10 col-sm-11 " style="padding: 50px 355px 0px 355px !important; width:100% !important">
 
       <div class="">
         <div class="box" style="border-right-width: 0px !important; border-bottom-width:0px">
-          <div class="box-header" style="background:white !important; font-weight:bold">
-            <h2 style=" margin: 0px 0px 0px 30px !important">{{post.ps_titulo}}</h2>
+          <div class="box-header" style="background: #1f70c1!important;font-weight:bold;height:55px;text-color:white;color: white;">
+            <h2 style="margin: 10px 0px 0px 20px !important; font-size:20px;">{{post.ps_titulo}}</h2>
           </div>
           <div class="box-content no-padding">
             <div *ngFor="let partido of partidos" class="sin-padding poco-padding casi-nada-padding" style="padding: 20px 60px 30px 60px">
+              <table width="100%">
+                <tbody>
+                  <tr>
+                    <td style="text-align:center">
+                      {{partido.mt_date | date: 'HH:mm'}} hs
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align:center">
+                      {{partido.ch_nome}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
               <table width="100%">
                 <tr>
                   <td width="40%" style="text-align:left;font-size:20px" title="{{partido.t1nome}}">
@@ -23,7 +37,8 @@
                     </span>
                   </td>
                   <td width="20%" style="text-align:center;font-size:30px">
-                    {{partido.mt_goal1}} X {{partido.mt_goal2}}
+                    {{partido.mt_goal1}}
+                    <span style="text-align:center;font-size:20px">x</span> {{partido.mt_goal2}}
                   </td>
                   <td width="40%" style="text-align:right;font-size:20px" title="{{partido.t2nome}}">
                     <span>

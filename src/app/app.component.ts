@@ -75,6 +75,7 @@ export class AppComponent {
       this.menu.push(new Opciones("Adicionar Partidos", "fa fa-home", "/adicionarpartidos"));
       this.menu.push(new Opciones("Resultados", "fa fa-user", "/resultados"));
       this.menu.push(new Opciones("Setear Rodada", "fa fa-user", "/setrodada"));
+      this.menu.push(new Opciones("Post facebook", "fa fa-user", "/postfacebook"));
 
     }
     this.menu.push(new Opciones("Logout", "fa fa-power-off", "/logout"));
