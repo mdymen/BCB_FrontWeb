@@ -15,8 +15,18 @@
           <i class="fa fa-pencil blue icon" style="width:25px;font-size:25px;padding: 5px 0"></i>
         </a>
         <i *ngIf="!isUsuarioLogado()" class="fa fa-pencil blue icon" style="width:25px;font-size:25px;padding: 5px 0"></i>
+
+        <div style="padding:10px">
+          <a class="btn btn-info" href="table.html#">
+            <i class="fa fa-flag-o "> </i>
+          </a>
+          <p>Seguir</p>
+        </div>
       </div>
 
+      <div *ngIf="!usuarioCargado" style="text-align:center;padding-top:50px">
+        <img src="/assets/gif/loading.gif" width="100px">
+      </div>
       <div class="col-xs-5 col-sm-12" *ngIf="usuarioCargado">
         <h3 *ngIf="grito">{{grito}}</h3>
 
@@ -30,21 +40,21 @@
               <i class="fa fa-dollar"></i>R$ {{cash}}</div>
           </li>
           <li style="font-size:15px">
-              <span class="yellow" style="font-weight:bold">{{palpitados}}</span>                                               
-              Palpitados                                                         
+            <span class="yellow" style="font-weight:bold">{{palpitados}}</span>
+            Palpitados
           </li>
-          <li style="font-size:15px">                                               
-              <span class="green" style="font-weight:bold">{{acertos}}</span>  
-              Acertos                                                         
-          </li>  
-          <li style="font-size:15px">                                         
-              <span class="green" style="font-weight:bold">{{pontos}}</span>      
-              Pontos                                                         
-          </li>  
-          <li style="font-size:15px">                                        
-              <span class="red" style="font-weight:bold">{{erros}}</span>       
-              Erros                                                         
-          </li>                         
+          <li style="font-size:15px">
+            <span class="green" style="font-weight:bold">{{acertos}}</span>
+            Acertos
+          </li>
+          <li style="font-size:15px">
+            <span class="green" style="font-weight:bold">{{pontos}}</span>
+            Pontos
+          </li>
+          <li style="font-size:15px">
+            <span class="red" style="font-weight:bold">{{erros}}</span>
+            Erros
+          </li>
         </ul>
 
         <input id="fileToUpload" type="file" style="display:none;" (change)="handleFileInput($event.target.files)">
@@ -61,7 +71,7 @@
       <li class="active">
         <a href="page-profile.html#palpites" (click)="palpites()">Palpites</a>
       </li>
-    <!--  <li class="" *ngIf="isUsuarioLogado()">
+      <!--  <li class="" *ngIf="isUsuarioLogado()">
         <a href="page-profile.html#skills">Emails</a>
       </li>
       <li class="" *ngIf="isUsuarioLogado()">
@@ -73,101 +83,101 @@
 
 
     <div class="tab-content" style="height: 450px; overflow-y:auto;overflow-x: hidden">
-        <div class="tab-pane active" id="palpites">
+      <div class="tab-pane active" id="palpites">
 
-          <div class="row" style="margin:auto" *ngIf="!partidos">
-            Carregando...
-          </div>
+        <div *ngIf="!partidos" style="text-align:center;padding-top:50px">
+          <img src="/assets/gif/loading.gif" width="100px">
+        </div>
 
-            <div class="row" *ngIf="partidos">
-    
+        <div class="row" *ngIf="partidos">
 
-                <div *ngFor='let partido of partidos'>
-                    <div class="col-lg-4 col-sm-6 col-xs-6 col-xxs-12 col-xxs-6" style="margin-top: 10px">
-                      <div class="smallstat box" style="border:1px solid #dbdee0; padding:7px">
-                        <table width="100%">
-                          <tbody>
-                            <tr>
-                              <td style="text-align:center">
-                                <b>
-                                  <a href="{{url}}/palpitarrodada/{{partido.ch_id}}">{{partido.ch_nome}}</a>
-                                </b>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <table width="100%">
-                          <tbody>
-                            <tr>
-                              <td style="text-align:center">
-                                <b>{{partido.mt_date | date: 'dd/MM/yyyy HH:mm'}}</b>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td width="55%" style="text-align:left">
-                                <span id="376">
-                                  <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm1_logo}}"> {{partido.t1nome}}
-                                </span>
-                              </td>
-                              <td width="10%" style="text-align:right" *ngIf="partido.mt_played === '1'">
-                                <span class="label label-danger" *ngIf="!verificarSuceso(partido)">{{partido.mt_goal1}}</span>
-                                <span class="label label-success" *ngIf="verificarSuceso(partido)">{{partido.mt_goal1}}</span>
-                              </td>
-                              <td width="35%">
-                                <div class="row">
-                                  <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                                    <input disabled="disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res1"
-                                      name="rs_res1{{partido.mt_id}}" type="text">
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td width="55%" style="text-align:left">
-                                <span id="372">
-                                  <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm2_logo}}"> {{partido.t2nome}}
-                                </span>
-                              </td>
-                              <td *ngIf="partido.mt_played === '1'" width="10%" style="text-align:right">
-                                  <span class="label label-danger" *ngIf="!verificarSuceso(partido)">{{partido.mt_goal2}}</span>
-                                  <span class="label label-success" *ngIf="verificarSuceso(partido)">{{partido.mt_goal2}}</span>
-                              </td>
-                              <td width="35%">
-                                <div class="row">
-                                  <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
-                                    <input disabled="disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res2"
-                                      name="rs_res2{{partido.mt_id}}" type="text">
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <div id="466" style="margin: 15px 0 0 0; ">
-                          <div id="dvInfo_1114" style="display:none"></div>
+
+          <div *ngFor='let partido of partidos'>
+            <div class="col-lg-4 col-sm-6 col-xs-6 col-xxs-12 col-xxs-6" style="margin-top: 10px">
+              <div class="smallstat box" style="border:1px solid #dbdee0; padding:7px">
+                <table width="100%">
+                  <tbody>
+                    <tr>
+                      <td style="text-align:center">
+                        <b>
+                          <a href="{{url}}/palpitarrodada/{{partido.ch_id}}">{{partido.ch_nome}}</a>
+                        </b>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table width="100%">
+                  <tbody>
+                    <tr>
+                      <td style="text-align:center">
+                        <b>{{partido.mt_date | date: 'dd/MM/yyyy HH:mm'}}</b>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td width="55%" style="text-align:left">
+                        <span id="376">
+                          <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm1_logo}}"> {{partido.t1nome}}
+                        </span>
+                      </td>
+                      <td width="10%" style="text-align:right" *ngIf="partido.mt_played === '1'">
+                        <span class="label label-danger" *ngIf="!verificarSuceso(partido)">{{partido.mt_goal1}}</span>
+                        <span class="label label-success" *ngIf="verificarSuceso(partido)">{{partido.mt_goal1}}</span>
+                      </td>
+                      <td width="35%">
+                        <div class="row">
+                          <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                            <input disabled="disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res1" name="rs_res1{{partido.mt_id}}"
+                              type="text">
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  
-
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td width="55%" style="text-align:left">
+                        <span id="372">
+                          <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{partido.tm2_logo}}"> {{partido.t2nome}}
+                        </span>
+                      </td>
+                      <td *ngIf="partido.mt_played === '1'" width="10%" style="text-align:right">
+                        <span class="label label-danger" *ngIf="!verificarSuceso(partido)">{{partido.mt_goal2}}</span>
+                        <span class="label label-success" *ngIf="verificarSuceso(partido)">{{partido.mt_goal2}}</span>
+                      </td>
+                      <td width="35%">
+                        <div class="row">
+                          <div class="col-xs-10 col-sm-10 col-lg-10 numeros">
+                            <input disabled="disabled" style="text-align:center" class="form-control numeros_input" [(ngModel)]="partido.rs_res2" name="rs_res2{{partido.mt_id}}"
+                              type="text">
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div id="466" style="margin: 15px 0 0 0; ">
+                  <div id="dvInfo_1114" style="display:none"></div>
+                </div>
+              </div>
             </div>
-
-            <div class="row" style="margin:auto" *ngIf="partidos && partidos.length > 0">
-                <a href="/perfil/{{proximo}}/usuario/{{idUsuario}}" class="btn btn-sm btn-primary">Mais</a>
-            </div>
-            <!--/row-->
-    
           </div>
+
+
+
+        </div>
+
+        <div class="row" style="margin:auto" *ngIf="partidos && partidos.length > 0">
+          <a href="/perfil/{{proximo}}/usuario/{{idUsuario}}" class="btn btn-sm btn-primary">Mais</a>
+        </div>
+        <!--/row-->
+
+      </div>
       <div class="tab-pane" id="skills" *ngIf="isUsuarioLogado()">
 
         <div class="row">

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../backend.service';
 import { Ranking } from '../ranking';
 import { ActivatedRoute } from '@angular/router';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { RodadaService } from '../services/rodada.service';
 
 @Component({
   selector: 'app-ranking',
@@ -16,49 +17,30 @@ export class RankingComponent implements OnInit {
   campeonato;
   vertabla = "display:none";
   rankings = [];
-  rankingCargado:boolean = false;
+  rankingCargado: boolean = false;
+  cargando = false;
+
+  @Input("rodada") idRodada;
 
   constructor(private http: HttpClient,
     private backend: BackendService,
     private route: ActivatedRoute,
-    private spinnerService: Ng4LoadingSpinnerService) { }
+    private spinnerService: Ng4LoadingSpinnerService,
+    private _rodadaService: RodadaService) { }
 
   ngOnInit() {
   }
 
-  
+
   cargarTabla() {
-    if (this.vertabla == "display:none") {
-      this.route.params.subscribe(params => {
 
-        this.campeonato = params['campeonato'];
-        this.spinnerService.show();
-        this.http.post(this.backend.getBackEnd() + "/ranking", { champ: this.campeonato })
-          .subscribe(result => {
-            console.log(result);
-            this.rankingCargado = true;
-            for (let ranking of result['ranking']) {
-              if (ranking['rk_foto']) {
-                ranking['rk_foto'] = "http://www.dymenstein.com/public/assets/img/perfil/" + ranking['rk_foto'];
-              } else {
-                ranking['rk_foto'] = "http://www.dymenstein.com/public/assets/img/perfil/user.png";
-              }
-
-              let rankingJson = <Ranking>ranking;
-
-              this.rankings.push(rankingJson);
-            }
-
-            console.log(result);
-
-            this.vertabla = "display:block";
-            this.spinnerService.hide();
-
-          });
-      });
-    } else {
-      this.vertabla = "display:none";
-    }
-  }
+    this.cargando = true;
+    this._rodadaService.ranking(this.idRodada)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.rankingCargado = true;
+        this.rankings = res.body;
+      })
+  };
 
 }

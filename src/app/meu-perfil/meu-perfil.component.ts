@@ -15,7 +15,7 @@ import { UsuarioService } from '../services/usuario.service';
   templateUrl: './meu-perfil.component.html',
   styleUrls: ['./meu-perfil.component.css']
 })
-export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
+export class MeuPerfilComponent implements OnInit/*, AfterViewInit */ {
 
   resRodadaPalpite: boolean;
   resPalpite: boolean;
@@ -38,12 +38,12 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
 
   idUsuario;
 
-  foto:string;
+  foto: string;
 
   partidos = false;
 
-  limit:Number = 9;
-  proximo:Number = 9;
+  limit: Number = 9;
+  proximo: Number = 9;
 
   usuarioObj = null;
 
@@ -54,55 +54,58 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
 
   constructor(private backend: BackendService, private http: HttpClient,
     private sanitazer: DomSanitizer,
-    private route:ActivatedRoute, 
-    private spinnerService:Ng4LoadingSpinnerService,
-    private _usuarioService:UsuarioService) {
+    private route: ActivatedRoute,
+    private spinnerService: Ng4LoadingSpinnerService,
+    private _usuarioService: UsuarioService) {
 
-      this.route.params.subscribe(params => {
-        if (params['limit']) {
-          this.limit = params['limit'];
-          this.proximo = parseInt(params['limit']) + 9;          
+    this.route.params.subscribe(params => {
+      if (params['limit']) {
+        this.limit = params['limit'];
+        this.proximo = parseInt(params['limit']) + 9;
+      }
+
+      if (params['usuario']) {
+        this.idUsuario = params['usuario'];
+      } else {
+        this.resRodadaPalpite = Number.parseInt(localStorage.getItem("res_rod_pal")) === 0 ? false : true;
+        this.resPalpite = Number.parseInt(localStorage.getItem("res_pal")) == 0 ? false : true;
+        this.infoRodadaGeral = Number.parseInt(localStorage.getItem("info_rod")) == 0 ? false : true;
+        this.usuario = localStorage.getItem("username");
+        this.idUsuario = localStorage.getItem("id");
+        this.cash = localStorage.getItem("cash");
+      }
+    })
+
+    this._usuarioService.getPalpites(this.idUsuario, this.limit)
+      .subscribe((res: any) => {
+        this.partidos = res.body;
+      });
+
+    console.log("usuario", this.idUsuario);
+
+    this._usuarioService.get(this.idUsuario)
+      .subscribe((result: any) => {
+        this.usuarioObj = result;
+        this.usuario = this.usuarioObj.us_username;
+        if (this.usuarioObj.us_grito) {
+          this.grito = this.usuarioObj.us_grito;
+        }
+        if (this.usuarioObj.us_teamname) {
+          this.equipo = this.usuarioObj.us_teamname;
         }
 
-        if (params['usuario']) {
-          this.idUsuario = params['usuario'];
-        } else {
-          this.resRodadaPalpite = Number.parseInt(localStorage.getItem("res_rod_pal")) === 0 ? false : true;
-          this.resPalpite = Number.parseInt(localStorage.getItem("res_pal")) == 0 ? false : true;
-          this.infoRodadaGeral = Number.parseInt(localStorage.getItem("info_rod")) == 0 ? false : true;
-          this.usuario = localStorage.getItem("username");
-          this.idUsuario = localStorage.getItem("id");
-          this.cash = localStorage.getItem("cash");            
-        }
+        this.acertos = this.usuarioObj.palpites.acertos;
+        this.erros = this.usuarioObj.palpites.erros;
+        this.palpitados = this.usuarioObj.palpites.palpitados;
+        this.pontos = this.usuarioObj.palpites.pontos;
+
+        this.usuarioCargado = true;
+
+        this.foto = "http://dymenstein.com/public/assets/img/perfil/" + this.usuarioObj.foto;
+
+        console.log(result);
       })
 
-      this._usuarioService.getPalpites(this.idUsuario, this.limit)
-        .subscribe((res:any) => {
-          this.partidos = res.body;
-        });
-
-    this.http.post(this.backend.getBackEndNormal() + "/usuario/usuario", {usuario:this.idUsuario})
-    .subscribe(result => {
-      this.usuarioObj = result;
-      this.usuario = this.usuarioObj.us_username;
-      if (this.usuarioObj.us_grito) {
-        this.grito = this.usuarioObj.us_grito;
-      }
-      if (this.usuarioObj.us_teamname) {
-        this.equipo = this.usuarioObj.us_teamname;
-      }
-
-      this.acertos = this.usuarioObj.palpites.acertos;
-      this.erros = this.usuarioObj.palpites.erros;
-      this.palpitados = this.usuarioObj.palpites.palpitados;
-      this.pontos = this.usuarioObj.palpites.pontos;
-
-      this.usuarioCargado = true;
-
-      this.foto = "http://dymenstein.com/public/assets/img/perfil/" + this.usuarioObj.foto;
-
-      console.log(result);
-    });
   }
 
   ngOnInit() {
@@ -128,15 +131,15 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
     formData.append('imgPerfil', this.fileToUpload, this.fileToUpload.name);
     formData.append('id', localStorage.getItem('id'));
 
-    let hs = new HttpHeaders({'enctype': 'multipart/form-data'});
-    var options =  {
+    let hs = new HttpHeaders({ 'enctype': 'multipart/form-data' });
+    var options = {
       headers: hs
     };
 
 
     this.http.post(this.backend.getBackEndNormal() + "usuario/uploadimage", formData, options)
-      .subscribe(res => {        
-        localStorage.setItem("foto", res['foto']); 
+      .subscribe(res => {
+        localStorage.setItem("foto", res['foto']);
         this.foto = "http://dymenstein.com/public/assets/img/perfil/" + localStorage.getItem("foto");
         window.location.reload();
       });
@@ -146,10 +149,10 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
    * Verifica si el usuario que está logado en este momento es el mismo usuario
    * al cual se accedio para ver el perfil
    */
-  isUsuarioLogado():boolean {
+  isUsuarioLogado(): boolean {
     return localStorage.getItem("id") === this.idUsuario;
   }
-  
+
   /**
    * Cuando el usuario no tiene foto carga la foto padron
    * @param  
@@ -160,51 +163,51 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */{
 
 
 
-    /**
- * Guarda la informacion del usuario correspondiente al recibimiento de emails
- * @param params tiene @param res_pal, @param res_rod_pal, @param info_rod_pal
- * @param iduser
- */
-/*  salvarConfiguracionEmail() {
-
-    this.http.post(this.backend.getBackEndNormal() + "usuario/emailconfiguracion",
-      {
-        res_pal: this.resPalpite,
-        res_rod_pal: this.resRodadaPalpite,
-        info_rod: this.infoRodadaGeral,
-        iduser: localStorage.getItem("id")
-      })
-      .subscribe(result => {
-        localStorage.setItem("res_rod_pal", Number(this.resRodadaPalpite).toString());
-        localStorage.setItem("res_pal", Number(this.resRodadaPalpite).toString());
-        localStorage.setItem("info_rod", Number(this.resRodadaPalpite).toString());
-
-        console.log(result);
-      },
-        error => { })
-
-
-
-  }*/
-
-
-    /**
-   * Informacion estadisticamente de los palpites de un usuario
-   */
- /* palpites() {
-   if (!this.cargoInfoPalpites) {
-      this.spinnerService.show();
-      this.http.post(this.backend.getBackEndNormal() + "usuario/infopalpitesusuario",
-        { usuario: localStorage.getItem("id") })
-        .subscribe(res => {
-          console.log(res);
-          this.spinnerService.hide();
-          this.erros = res['erros'],
-            this.acertos = res['acertos'],
-            this.palpitados = res['palpitados'],
-            this.pontos = res['pontos']
-          this.cargoInfoPalpites = true;
+  /**
+* Guarda la informacion del usuario correspondiente al recibimiento de emails
+* @param params tiene @param res_pal, @param res_rod_pal, @param info_rod_pal
+* @param iduser
+*/
+  /*  salvarConfiguracionEmail() {
+  
+      this.http.post(this.backend.getBackEndNormal() + "usuario/emailconfiguracion",
+        {
+          res_pal: this.resPalpite,
+          res_rod_pal: this.resRodadaPalpite,
+          info_rod: this.infoRodadaGeral,
+          iduser: localStorage.getItem("id")
         })
-    }
-  }*/
+        .subscribe(result => {
+          localStorage.setItem("res_rod_pal", Number(this.resRodadaPalpite).toString());
+          localStorage.setItem("res_pal", Number(this.resRodadaPalpite).toString());
+          localStorage.setItem("info_rod", Number(this.resRodadaPalpite).toString());
+  
+          console.log(result);
+        },
+          error => { })
+  
+  
+  
+    }*/
+
+
+  /**
+ * Informacion estadisticamente de los palpites de un usuario
+ */
+  /* palpites() {
+    if (!this.cargoInfoPalpites) {
+       this.spinnerService.show();
+       this.http.post(this.backend.getBackEndNormal() + "usuario/infopalpitesusuario",
+         { usuario: localStorage.getItem("id") })
+         .subscribe(res => {
+           console.log(res);
+           this.spinnerService.hide();
+           this.erros = res['erros'],
+             this.acertos = res['acertos'],
+             this.palpitados = res['palpitados'],
+             this.pontos = res['pontos']
+           this.cargoInfoPalpites = true;
+         })
+     }
+   }*/
 }

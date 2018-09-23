@@ -88,4 +88,8 @@ export class PartidoService {
         return this._http.post(`${this.url}/facebook/manualpost/`,post);
     }
 
+    public getPosterior(id) {
+        return this._http.get(`${this.url}/facebook/getpostposterior/id/${id}`);
+    }
+
 }

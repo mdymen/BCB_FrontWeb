@@ -29,4 +29,11 @@ export class UsuarioService {
         return this._http.post(`${this.url}/index/contacto`, {nome:nome, email:email, assunto:assunto, corpo: corpo});
     }
 
+    /**
+     * Retorna informacion del usuario
+     */
+    public get(usuario) {
+        return this._http.get(`${this.url}/usuario/get/usuario/${usuario}`);
+    }
+
 }

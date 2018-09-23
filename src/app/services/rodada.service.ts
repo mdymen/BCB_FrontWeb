@@ -23,4 +23,8 @@ export class RodadaService {
         return this._http.post(`${this.url}/rodada/post`, {champ:champ, rodada:rodada, suma:suma, cambio:cambio});
     }
 
+    public ranking(idRodada) {
+        return this._http.get(`${this.url}/rodada/ranking/idRodada/${idRodada}`);
+    }
+
 }
