@@ -22,7 +22,7 @@
 
     <!-- TABLA CREADA PARA EL CAMPEONATO QUE NO ES POR GRUPOS -->
 
-    <div *ngIf="equipos.length > 0">
+    <div *ngIf="!isGrupos && equipos.length > 0">
       <table class="table">
         <thead></thead>
         <tbody>
@@ -32,7 +32,9 @@
               <span class="badge">{{i + 1}}</span>
             </td>
             <td>
-              <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{assets}}/{{equipo.eq_logo}}"> {{equipo.eq_nome}}
+              <a href="/equipo/{{equipo.eq_id}}" title="{{equipo.eq_nome}}">
+                <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{assets}}/{{equipo.eq_logo}}"> {{equipo.eq_nome}}
+              </a>
             </td>
             <td>{{equipo.ec_jugados}}</td>
             <td>{{equipo.ec_pontos}}</td>
@@ -55,7 +57,7 @@
     <!-- TABLA CREADA PARA EL CAMPEONATO QUE ES POR GRUPOS -->
 
 
-    <div *ngIf="isGrupos && tablaCargada">
+    <div *ngIf="isGrupos && grupos.length > 0">
 
       <table class="table" *ngFor="let grupo of grupos">
         <thead></thead>
@@ -63,17 +65,19 @@
 
           <tr>
             <td></td>
-            <td> Grupo {{grupo.tm_grupo}}</td>
+            <td> Grupo {{grupo.ec_grupo}}</td>
             <td></td>
             <td></td>
           </tr>
-
           <tr *ngFor="let equipo of grupo.grupo, let i = index">
+            
             <td>
               <span class="badge">{{i + 1}}</span>
             </td>
             <td>
-              <img width="25px;" height="21px;" src="http://www.bolaocraquedebola.com.br/{{equipo.tm_logo}}"> {{equipo.eq_nome}}
+              <a href="/equipo/{{equipo.eq_id}}" title="{{equipo.eq_nome}}">
+                <img width="25px;" height="21px;" src="{{url_img}}//{{equipo.eq_logo}}"> {{equipo.eq_nome}}
+              </a>
             </td>
             <td>{{equipo.ec_jugados}}</td>
             <td>{{equipo.ec_pontos}}</td>

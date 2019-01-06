@@ -179,8 +179,7 @@ export class LoginComponent implements OnInit {
 
   loguearse(usuario, password) {
     this.spinnerService.show();
-    this.http.post("http://www.dymenstein.com/public/mobile/cellogin",
-      { us: usuario, pass: password })
+    this._usuarioService.login(usuario, password)
       .subscribe(result => {
         this.guardarLocalStorage(result);
         this.spinnerService.hide();

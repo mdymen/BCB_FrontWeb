@@ -92,4 +92,19 @@ export class PartidoService {
         return this._http.get(`${this.url}/facebook/getpostposterior/id/${id}`);
     }
 
+    /**
+     * Retorna todos los partidos de la fecha especificada
+     */
+    public getPartidosByDate(date) {
+        return this._http.get(`${this.url}/partidos/bydate/date/${date}`)
+    }
+
+    public postTeste() {
+        return this._http.post(`${this.url}/partidos/postteste`,{})
+    }
+
+    public postTexto(id) {
+        return this._http.post(`${this.url}/facebook/postfacebook`,{id});
+    }
+
 }

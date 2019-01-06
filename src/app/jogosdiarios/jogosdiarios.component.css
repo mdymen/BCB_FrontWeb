@@ -1,0 +1,6 @@
+.truncate {
+    width:17ch;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}

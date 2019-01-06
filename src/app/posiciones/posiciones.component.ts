@@ -25,6 +25,8 @@ export class PosicionesComponent implements OnInit {
   tablaCargada:boolean = false;
   assets;
 
+  url_img;
+
   constructor(private http: HttpClient,
     private backend: BackendService,
     private route: ActivatedRoute,
@@ -32,6 +34,7 @@ export class PosicionesComponent implements OnInit {
     private _equiposService:EquiposService) {
       
       this.assets = Global.ASSETS_EQUIPOS;
+      this.url_img = Global.URL_BOLAO + Global.ASSETS_EQUIPOS;
 
     }
 
@@ -43,44 +46,21 @@ export class PosicionesComponent implements OnInit {
   cargarTabla() {
  
       this.route.params.subscribe(params => {
-
-
         this.campeonato = params['campeonato'];
         this.spinnerService.show();
         this._equiposService.loadTabla(this.campeonato) 
           .subscribe((res:any) => {
-            this.equipos = res.body.teams;
-            console.log(this.equipos);
-            this.spinnerService.hide();
-          });
 
-
-   /*     this.spinnerService.show();
-        this.http.post(this.backend.getBackEnd() + "/equipos", { champ: this.campeonato })
-          .subscribe(result => {
-            this.tablaCargada = true;
-            if (result['teams'][0].tem_grupo == false) {
-              console.log(result);
-              result['teams'].map(team => {this.equipos.push(team);});
+            if (!res.body.teams[0].tem_grupo) {
               this.isGrupos = false;
-              console.log(this.equipos);
+              this.equipos = res.body.teams;
             } else {
-              console.log(result);
-              for (let grupo of result['teams']) {
-                let grupoJson = new Grupo(grupo['grupo'], grupo['tem_grupo'], grupo['tm_grupo']);
-                this.grupos.push(grupoJson);
-                this.isGrupos = true;
-              }
-            }
-
-            this.vertabla = "display:block";
+              this.grupos = res.body.teams;
+              this.isGrupos = true;
+            }            
             this.spinnerService.hide();
 
           });
-      });
-    } else {
-      this.vertabla = "display:none";
-    }*/
       })
 
 }

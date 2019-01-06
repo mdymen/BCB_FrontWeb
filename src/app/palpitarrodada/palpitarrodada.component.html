@@ -221,7 +221,7 @@
     <div class="col-lg-4 col-sm-6 col-xs-12 col-xxs-12" *ngFor="let dia of proximosPartidos, let i = index">
       <div class="box" style="border-right-width: 0px !important; border-bottom-width:0px">
         <div class="box-header" style="background:white !important; font-weight:bold">
-          <h2 style=" margin: 0px 0px 0px 30px !important">{{proximosPartidosTitulos[i]}}</h2>
+          <h2 style=" margin: 0px 0px 0px 30px !important"><a href="/jogosdiarios/{{proximosPartidosFechas[i]}}"> {{proximosPartidosTitulos[i]}}</a></h2>
         </div>
         <div class="box-content no-padding">
           <div *ngFor="let partido of dia" class="sin-padding poco-padding casi-nada-padding" style="padding: 20px 60px 30px 60px">
@@ -234,7 +234,7 @@
                 </tr>
                 <tr>
                   <td style="text-align:center">
-                    {{partido.ch_nome}}
+                      <a href="/palpitarrodada/{{partido.mt_idchampionship}}">{{partido.ch_nome}}</a>
                   </td>
                 </tr>
               </tbody>
@@ -243,7 +243,7 @@
               <tr>
                 <td width="40%" style="text-align:left;font-size:20px" title="{{partido.t1nome}}">
                   <span>
-                    <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm1_logo}}"> {{partido.tm1_sigla}}
+                    <a href="/equipo/{{partido.tm1_id}}"><img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm1_logo}}"> {{partido.tm1_sigla}}</a>
                   </span>
                 </td>
                 <td width="20%" style="text-align:center">
@@ -251,8 +251,8 @@
                 </td>
                 <td width="40%" style="text-align:right;font-size:20px" title="{{partido.t2nome}}">
                   <span>
-                    {{partido.tm2_sigla}}
-                    <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm2_logo}}">
+                      <a href="/equipo/{{partido.tm2_id}}">{{partido.tm2_sigla}}
+                    <img width="25px;" height="21px;" src="{{url_img}}/{{partido.tm2_logo}}"></a>
                   </span>
                 </td>
               </tr>

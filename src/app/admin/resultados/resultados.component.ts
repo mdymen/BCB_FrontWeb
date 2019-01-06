@@ -50,7 +50,7 @@ export class ResultadosComponent implements OnInit {
     this._campeonatoService.loadGlobo(this.rodada, this.campeonato)
       .subscribe((res: any) => {
         this.partidos = res.body;
-        console.log(res);
+        console.log("resultados", res);
         this.partidos.map(
           partido => {
             partido.equipo1[0].selected = true;

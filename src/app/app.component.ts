@@ -69,6 +69,7 @@ export class AppComponent {
     let admin = localStorage.getItem("username");
 
     if (admin == "m") {
+      this.menu.push(new Opciones("Admin Inicio", "fa fa-home", "/admininicio"));
       this.menu.push(new Opciones("Adicionar Campeonato", "fa fa-home", "/adicionarcampeonato"));
       this.menu.push(new Opciones("Add Equipos", "fa fa-male", "/adicionarequipos"));
       this.menu.push(new Opciones("Equipo Campeonato", "fa fa-users", "/equipocampeonato"));

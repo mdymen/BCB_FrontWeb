@@ -4,27 +4,6 @@ import { Injectable } from "@angular/core";
 export class Campeonatos {
 
     public static Campeonatos = [
- {
-            ch_id: 24,
-            ch_nome: "Brasileirão 2018",
-            ch_logocampeonato: "https://upload.wikimedia.org/wikipedia/pt/e/e1/Brasileirao_Serie_A_2018.png"
-        } ,
- {
-            ch_id: 27,
-            ch_nome: "Brasileirão Serie B",
-            ch_logocampeonato: "http://www.ceroacero.es/img/logos/edicoes/104432_imgbank_.png"
-        } ,
- {
-            ch_id: 28,
-            ch_nome: "Libertadores 2018",
-            ch_logocampeonato: "https://1.bp.blogspot.com/-IvNqa0hX-ro/Wj0sbCu4PgI/AAAAAAABQlE/3tmNuTzm6DAfiboJMvr9Q2_YG2SkLtiLwCLcBGAs/s1600/Copa%2BCONMEBOL%2BLibertadores.png"
-        } ,
- {
-            ch_id: 29,
-            ch_nome: "Copa Sul-Americana",
-            ch_logocampeonato: "https://upload.wikimedia.org/wikipedia/pt/thumb/e/e4/Conmebol_Sudamericana_logo.png/235px-Conmebol_Sudamericana_logo.png"
-        } ,
-
         {
             ch_id: 30,
             ch_nome: "Futebol Espanhol",
@@ -46,6 +25,11 @@ export class Campeonatos {
             ch_id: 33,
             ch_nome: "Superliga Argentina",
             ch_logocampeonato: "https://upload.wikimedia.org/wikipedia/commons/b/b2/Superliga_Argentina_Logo.png"
+        },
+        {
+            ch_id: 34,
+            ch_nome: "Campeonato Paulista 2019",
+            ch_logocampeonato: "http://estaticos.maisbolao.com.br//Campeonato/fe918f1a-b013-48cc-94fc-f90370e17819_medium.png"
         }];
         public static BACKEND_ADMIN = "http://www.dymenstein.com/public/admin";
         public static ASSETS_EQUIPOS = "/assets/equipos/grande";

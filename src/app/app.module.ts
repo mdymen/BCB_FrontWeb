@@ -53,6 +53,8 @@ import { RodadaService } from './services/rodada.service';
 import { TermosComponent } from './termos/termos.component';
 import { PropagandaComponent } from './propaganda/propaganda.component';
 import { PostfacebookComponent } from './postfacebook/postfacebook.component';
+import { AdminInicioComponent } from './admin/inicio/inicio.component';
+import { JogosdiariosComponent } from './jogosdiarios/jogosdiarios.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -88,7 +90,9 @@ const routes: Routes = [
   { path: "privacidade/:id", component:TermosComponent},
   { path: "partidos/:id", component:AppComponent},
   { path: "propaganda/:foto/:idCampeonato/:uuid", component:PropagandaComponent },
-  { path: "postfacebook", component:PostfacebookComponent }
+  { path: "postfacebook", component:PostfacebookComponent },
+  { path: "admininicio", component:AdminInicioComponent},
+  { path: "jogosdiarios/:date", component:JogosdiariosComponent}
 
 ];
 
@@ -144,7 +148,9 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
     ResultadosComponent,
     TermosComponent,
     PropagandaComponent,
-    PostfacebookComponent
+    PostfacebookComponent,
+    AdminInicioComponent,
+    JogosdiariosComponent
   ],
   imports: [
     BrowserModule,

@@ -50,6 +50,7 @@ export class PalpitarrodadaComponent implements OnInit {
 
   proximosPartidos = [];
   proximosPartidosTitulos = [];
+  proximosPartidosFechas = [];
 
   constructor(private http: HttpClient,
     private route: ActivatedRoute,
@@ -239,6 +240,10 @@ this.campeonatos = Campeonatos.Campeonatos;
         this.proximosPartidosTitulos[2] = "Amanha";
 
         console.log(this.proximosPartidos);
+
+        this.proximosPartidosFechas[0] = res.body.dataayer;
+        this.proximosPartidosFechas[1] = res.body.datahoy;
+        this.proximosPartidosFechas[2] = res.body.datamaniana;
 
       })
   }

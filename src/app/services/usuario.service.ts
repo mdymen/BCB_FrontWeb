@@ -36,4 +36,8 @@ export class UsuarioService {
         return this._http.get(`${this.url}/usuario/get/usuario/${usuario}`);
     }
 
+    public login(usuario, senha ) {
+        return this._http.post(`${this.url}/mobile/cellogin`, { us: usuario, pass: senha });
+    }
+
 }

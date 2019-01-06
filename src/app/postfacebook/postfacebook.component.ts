@@ -11,7 +11,8 @@ import {Observable} from 'rxjs/Rx';
 export class PostfacebookComponent implements OnInit {
 
   resultados = "";
-  idPost = 0;
+  idPost;
+  results = [];
 
   constructor(private _partidoService:PartidoService) { }
 
@@ -19,24 +20,15 @@ export class PostfacebookComponent implements OnInit {
     let date = new Date().toString();
 
 
-    Observable.interval(32000000)
+    Observable.interval(1800000)
       .subscribe(()=> {
-        this._partidoService.getPosterior(this.idPost)
-          .subscribe((res:any) => {
-            this.idPost = res.body.ps_id;
-            console.log(res);
+        this._partidoService.postTexto(this.idPost)
+          .subscribe((res:any)=> {
+            this.idPost = res.body.id;
 
-            let post = {
-              ps_id : res.body.ps_id,
-              ps_tag : res.body.ps_tag,
-              ps_titulo : res.body.ps_titulo,
-              ps_descripcion : res.body.ps_descripcion,              
-            }
-
-            console.log(post);
-
-            this.resultados = date + ":" + post.ps_id + " - " + post.ps_tag + " - " + post.ps_descripcion + " - " + post.ps_titulo;
-          })
+           this.results.push(res.body.result);
+              
+          });
       });
 
   }
