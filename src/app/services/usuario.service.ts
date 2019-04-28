@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 @Injectable() 
 export class UsuarioService {
 
-    url = "http://www.dymenstein.com/public/";
+    url = "http://localhost:80/penca/public";
 
     constructor(private _http:HttpClient) {
 
@@ -37,7 +37,7 @@ export class UsuarioService {
     }
 
     public login(usuario, senha ) {
-        return this._http.post(`${this.url}/mobile/cellogin`, { us: usuario, pass: senha });
+        return this._http.post(`${this.url}/authentication/login`, { usuario: usuario, senha: senha });
     }
 
 }

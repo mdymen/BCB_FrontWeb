@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { CampeonatoService } from '../services/campeonato.service';
 import { Campeonatos } from '../config/campeonatos';
 import { UsuarioService } from '../services/usuario.service';
+import { UnloggedService } from '../services/unlogged.service';
 
 @Component({
   selector: 'app-login',
@@ -47,7 +48,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private _campeonatoService:CampeonatoService,
     private _usuarioService:UsuarioService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private _unloggedService: UnloggedService) {
       this.campeonatos = Campeonatos.Campeonatos;
   }
 
@@ -123,7 +125,7 @@ export class LoginComponent implements OnInit {
   }
 
   updatePartidos() {
-    this._campeonatoService.updatePartidos()
+    this._unloggedService.updatePartidos()
       .subscribe((res:any) => {
         localStorage.setItem("fecha", this.getToday());
         console.log("fecha local", localStorage.getItem("fecha"));
@@ -171,8 +173,8 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("info_rod", result['info_rod']);
       localStorage.setItem("foto", result['us_foto']);
       localStorage.setItem("jsonUsuario", JSON.stringify(result));
-      this.router.navigate(['/']);
-      location.reload();
+    //  this.router.navigate(['/']);
+    //  location.reload();
       this.erro = false;
     }
   }
@@ -180,8 +182,12 @@ export class LoginComponent implements OnInit {
   loguearse(usuario, password) {
     this.spinnerService.show();
     this._usuarioService.login(usuario, password)
-      .subscribe(result => {
-        this.guardarLocalStorage(result);
+      .subscribe((result:any) => {      
+        localStorage.setItem("token", result.data.token);
+        this.router.navigate(['/']);
+        location.reload();
+     //   console.log(result.data.token);
+     //   this.guardarLocalStorage(result);
         this.spinnerService.hide();
       }
         , error => {

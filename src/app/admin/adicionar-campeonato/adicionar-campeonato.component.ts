@@ -36,10 +36,8 @@ export class AdicionarCampeonatoComponent implements OnInit {
 
   onSubmit() {
     let form = this.campeonato.value;
-    console.log(form);
     this.http.post(this.backendService.getBackEndAdmin() + "campeonato/index", { form })
       .subscribe(result => {
-        console.log(result);
       });
   }
 }

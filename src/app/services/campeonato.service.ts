@@ -2,13 +2,15 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BackendService } from "../backend.service";
 import { Global } from "../config/global.service";
+import { HeaderService } from "./header.service";
 
 @Injectable()
-export class CampeonatoService {
+export class CampeonatoService extends HeaderService {
 
   url;// = "http://www.dymenstein.com/public"
 
-  constructor(private _http: HttpClient, private backend: BackendService) {
+  constructor(public _http: HttpClient, private backend: BackendService) {
+    super(_http);
     this.url = Global.BACKEND;
   }
 
@@ -61,12 +63,11 @@ export class CampeonatoService {
 
   /**
    * Retorna todos los datos del campeonato con los partidos de la rodada y palpites del usuario
-   * @param idUsuario 
    * @param idCampeonato 
    * @param idRodada 
    */
-  public loadRodadaPalpitada(idUsuario, idCampeonato, idRodada) {
-    return this._http.get(this.url + `/campeonatos/getpartidos/idUsuario/${idUsuario}/idCampeonato/${idCampeonato}/idRodada/${idRodada}`);
+  public loadRodadaPalpitada(idCampeonato, idRodada) {
+    return this.get(this.url + `/campeonatos/getpartidos/idCampeonato/${idCampeonato}/idRodada/${idRodada}`);
   }
 
   public loadGlobo(idRodada, idCampeonato) {

@@ -2,14 +2,16 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BackendService } from "../backend.service";
 import { Global } from "../config/global.service";
+import { HeaderService } from "./header.service";
 
 @Injectable()
-export class PartidoService {
+export class PartidoService extends HeaderService {
 
     url;
 
-    constructor(private _http:HttpClient, private backend:BackendService) {
-        this.url = Global.BACKEND;
+    constructor(public _http:HttpClient, private backend:BackendService) {        
+        super(_http);
+        this.url = Global.BACKEND;        
     }
 
 
@@ -19,7 +21,7 @@ export class PartidoService {
      * @param idRodada
      */
     public getPartidos(idCampeonato, idRodada) {
-        return this._http.get(`${this.url}/partidos/get/idCampeonato/${idCampeonato}/idRodada/${idRodada}`);
+        return this.get(`${this.url}/partidos/get/idCampeonato/${idCampeonato}/idRodada/${idRodada}`);
     }
 
     /**
@@ -41,32 +43,18 @@ export class PartidoService {
      * @param mt_idround
      */
     public save(partidos) {
-        return this._http.post(`${this.url}/partidos/put`, {partidos:partidos});
-    }
-
-    /**
-     * Lista de los proximos partidos
-     */
-    public games() {
-        return this._http.get(`${this.url}/index/games`);
-    }
-
-    /**
-     * Lista de los ultimos partidos jugados
-     */
-    public ultimosJugados() {
-        return this._http.get(`${this.url}/partidos/ultimosjugados`)
+        return this.post(`${this.url}/partidos/put`, {partidos:partidos});
     }
 
     /**
      * Devuelve una lista de los partidos de ayer, de hoy y de maniana.
      */
     public getPartidosRecientes() {
-        return this._http.get(`${this.url}/partidos/getproximos`)
+        return this.get(`${this.url}/partidos/getproximos`)
     }
 
     public getByCampeonatoAndDate(idCampeonato) {
-        return this._http.get(`${this.url}/partidos/getjogosbycampeonatoanddate/idCampeonato/${idCampeonato}`)
+        return this.get(`${this.url}/partidos/getjogosbycampeonatoanddate/idCampeonato/${idCampeonato}`)
     }
 
     /**
@@ -74,7 +62,7 @@ export class PartidoService {
      */
     public getPost(tipo, idCampeonato?) {
         let campeonato = idCampeonato ? idCampeonato : "00";
-        return this._http.get(`${this.url}/partidos/getpost/tag/${tipo}/idCampeonato/${campeonato}`)
+        return this.get(`${this.url}/partidos/getpost/tag/${tipo}/idCampeonato/${campeonato}`)
     }
 
     public manualPost(tipo, idCampeonato?) {
@@ -85,26 +73,26 @@ export class PartidoService {
             idCampeonato:idCampeonato
         }
 
-        return this._http.post(`${this.url}/facebook/manualpost/`,post);
+        return this.post(`${this.url}/facebook/manualpost/`,post);
     }
 
     public getPosterior(id) {
-        return this._http.get(`${this.url}/facebook/getpostposterior/id/${id}`);
+        return this.get(`${this.url}/facebook/getpostposterior/id/${id}`);
     }
 
     /**
      * Retorna todos los partidos de la fecha especificada
      */
     public getPartidosByDate(date) {
-        return this._http.get(`${this.url}/partidos/bydate/date/${date}`)
+        return this.get(`${this.url}/partidos/bydate/date/${date}`)
     }
 
     public postTeste() {
-        return this._http.post(`${this.url}/partidos/postteste`,{})
+        return this.post(`${this.url}/partidos/postteste`,{})
     }
 
     public postTexto(id) {
-        return this._http.post(`${this.url}/facebook/postfacebook`,{id});
+        return this.post(`${this.url}/facebook/postfacebook`,{id});
     }
 
 }

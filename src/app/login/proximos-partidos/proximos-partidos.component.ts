@@ -4,6 +4,7 @@ import { BackendService } from '../../backend.service';
 import { FechaService } from '../../fecha.service';
 import { PartidoService } from '../../services/partido.service';
 import { Global } from '../../config/global.service';
+import { UnloggedService } from '../../services/unlogged.service';
 
 @Component({
   selector: 'app-proximos-partidos',
@@ -16,11 +17,13 @@ export class ProximosPartidosComponent implements OnInit {
   partidosUltimosJugados = [];
   nomes = [];
   erro = false;
+  proximosPartidosCargados = false;
 
   url_img;
 
   constructor(private http: HttpClient,
     private _partidoService: PartidoService,
+    private _unloggedService: UnloggedService,
     private fechaService: FechaService) {
 
     this.url_img = Global.URL_BOLAO + Global.ASSETS_EQUIPOS;
@@ -35,7 +38,7 @@ export class ProximosPartidosComponent implements OnInit {
   proximosJogos() {
 
     if (localStorage.getItem("id") === null) {
-      this._partidoService.games()
+      this._unloggedService.games()
         .subscribe((res: any) => {
           //carga los partidos
           for (let partido of res.body) {
@@ -43,6 +46,7 @@ export class ProximosPartidosComponent implements OnInit {
             this.partidos.push(partido);
           }
           console.log(this.partidos);
+          this.proximosPartidosCargados = true;
         }, error => {
           console.log(error);
           this.erro = true;
@@ -52,7 +56,7 @@ export class ProximosPartidosComponent implements OnInit {
 
   ultimosJugados() {
     if (localStorage.getItem("id") === null) {
-      this._partidoService.ultimosJugados()
+      this._unloggedService.ultimosJugados()
         .subscribe((res: any) => {
           this.partidosUltimosJugados = res.body;
           console.log(this.partidosUltimosJugados);

@@ -11,6 +11,7 @@ import { CampeonatoService } from '../services/campeonato.service';
 import { Global } from '../config/global.service';
 import { PartidoService } from '../services/partido.service';
 import { Campeonatos } from '../config/campeonatos';
+import { UnloggedService } from '../services/unlogged.service';
 
 @Component({
   selector: 'app-palpitarrodada',
@@ -59,6 +60,7 @@ export class PalpitarrodadaComponent implements OnInit {
     private backEndService: BackendService,
     private _campeonatoService: CampeonatoService,
     private _partidoService:PartidoService,
+    private _unloggedService:UnloggedService,
     private location: Location) {
       this.url_img = Global.URL_BOLAO + Global.ASSETS_EQUIPOS;
 
@@ -66,9 +68,13 @@ export class PalpitarrodadaComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log("paso por acá");
+
     this._partidoService.getByCampeonatoAndDate(24)
       .subscribe((res:any) => {
         console.log("partidos hoy",res);
+      }, error => {
+        console.log(error);
       })
 
 
@@ -112,7 +118,7 @@ this.campeonatos = Campeonatos.Campeonatos;
       if (this.isSelected()) {
         this.getPartidosRecientes();
 
-        this._partidoService.ultimosJugados()
+        this._unloggedService.ultimosJugados()
           .subscribe((res:any) => {
             console.log(res);
           })
@@ -124,7 +130,7 @@ this.campeonatos = Campeonatos.Campeonatos;
    */
   public onChange(): void {
 
-    this._campeonatoService.loadRodadaPalpitada(localStorage.getItem("id"), this.campeonatoActual, this.rodadaActual)
+    this._campeonatoService.loadRodadaPalpitada(this.campeonatoActual, this.rodadaActual)
       .subscribe((res:any) => {
         console.log("novo", res);
         this.campeonatoActualObjeto = res.body.championship;

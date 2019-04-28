@@ -55,6 +55,7 @@ import { PropagandaComponent } from './propaganda/propaganda.component';
 import { PostfacebookComponent } from './postfacebook/postfacebook.component';
 import { AdminInicioComponent } from './admin/inicio/inicio.component';
 import { JogosdiariosComponent } from './jogosdiarios/jogosdiarios.component';
+import { UnloggedService } from './services/unlogged.service';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -178,6 +179,7 @@ export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
   UsuarioService,
   PartidoService,
   RodadaService,
+  UnloggedService,
   Global,
   PaisService],
   bootstrap: [AppComponent]

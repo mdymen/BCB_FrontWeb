@@ -91,7 +91,6 @@ export class AdicionarPartidosComponent implements OnInit {
 
     this._partidoService.save(toSave)
       .subscribe((res:any) => {
-        console.log(res);
         this.spinner.hide();
       });
   }

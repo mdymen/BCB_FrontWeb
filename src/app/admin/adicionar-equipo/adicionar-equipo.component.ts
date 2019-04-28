@@ -95,7 +95,6 @@ export class AdicionarEquipoComponent implements OnInit {
       .subscribe((res: any) => {
         this.equiposCadastrados = res.body;
         this.spinnerService.hide();
-        console.log(res);
       });
   }
 }

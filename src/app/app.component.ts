@@ -36,7 +36,7 @@ export class AppComponent {
     private routes:ActivatedRoute,
     private _partidoService:PartidoService){
 
-    var usuario = localStorage.getItem("username");
+    var usuario = localStorage.getItem("token");
     if (usuario) {
       this.logado = true;
       this.usuario = usuario;
