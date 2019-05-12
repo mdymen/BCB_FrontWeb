@@ -34,7 +34,6 @@ export class EquipoCampeonatoComponent implements OnInit {
       .subscribe((res: any) => {
         this.equipos = res.body;
         this.equiposFiltrados = res.body;
-        console.log(res);
       })
   }
 
@@ -97,7 +96,6 @@ export class EquipoCampeonatoComponent implements OnInit {
 
     this._campeonatoService.loadByCampeonato(this.campeonato)
       .subscribe((res:any) => {
-        console.log(res);
         this.equiposCadastrados = res.body;
         this.spinnerService.hide();
       });
@@ -116,7 +114,6 @@ export class EquipoCampeonatoComponent implements OnInit {
           this.equiposAdicionados = [];
           this.spinnerService.hide();
         }, error => {
-          console.log(error);
         }
       );
   }

@@ -81,7 +81,6 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */ {
         this.partidos = res.body;
       });
 
-    console.log("usuario", this.idUsuario);
 
     this._usuarioService.get(this.idUsuario)
       .subscribe((result: any) => {
@@ -103,7 +102,6 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */ {
 
         this.foto = "http://dymenstein.com/public/assets/img/perfil/" + this.usuarioObj.foto;
 
-        console.log(result);
       })
 
   }
@@ -161,53 +159,4 @@ export class MeuPerfilComponent implements OnInit/*, AfterViewInit */ {
     this.foto = "http://dymenstein.com/public/assets/img/perfil/user.png";
   }
 
-
-
-  /**
-* Guarda la informacion del usuario correspondiente al recibimiento de emails
-* @param params tiene @param res_pal, @param res_rod_pal, @param info_rod_pal
-* @param iduser
-*/
-  /*  salvarConfiguracionEmail() {
-  
-      this.http.post(this.backend.getBackEndNormal() + "usuario/emailconfiguracion",
-        {
-          res_pal: this.resPalpite,
-          res_rod_pal: this.resRodadaPalpite,
-          info_rod: this.infoRodadaGeral,
-          iduser: localStorage.getItem("id")
-        })
-        .subscribe(result => {
-          localStorage.setItem("res_rod_pal", Number(this.resRodadaPalpite).toString());
-          localStorage.setItem("res_pal", Number(this.resRodadaPalpite).toString());
-          localStorage.setItem("info_rod", Number(this.resRodadaPalpite).toString());
-  
-          console.log(result);
-        },
-          error => { })
-  
-  
-  
-    }*/
-
-
-  /**
- * Informacion estadisticamente de los palpites de un usuario
- */
-  /* palpites() {
-    if (!this.cargoInfoPalpites) {
-       this.spinnerService.show();
-       this.http.post(this.backend.getBackEndNormal() + "usuario/infopalpitesusuario",
-         { usuario: localStorage.getItem("id") })
-         .subscribe(res => {
-           console.log(res);
-           this.spinnerService.hide();
-           this.erros = res['erros'],
-             this.acertos = res['acertos'],
-             this.palpitados = res['palpitados'],
-             this.pontos = res['pontos']
-           this.cargoInfoPalpites = true;
-         })
-     }
-   }*/
 }

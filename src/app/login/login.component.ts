@@ -87,7 +87,6 @@ export class LoginComponent implements OnInit {
 
   this.authService.authState.subscribe((user) => {
       this.user = user;
-      console.log("usuario1", this.user);
       this.loggedIn = (user != null);
       if (this.loggedIn) {
       
@@ -101,16 +100,11 @@ export class LoginComponent implements OnInit {
           });
 
       }
-      console.log("loggedIn1", this.loggedIn);
     });
 
-    console.log("loggedIn", this.loggedIn);
-    console.log("usuario", this.user);
-
-
-    if (this.needUpdate()) {
+    //if (this.needUpdate()) {
       this.updatePartidos();
-    }
+    //}
 
    // this.getCampeonatos();
   }
@@ -127,8 +121,9 @@ export class LoginComponent implements OnInit {
   updatePartidos() {
     this._unloggedService.updatePartidos()
       .subscribe((res:any) => {
-        localStorage.setItem("fecha", this.getToday());
-        console.log("fecha local", localStorage.getItem("fecha"));
+        console.log(res);
+      }, error => {
+        console.log(error);
       });
   }
 
@@ -184,10 +179,14 @@ export class LoginComponent implements OnInit {
     this._usuarioService.login(usuario, password)
       .subscribe((result:any) => {      
         localStorage.setItem("token", result.data.token);
+        localStorage.setItem("id", result.data.usuario.us_id);
+        localStorage.setItem("username", result.data.usuario.us_username);
+        localStorage.setItem("email", result.data.usuario.us_email);
+        localStorage.setItem("cash", result.data.usuario.us_cash);
+        localStorage.setItem("admin", result.data.usuario.us_admin);
+        localStorage.setItem("foto", result.data.usuario.us_foto);
         this.router.navigate(['/']);
         location.reload();
-     //   console.log(result.data.token);
-     //   this.guardarLocalStorage(result);
         this.spinnerService.hide();
       }
         , error => {
@@ -241,7 +240,6 @@ export class LoginComponent implements OnInit {
           error => {
             this.spinnerService.hide();
             this.erro = true;
-            console.log(error);
           })
     }
   }
@@ -269,7 +267,6 @@ export class LoginComponent implements OnInit {
     this._campeonatoService.getBasico()
       .subscribe((res:any) => {
         this.campeonatos = res.body;
-        console.log(this.campeonatos);
       })
   }
 
@@ -286,7 +283,7 @@ export class LoginComponent implements OnInit {
         this.contacto.controls['assunto'].value, 
         this.contacto.controls['corpo'].value)
         .subscribe((res:any) => {
-          console.log(res);
+
           this.enviando = false;
           this.envioCorrecto = true;
 

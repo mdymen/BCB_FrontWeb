@@ -23,13 +23,8 @@ export class PropagandaComponent implements OnInit {
     }
 
   ngOnInit() {
-  
-    console.log("Tipo", this.tipo);
-    console.log("Campeonato", this.campeonato);
-
     this._partidoService.getPost(this.tipo, this.campeonato)
     .subscribe((res:any) => {
-      console.log(res);
       this.partidos = res.body.partidos;
       this.post = res.body.post;
     })

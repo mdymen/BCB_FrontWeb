@@ -36,7 +36,6 @@ export class EquipoCoracaoComponent implements OnInit {
       .subscribe((res: any) => {
         this.equipos = res.body;
         this.equiposFiltrados = res.body;
-        console.log(res);
       })
   }
 
@@ -47,7 +46,6 @@ export class EquipoCoracaoComponent implements OnInit {
     this._paisesService.get()
       .subscribe((res: any) => {
         this.paises = res.body;
-        console.log(res);
       })
   }
 
@@ -74,7 +72,6 @@ export class EquipoCoracaoComponent implements OnInit {
    */
   select(equipo) {
     this.equipo = equipo;
-    console.log(this.equipo);
   }
 
 }

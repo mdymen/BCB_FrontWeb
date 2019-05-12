@@ -85,12 +85,6 @@ puedePalpitar(fecha: string): boolean {
   let horaAtual = horasAtual[0];
   let minutoAtual = horasAtual[1];
 
-  /*console.log(Number(anoJogo) + " >= " + Number(anoAtual) + " "
-    + Number(mesJogo) + " >= " + Number(mesAtual) + " "
-    + Number(diaJogo) + " >= " + Number(diaAtual) + " "
-    + Number(horaJogo) + " >= " + Number(horaAtual));
-*/
-
   if (Number(anoJogo) > Number(anoAtual)) {
     return true;
   }

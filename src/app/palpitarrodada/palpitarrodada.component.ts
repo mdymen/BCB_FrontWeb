@@ -67,21 +67,14 @@ export class PalpitarrodadaComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    console.log("paso por acá");
-
     this._partidoService.getByCampeonatoAndDate(24)
       .subscribe((res:any) => {
-        console.log("partidos hoy",res);
       }, error => {
-        console.log(error);
       })
 
 
     //carga los dados del campeonato en funcion de los parametros de la url
     this.route.params.subscribe(params => {
-
-      console.log("params", params);
 
       //si no hay valor en la variable rodada, significa que el parametro
       //de la url rodada viene vacio, entonces tiene que cargar la 
@@ -94,10 +87,8 @@ export class PalpitarrodadaComponent implements OnInit {
 
       //si no hay valor en la variable campeonato, significa que el parametro
       //de la url campeonato viene vacio
-      console.log(params['campeonato']);
       if (params['campeonato']) {
         this.campeonatoActual = params['campeonato'];
-        console.log("if", params['campeonato']);
         this.onChange();
       } else {
         this.campeonatoActual = null;
@@ -113,14 +104,11 @@ export class PalpitarrodadaComponent implements OnInit {
 */
 
 this.campeonatos = Campeonatos.Campeonatos;
-
-      console.log("selected", this.isSelected());
       if (this.isSelected()) {
         this.getPartidosRecientes();
 
         this._unloggedService.ultimosJugados()
           .subscribe((res:any) => {
-            console.log(res);
           })
       }
   }
@@ -132,7 +120,6 @@ this.campeonatos = Campeonatos.Campeonatos;
 
     this._campeonatoService.loadRodadaPalpitada(this.campeonatoActual, this.rodadaActual)
       .subscribe((res:any) => {
-        console.log("novo", res);
         this.campeonatoActualObjeto = res.body.championship;
         this.cargoCampeonato = true;
         this.rodadaActual = res.body.n_rodada;
@@ -174,7 +161,8 @@ this.campeonatos = Campeonatos.Campeonatos;
       }
     })
 
-    this.http.post(this.url + "/public/mobile/palpitarrodadatoda", { palpites: palpitados, usuario: localStorage.getItem("id") })
+    
+    this._partidoService.palpitar(palpitados)
       .subscribe(resultado => {
         this.spinnerService.hide();
         if (resultado == 200) {
@@ -183,6 +171,7 @@ this.campeonatos = Campeonatos.Campeonatos;
           this.palpitesRealizados = false;
         }
         this.palpitando = false;
+      }, error => {
       })
   }
 
@@ -191,7 +180,6 @@ this.campeonatos = Campeonatos.Campeonatos;
     this.http.post(this.backEndService.getBackEnd() + "comprarrodada",
       { usuario: localStorage.getItem("id"), rodada: this.rodadaActual })
       .subscribe(res => {
-        console.log(res);
         this.spinnerService.hide();
         if (res['status'] === 200) {          
           window.location.reload();
@@ -213,7 +201,6 @@ this.campeonatos = Campeonatos.Campeonatos;
    * retorna true si la rodada tiene algun costo 
    */ 
   rodadaPay() : boolean {
-    console.log("rodada actual", this.rodadaActualObjeto);
     return this.rodadaActualObjeto.rd_custo && this.rodadaActualObjeto.rd_custo > 0;
   }
 
@@ -221,12 +208,10 @@ this.campeonatos = Campeonatos.Campeonatos;
    * retorna true si la rodada fue paga
    */
   paid() : boolean {
-    console.log("paga",this.rodadaActualObjeto.ru_pago);
     return this.rodadaActualObjeto.ru_pago === "1";
   }
 
   isSelected() {
-    console.log(this.campeonatoActual === null);
     return this.campeonatoActual === null;
   }
 
@@ -236,7 +221,6 @@ this.campeonatos = Campeonatos.Campeonatos;
   getPartidosRecientes() {
     this._partidoService.getPartidosRecientes()
       .subscribe((res:any)=> {
-        console.log(res);
         this.proximosPartidos.push(res.body.ayer);
         this.proximosPartidos.push(res.body.hoy);
         this.proximosPartidos.push(res.body.maniana);
@@ -245,7 +229,6 @@ this.campeonatos = Campeonatos.Campeonatos;
         this.proximosPartidosTitulos[1] = "Hoje";
         this.proximosPartidosTitulos[2] = "Amanha";
 
-        console.log(this.proximosPartidos);
 
         this.proximosPartidosFechas[0] = res.body.dataayer;
         this.proximosPartidosFechas[1] = res.body.datahoy;

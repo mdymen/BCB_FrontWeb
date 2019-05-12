@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Global } from "../config/global.service";
 
 @Injectable() 
 export class UsuarioService {
 
-    url = "http://localhost:80/penca/public";
+    url;
 
     constructor(private _http:HttpClient) {
-
+        this.url = Global.BACKEND; 
     }
 
     public getPalpites(idUsuario, limit) {

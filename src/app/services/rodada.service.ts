@@ -1,14 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Global } from "../config/global.service";
+import { HeaderService } from "./header.service";
 
 
 @Injectable()
-export class RodadaService {
+export class RodadaService extends HeaderService {
 
     url;
 
-    constructor(private _http:HttpClient) {
+    constructor(public _http:HttpClient) {
+        super(_http);
         this.url = Global.BACKEND;
     }
 
@@ -19,12 +21,12 @@ export class RodadaService {
      * @param rodada
      * @param suma
      */
-    public post(champ, rodada, suma, cambio) {
-        return this._http.post(`${this.url}/rodada/post`, {champ:champ, rodada:rodada, suma:suma, cambio:cambio});
+    public postRodada(champ, rodada, suma, cambio) {
+        return this.post(`${this.url}/rodada/post`, {champ:champ, rodada:rodada, suma:suma, cambio:cambio});
     }
 
     public ranking(idRodada) {
-        return this._http.get(`${this.url}/rodada/ranking/idRodada/${idRodada}`);
+        return this.get(`${this.url}/rodada/ranking/idRodada/${idRodada}`);
     }
 
 }

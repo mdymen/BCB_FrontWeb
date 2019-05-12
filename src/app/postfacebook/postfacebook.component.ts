@@ -36,7 +36,6 @@ export class PostfacebookComponent implements OnInit {
   serieApartidosHoy() {
     this._partidoService.manualPost("H",24)
       .subscribe((res:any) => {
-        console.log(res);
         this.resultados = res;
       });
   }
@@ -45,7 +44,6 @@ export class PostfacebookComponent implements OnInit {
   serieApartidosAyer() {
     this._partidoService.manualPost("A",24)
       .subscribe((res:any) => {
-        console.log(res);
         this.resultados = res;
       });
   }
@@ -54,7 +52,6 @@ export class PostfacebookComponent implements OnInit {
   serieBpartidosHoy() {
     this._partidoService.manualPost("H",27)
       .subscribe((res:any) => {
-        console.log(res);
         this.resultados = res;
       });
   }
@@ -63,7 +60,6 @@ export class PostfacebookComponent implements OnInit {
   serieBpartidosAyer() {
     this._partidoService.manualPost("A",27)
       .subscribe((res:any) => {
-        console.log(res);
         this.resultados = res;
       });
   }
@@ -71,7 +67,6 @@ export class PostfacebookComponent implements OnInit {
   jogosAmanha() {
     this._partidoService.manualPost("M",0)
       .subscribe((res:any) => {
-        console.log(res);
         this.resultados = res;
       });    
   }

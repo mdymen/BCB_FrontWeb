@@ -95,4 +95,8 @@ export class PartidoService extends HeaderService {
         return this.post(`${this.url}/facebook/postfacebook`,{id});
     }
 
+    public palpitar(partidos) {
+        return this.post(`${this.url}/partidos/palpitar`,{partidos});
+    }
+
 }

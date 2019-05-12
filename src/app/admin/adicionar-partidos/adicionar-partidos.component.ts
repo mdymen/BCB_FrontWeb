@@ -123,12 +123,10 @@ export class AdicionarPartidosComponent implements OnInit {
 
   search() {
     this.spinner.show();
-    console.log("campeonato", this.campeonato);
     this._campeonatoService.loadGlobo( this.rodada, this.campeonato)
       .subscribe((res: any) => {
         this.partidos = res.body;
         this.spinner.hide();
-        console.log(res);
       })
   }
 
@@ -138,10 +136,8 @@ export class AdicionarPartidosComponent implements OnInit {
 
   save() {
     this.spinner.show();
-    console.log(this.partidos);
     this._partidoService.save(this.partidos) 
       .subscribe((res:any) => {
-        console.log(res);
         this.spinner.hide();
       })
   }

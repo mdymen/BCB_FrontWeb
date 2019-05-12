@@ -7,7 +7,7 @@ import { HeaderService } from "./header.service";
 @Injectable()
 export class CampeonatoService extends HeaderService {
 
-  url;// = "http://www.dymenstein.com/public"
+  url;
 
   constructor(public _http: HttpClient, private backend: BackendService) {
     super(_http);
@@ -34,7 +34,7 @@ export class CampeonatoService extends HeaderService {
    * Retorna todos los campeonatos activos
    */
   public load() {
-    return this._http.get(this.url + "/campeonatos/get");
+    return this.get(this.url + "/campeonatos/get");
   }
 
   /**
@@ -42,7 +42,7 @@ export class CampeonatoService extends HeaderService {
    * @param equipos los equipos que seran asociados a un campeonato determinado
    */
   public save(equipos) {
-    return this._http.post(this.url + "/campeonatos/save", equipos);
+    return this.post(this.url + "/campeonatos/save", equipos);
   }
 
   /**
@@ -50,7 +50,7 @@ export class CampeonatoService extends HeaderService {
    * @param idCampeonato 
    */
   public loadByCampeonato(idCampeonato) {
-    return this._http.get(this.url + "/campeonatos/getbycampeonato/idCampeonato/" + idCampeonato);
+    return this.get(this.url + "/campeonatos/getbycampeonato/idCampeonato/" + idCampeonato);
   }
 
   /**
@@ -80,4 +80,17 @@ export class CampeonatoService extends HeaderService {
   public updatePartidos() {
     return this._http.get(`${this.url}/campeonatos/update`);
   }
+
+  public postCampeonato(dados) {
+    return this.post(`${this.url}/campeonatos/post`, dados);
+  }
+
+  public updateCampeonato(idCampeonato) {
+    return this.get(`${this.url}/aquehorajuega/update/idCampeonato/${idCampeonato}`);
+  }
+
+  public updateTodosCampeonatos() {
+    return this.get(`${this.url}/aquehorajuega/update`);
+  }
+
 }

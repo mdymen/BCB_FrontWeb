@@ -16,7 +16,7 @@ export class UnloggedService {
      * Verifica si hay partidos que precisan ser actualizados
      */
     public updatePartidos() {
-        return this._http.get(`${this.url}/unlogged/update`);
+        return this._http.get(`${this.url}/aquehorajuega/updatesecuencial`);
     }
 
     /**

@@ -36,10 +36,10 @@ export class AppComponent {
     private routes:ActivatedRoute,
     private _partidoService:PartidoService){
 
-    var usuario = localStorage.getItem("token");
-    if (usuario) {
+    var token = localStorage.getItem("token");
+    if (token) {
       this.logado = true;
-      this.usuario = usuario;
+      this.usuario = localStorage.getItem("usuario");
       this.cash = localStorage.getItem("cash");
     }
 
@@ -74,9 +74,9 @@ export class AppComponent {
       this.menu.push(new Opciones("Add Equipos", "fa fa-male", "/adicionarequipos"));
       this.menu.push(new Opciones("Equipo Campeonato", "fa fa-users", "/equipocampeonato"));
       this.menu.push(new Opciones("Adicionar Partidos", "fa fa-home", "/adicionarpartidos"));
-      this.menu.push(new Opciones("Resultados", "fa fa-user", "/resultados"));
-      this.menu.push(new Opciones("Setear Rodada", "fa fa-user", "/setrodada"));
-      this.menu.push(new Opciones("Post facebook", "fa fa-user", "/postfacebook"));
+      //this.menu.push(new Opciones("Resultados", "fa fa-user", "/resultados"));
+      //this.menu.push(new Opciones("Setear Rodada", "fa fa-user", "/setrodada"));
+      //this.menu.push(new Opciones("Post facebook", "fa fa-user", "/postfacebook"));
 
     }
     this.menu.push(new Opciones("Logout", "fa fa-power-off", "/logout"));

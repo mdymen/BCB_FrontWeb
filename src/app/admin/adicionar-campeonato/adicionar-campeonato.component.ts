@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { BackendService } from '../../backend.service';
+import { CampeonatoService } from '../../services/campeonato.service';
 
 @Component({
   selector: 'app-adicionar-campeonato',
@@ -11,8 +12,9 @@ import { BackendService } from '../../backend.service';
 export class AdicionarCampeonatoComponent implements OnInit {
 
   campeonato: FormGroup;
+  urlCampeonato: FormGroup;
 
-  constructor(private http: HttpClient, private backendService: BackendService) { }
+  constructor(private _campeonatoService: CampeonatoService, private backendService: BackendService) { }
 
   ngOnInit() {
     this.campeonato = new FormGroup({
@@ -30,14 +32,19 @@ export class AdicionarCampeonatoComponent implements OnInit {
       ch_djogo: new FormControl(),
       ch_drodada: new FormControl(),
       ch_dpalpite: new FormControl(),
-      ch_logocampeonato: new FormControl()
+      ch_logocampeonato: new FormControl(),
+      dr_url: new FormControl()
     });
+
   }
 
   onSubmit() {
     let form = this.campeonato.value;
-    this.http.post(this.backendService.getBackEndAdmin() + "campeonato/index", { form })
-      .subscribe(result => {
-      });
+    this._campeonatoService.postCampeonato(form).
+      subscribe((res:any) => {
+
+      }, error => {
+
+      })
   }
 }

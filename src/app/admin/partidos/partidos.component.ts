@@ -84,7 +84,6 @@ export class PartidosComponent implements OnInit, AfterViewInit {
     this.http.post(this.backend.getBackEndAdmin() + "resultados/cargarpartidos?",
       { champ: this.campeonato, ronda: rodada })
       .subscribe(result => {
-        console.log(result);
         this.cargoRodada = true;
         this.partidos = [];
         result['matchs']
@@ -119,7 +118,6 @@ export class PartidosComponent implements OnInit, AfterViewInit {
     this.http.post(this.backend.getBackEndAdmin() + "resultados/grabarresultados?",
       { results: this.resultados })
       .subscribe(result => {
-        console.log(result);
         this.seleccionarRodada(partidos[0].rd_id);
       })
   }
@@ -129,12 +127,10 @@ export class PartidosComponent implements OnInit, AfterViewInit {
    */
   verusuariospalpitaron(idmatch: Number, partido: any) {
     this.spinnerService.show();
-    console.log(partido);
     this.http.post(this.backend.getBackEndAdmin() + "mail/palpitaronpartido", { mt_id: idmatch })
       .subscribe(result => {
         partido.palpites = result;
         partido.ver_usuarios_palpitaron = true;
-        console.log(partido);
         this.spinnerService.hide();
       })
   }
@@ -148,7 +144,6 @@ export class PartidosComponent implements OnInit, AfterViewInit {
     this.http.post(this.backend.getBackEndAdmin() + "mail/emailparapalpitadores", { mt_id: idmatch })
       .subscribe(result => {
         this.spinnerService.hide();
-        console.log(result);
       })
   }
 
@@ -156,17 +151,15 @@ export class PartidosComponent implements OnInit, AfterViewInit {
    * Envia el HTML a los usuarios que tienen configurado para recibir
    */
   enviarHTML() {
-    console.log("champ " + this.campeonato + " rodada" + this.rodada);
     this.http.post(this.backend.getBackEndAdmin() + "index/emailrodada",
       { champ: this.campeonato, rodada: this.rodada })
-      .subscribe(result => console.log(result));
+      .subscribe(result => {});
   }
 
   /**
    * Abre un modal para editar la informacion del partido
    */
   editar(partido) {
-    console.log(partido);
     let rodadaAtual = {
       rd_round:partido.rd_round,
       rd_id:partido.rd_id
@@ -191,7 +184,6 @@ export class PartidosComponent implements OnInit, AfterViewInit {
         this.modalParaEditar.rodada = rodadaAtual;
         this.modalParaEditar.mostrarModal = true;
 
-        console.log(this.modalParaEditar.rodada);
       })
   }
 

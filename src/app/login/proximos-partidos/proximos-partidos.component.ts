@@ -45,10 +45,8 @@ export class ProximosPartidosComponent implements OnInit {
             partido.esHoy = this.esHoy(partido.mt_date) ? true : false;
             this.partidos.push(partido);
           }
-          console.log(this.partidos);
           this.proximosPartidosCargados = true;
         }, error => {
-          console.log(error);
           this.erro = true;
         });
     }
@@ -59,9 +57,7 @@ export class ProximosPartidosComponent implements OnInit {
       this._unloggedService.ultimosJugados()
         .subscribe((res: any) => {
           this.partidosUltimosJugados = res.body;
-          console.log(this.partidosUltimosJugados);
         }, error => {
-          console.log(error);
           this.erro = true;
         });
     }

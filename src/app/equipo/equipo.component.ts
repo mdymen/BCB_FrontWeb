@@ -28,13 +28,12 @@ export class EquipoComponent implements OnInit {
    }
 
   ngOnInit() {
-    this._equiposService.get(this.idEquipo)
+    this._equiposService.getEquipo(this.idEquipo)
       .subscribe((res:any) => {
         this.equipo = res.body.equipo;
         this.partidos = res.body.jogos;
         this.campeonatos = res.body.campeonatos;
 
-        console.log(res);
       })
   }
 

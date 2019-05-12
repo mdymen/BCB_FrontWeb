@@ -50,7 +50,6 @@ export class ResultadosComponent implements OnInit {
     this._campeonatoService.loadGlobo(this.rodada, this.campeonato)
       .subscribe((res: any) => {
         this.partidos = res.body;
-        console.log("resultados", res);
         this.partidos.map(
           partido => {
             partido.equipo1[0].selected = true;
@@ -58,7 +57,6 @@ export class ResultadosComponent implements OnInit {
           }
         )
         this.spinner.hide();
-        console.log(res);
       })
   }
 
@@ -77,7 +75,6 @@ export class ResultadosComponent implements OnInit {
   }
 
   ver() {
-    console.log(this.partidos);
   }
 
   /**
@@ -98,12 +95,10 @@ export class ResultadosComponent implements OnInit {
 
   save() {
     let partidos = this.setPartidos();
-    console.log(partidos);
 
     this.spinner.show();
     this._partidoService.save(partidos)
       .subscribe((res: any) => {
-        console.log(res);
         this.spinner.hide();
       })
   }
@@ -144,7 +139,7 @@ export class ResultadosComponent implements OnInit {
   }
 
 
-  crearRodada(rd_idchampionship, rd_round, rd_suma, rd_cambio) {
+  /*crearRodada(rd_idchampionship, rd_round, rd_suma, rd_cambio) {
     this.spinner.show();
     this._rodadaService.post(rd_idchampionship, rd_round, rd_suma, rd_cambio)
       .subscribe(result => {
@@ -155,7 +150,7 @@ export class ResultadosComponent implements OnInit {
         this.spinner.hide();
         console.log(erro);
       });
-  }
+  }*/
 
 
 }

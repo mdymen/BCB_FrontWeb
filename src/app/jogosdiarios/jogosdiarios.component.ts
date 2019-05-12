@@ -30,7 +30,6 @@ export class JogosdiariosComponent implements OnInit {
       this._partidoService.getPartidosByDate(params['date'])
         .subscribe((res: any) => {
           this.partidos = res.body;
-          console.log(this.partidos);
           this.setDisabled(this.partidos);
         })
 
@@ -39,7 +38,6 @@ export class JogosdiariosComponent implements OnInit {
 
   setDisabled(partidos) {
     partidos.map(partido => {
-      console.log(this._fechaService.puedePalpitar(partido.mt_date));
       partido.disabled = this._fechaService.puedePalpitar(partido.mt_date) && partido.rd_custo == null; 
     });
   }

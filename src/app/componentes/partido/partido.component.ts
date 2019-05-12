@@ -10,6 +10,5 @@ export class PartidoComponent {
     @Input("equipo1") equipo1;
 
     constructor() {
-        console.log(this.equipo1);
     }
 }

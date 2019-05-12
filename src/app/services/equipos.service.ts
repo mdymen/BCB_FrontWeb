@@ -1,19 +1,24 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Global } from "../config/global.service";
+import { HeaderService } from "./header.service";
 
 @Injectable()
-export class EquiposService {
+export class EquiposService extends HeaderService {
 
-    url = "http://www.dymenstein.com/public/"
+    url;
 
-    constructor(private _http:HttpClient){}
-
-    loadTabla(idCampeonato) {
-        return this._http.get(`${this.url}/equipos/getbycampeonato/idCampeonato/${idCampeonato}`);
+    constructor(public _http:HttpClient){
+        super(_http)
+        this.url = Global.BACKEND;
     }
 
-    get(idEquipo) {
-        return this._http.get(`${this.url}/equipos/get/idEquipo/${idEquipo}`);
+    loadTabla(idCampeonato) {
+        return this.get(`${this.url}/equipos/getbycampeonato/idCampeonato/${idCampeonato}`);
+    }
+
+    getEquipo(idEquipo) {
+        return this.get(`${this.url}/equipos/get/idEquipo/${idEquipo}`);
     }
 
     /**
@@ -22,7 +27,7 @@ export class EquiposService {
      * @param limite cantidad de partidos para cargar
      */
     getPartidos(idEquipo, limite) {
-        return this._http.get(`${this.url}/equipos/getpartidos/idEquipo/${idEquipo}/limite/${limite}`);
+        return this.get(`${this.url}/equipos/getpartidos/idEquipo/${idEquipo}/limite/${limite}`);
     }
 
     /**
@@ -30,7 +35,7 @@ export class EquiposService {
      * @param idPais id del pais que se desea cargar los equipos
      */
     getTimes(idPais) {
-        return this._http.get(`${this.url}/equipos/gettimes/idPais/${idPais}`);
+        return this.get(`${this.url}/equipos/gettimes/idPais/${idPais}`);
     }
 
 

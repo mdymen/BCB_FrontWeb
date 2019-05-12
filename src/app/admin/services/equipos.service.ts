@@ -1,13 +1,17 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { HeaderService } from "../../services/header.service";
+import { Global } from "../../config/global.service";
 
 @Injectable()
-export class EquipoService {
+export class EquipoService extends HeaderService {
 
-    url = "http://www.dymenstein.com/public/";
+    url;
 
-    constructor(private _http:HttpClient) {
-
+    constructor(public _http:HttpClient) {
+        super(_http);
+        super(_http);
+        this.url = Global.BACKEND;
     }
 
     /**
@@ -15,15 +19,15 @@ export class EquipoService {
      * @param equipos 
      */
     public save(equipos) {
-        return this._http.post(this.url + "/team/post", equipos);
+        return this.post(this.url + "/team/post", equipos);
     }
 
     public loadByPais(pais) {
-        return this._http.get(this.url + "team/getbypais/idPais/" + pais);
+        return this.get(this.url + "/team/getbypais/idPais/" + pais);
     }
 
     public load() {
-        return this._http.get(this.url + "team/get");
+        return this.get(this.url + "/team/get");
     }
 
 }

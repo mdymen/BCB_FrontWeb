@@ -86,7 +86,7 @@
       <div class="box-header" style="background:white !important; font-weight:bold">
         <h2 style=" margin: 0px 0px 0px 30px !important">Próximos jogos</h2>
       </div>
-      <div *ngIf="proximosPartidosCargados" style="text-align:center;padding-top:50px">
+      <div *ngIf="!proximosPartidosCargados" style="text-align:center;padding-top:50px">
         <img src="/assets/gif/loading.gif" width="100px">
       </div>
       <div class="box-content no-padding">

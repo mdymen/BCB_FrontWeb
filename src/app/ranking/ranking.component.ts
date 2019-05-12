@@ -37,7 +37,6 @@ export class RankingComponent implements OnInit {
     this.cargando = true;
     this._rodadaService.ranking(this.idRodada)
       .subscribe((res: any) => {
-        console.log(res);
         this.rankingCargado = true;
         this.rankings = res.body;
       })

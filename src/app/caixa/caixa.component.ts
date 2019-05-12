@@ -22,7 +22,6 @@ export class CaixaComponent implements OnInit {
     this.http.post(this.backend.getBackEndNormal() + "caixa/plano", {p:plano, user:localStorage.getItem("id"), email:"martin@dymenstein.com"})
       .subscribe(result => {
         this.spinnerService.hide();
-        console.log(result);
         window.location.href='https://pagseguro.uol.com.br/v2/checkout/payment.html?code=' + result;
       });
   }
@@ -32,7 +31,6 @@ export class CaixaComponent implements OnInit {
     this.http.post(this.backend.getBackEndNormal() + "caixa/testarcaixax", {p:plano, user:localStorage.getItem("id"), email:"martin@dymenstein.com"})
       .subscribe(result => {
         this.spinnerService.hide();
-        console.log(result);
         window.location.href='https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=' + result;
       });
   }

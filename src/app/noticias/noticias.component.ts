@@ -22,8 +22,6 @@ export class NoticiasComponent implements OnInit {
 
       this.http.get(this.backEndService.getBackEndNormal() + "/index/noticias")
         .subscribe(result => {
-          console.log(result);
-
           this.noticias.push(result['noticias'][0]);
           this.noticias.push(result['noticias'][1]);
           this.noticias.push(result['noticias'][2]);

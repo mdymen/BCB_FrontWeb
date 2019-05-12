@@ -27,7 +27,6 @@ export class SetrodadaComponent implements OnInit {
     this.spinnerService.show();
     this.campeonatoService.getCampeonatos().subscribe(result => {
       this.campeonatos = result as any[];
-      console.log(result);
       this.spinnerService.hide();
     }); 
   }
@@ -53,7 +52,7 @@ export class SetrodadaComponent implements OnInit {
       { champ_selected: this.campeonato, ronda : this.rodada })
     .subscribe(result => {
       this.spinnerService.hide();
-      console.log(result);
+
     })
   }
 }
